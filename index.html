@@ -1,0 +1,3423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXENTIA MMXXVI · THE REALM DIVIDED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#06070A;
+  --iron:#0E1116;
+  --slate:#171C24;
+  --stone:#2A303B;
+  --ash:#4B5361;
+  --mist:#8E97A6;
+  --bone:#D9D5C9;
+  --blood:#8A1116;
+  --blood-lt:#B3252A;
+  --gold:#C8A54B;
+  --amber:#E2A44A;
+  --ice:#7FA6C4;
+  --weir:#B4302F;
+  --line:rgba(200,165,75,.24);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:#0E1116;color:var(--bone);font-family:'Spectral',Georgia,serif;
+  overflow-x:hidden;transition:background 1.8s ease}
+body.deep{background:var(--void)}
+::selection{background:var(--blood);color:var(--bone)}
+a{color:inherit;text-decoration:none}
+
+#gl{position:fixed;inset:0;z-index:1}
+.vig{position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,transparent 54%,rgba(4,5,8,.66) 100%)}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.content{position:relative;z-index:5}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;
+  align-items:center;padding:18px 4vw;mix-blend-mode:difference;color:#fff}
+nav .mark{font-family:'Cinzel';font-weight:900;font-size:16px;letter-spacing:.28em}
+nav .links{display:flex;gap:26px;font-family:'Cinzel';font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+nav .links a{opacity:.58;transition:opacity .25s}
+nav .links a:hover{opacity:1}
+@media(max-width:940px){nav .links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:0 5vw;position:relative}
+.hero .crest{width:46px;height:46px;margin-bottom:24px;color:var(--blood-lt);opacity:0;transform:translateY(16px)}
+.hero .over{font-family:'Cinzel';font-size:10px;letter-spacing:.44em;text-transform:uppercase;
+  color:var(--mist);margin-bottom:22px;opacity:0;transform:translateY(16px)}
+.hero h1{font-family:'Cinzel';font-weight:900;font-size:clamp(46px,11vw,172px);
+  line-height:.92;letter-spacing:.02em;text-transform:uppercase}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .line span{display:inline-block;transform:translateY(112%)}
+.hero h1 .div{color:transparent;-webkit-text-stroke:1.6px var(--blood-lt)}
+.rule{display:flex;align-items:center;gap:16px;justify-content:center;margin-top:28px;opacity:0}
+.rule i{width:clamp(44px,9vw,110px);height:1px;background:var(--gold);opacity:.5}
+.rule b{font-family:'Cinzel';font-weight:700;font-size:12px;letter-spacing:.36em;
+  text-transform:uppercase;color:var(--gold)}
+.hero .lede{margin-top:26px;max-width:580px;font-size:18px;line-height:1.75;color:var(--mist);
+  opacity:0;transform:translateY(20px)}
+.hero .base{position:absolute;bottom:26px;left:0;right:0;display:flex;justify-content:space-between;
+  padding:0 4vw;font-family:'Cinzel';font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ash);opacity:0}
+.hero .cue{display:flex;align-items:center;gap:12px}
+.hero .cue::after{content:"";width:44px;height:1px;background:var(--gold);
+  animation:beat 2.1s ease-in-out infinite;transform-origin:left}
+@keyframes beat{0%,100%{transform:scaleX(.22);opacity:.35}50%{transform:scaleX(1);opacity:.9}}
+
+/* ---------- chapters ---------- */
+.chapter{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:0 5vw;gap:5vw}
+.chapter.right .txt{grid-column:2}
+.chapter.right .void{grid-column:1;grid-row:1}
+.chapter .mark{font-family:'Cinzel';font-weight:700;font-size:11px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:3vh;display:flex;align-items:center;gap:14px}
+.chapter .mark::before{content:"";width:34px;height:1px;background:var(--gold)}
+.chapter h2{font-family:'Cinzel';font-weight:700;font-size:clamp(28px,4.4vw,60px);line-height:1.12;
+  text-transform:uppercase;margin-bottom:3vh}
+.chapter p{font-size:18px;line-height:1.78;color:var(--mist);max-width:480px}
+.chapter .txt{will-change:transform}
+@media(max-width:820px){
+  .chapter{grid-template-columns:1fr;min-height:78vh;padding-top:12vh;padding-bottom:12vh}
+  .chapter .void{display:none}
+  .chapter.right .txt{grid-column:1}
+}
+
+/* ---------- the map stage ---------- */
+/* the stage MUST sit above .content (z-index 5), or the invisible
+   #realm section swallows every pointerdown and the map goes dead.
+   It stays click-through until .live, so the page behaves normally. */
+#stage{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;transition:opacity .7s}
+#stage.live{pointer-events:auto;opacity:1;cursor:grab;touch-action:pan-y}
+#stage.live.dragging{cursor:grabbing}
+.pin{position:absolute;transform:translate(-50%,-100%);pointer-events:auto;background:none;
+  border:0;cursor:pointer;padding:0;display:none;font-family:'Cinzel';color:var(--bone)}
+.pin .stalk{width:1px;height:26px;background:linear-gradient(var(--gold),transparent);margin:0 auto}
+.pin .flag{display:flex;align-items:center;gap:7px;padding:5px 10px 5px 6px;
+  background:rgba(8,10,14,.94);border:1px solid var(--pinCol,var(--gold));
+  transform:translateY(2px);transition:background .25s,transform .25s;white-space:nowrap}
+.pin:hover .flag,.pin.sel .flag{background:var(--pinCol,var(--gold));transform:translateY(-1px) scale(1.04)}
+.pin:hover .flag .nm,.pin.sel .flag .nm{color:#0B0D11}
+.pin .dot{width:8px;height:8px;background:var(--pinCol,var(--gold));flex:0 0 8px;
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.pin:hover .dot,.pin.sel .dot{background:#0B0D11}
+.pin .nm{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:#F4EFE0;text-shadow:0 1px 3px rgba(0,0,0,.9);transition:color .25s}
+.pin .sm{font-size:9.5px;letter-spacing:.1em;color:#C6CDD8;display:inline;
+  text-shadow:0 1px 3px rgba(0,0,0,.9)}
+.pin:hover .flag .sm,.pin.sel .flag .sm{color:#0B0D11}
+
+
+/* house drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,92vw);z-index:70;
+  background:linear-gradient(180deg,rgba(14,17,22,.98),rgba(8,10,13,.98));
+  border-left:1px solid var(--line);padding:32px 30px;overflow-y:auto;
+  transform:translateX(102%);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+#drawer.open{transform:none}
+#drawer .x{position:absolute;top:20px;right:22px;background:none;border:0;color:var(--mist);
+  font-size:24px;cursor:pointer;line-height:1;font-family:'Cinzel'}
+#drawer .x:hover{color:var(--bone)}
+#drawer .dsig{width:70px;height:70px;color:var(--dCol,var(--gold));margin-bottom:18px}
+#drawer .dh{font-family:'Cinzel';font-weight:900;font-size:27px;text-transform:uppercase;line-height:1.1}
+#drawer .dt{margin-top:8px;font-style:italic;color:var(--amber);font-size:17px}
+#drawer .dd{margin-top:16px;display:inline-block;font-family:'Cinzel';font-size:9px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mist);border:1px solid var(--line);padding:5px 11px}
+#drawer .dw{margin-top:20px;font-style:italic;color:var(--gold);font-size:17px;line-height:1.55;
+  border-left:2px solid var(--dCol,var(--gold));padding-left:14px}
+#drawer .dp{margin-top:20px;font-size:16px;line-height:1.75;color:var(--mist)}
+#drawer .dm{margin-top:22px;font-family:'Cinzel';font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mist);border-top:1px solid var(--line);padding-top:16px}
+#drawer .ride{margin-top:22px;width:100%;font-family:'Cinzel';font-weight:700;font-size:13px;
+  letter-spacing:.2em;text-transform:uppercase;padding:15px;cursor:pointer;
+  background:var(--blood);border:1px solid var(--blood);color:var(--bone);transition:.28s}
+#drawer .ride:hover{background:var(--blood-lt);border-color:var(--blood-lt)}
+
+/* ---------- roll index ---------- */
+.roll{padding:14vh 4vw 10vh}
+.roll .head{max-width:820px;margin-bottom:6vh}
+.kick{font-family:'Cinzel';font-weight:700;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.kick::before{content:"";width:34px;height:1px;background:var(--gold)}
+.roll h2{font-family:'Cinzel';font-weight:900;font-size:clamp(32px,5.6vw,82px);line-height:1;
+  text-transform:uppercase}
+.roll .head p{margin-top:20px;color:var(--mist);font-size:17px;line-height:1.72;max-width:580px}
+.rows{border-top:1px solid var(--line)}
+.rrow{display:grid;grid-template-columns:52px 1.15fr 1.15fr .9fr auto;gap:20px;align-items:center;
+  padding:19px 12px;border-bottom:1px solid var(--line);cursor:pointer;
+  transition:background .3s,padding-left .3s}
+.rrow:hover{background:rgba(200,165,75,.06);padding-left:22px}
+.rrow .rs{width:34px;height:34px;color:var(--rc,var(--gold))}
+.rrow .rh{font-family:'Cinzel';font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.rrow .rt{font-style:italic;color:var(--amber);font-size:16px}
+.rrow .rd{font-family:'Cinzel';font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.rrow .rn{font-family:'Cinzel';font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+@media(max-width:900px){
+  .rrow{grid-template-columns:40px 1fr;gap:14px;padding:16px 8px}
+  .rrow .rt,.rrow .rn{display:none}
+  .rrow .rd{grid-column:2}
+}
+
+/* ---------- oath ---------- */
+.oath{min-height:100vh;display:flex;align-items:center;padding:12vh 4vw}
+.scr{width:100%;max-width:790px;margin:0 auto;position:relative;color:#241C12;
+  background:linear-gradient(178deg,#E9DEC4,#D8C9A6);padding:clamp(32px,5vw,64px);
+  box-shadow:0 50px 140px -40px #000;will-change:transform;
+  clip-path:polygon(0 12px,12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px))}
+.scr::before{content:"";position:absolute;inset:9px;border:1px solid rgba(80,66,44,.36);pointer-events:none}
+.scr .kick{color:var(--blood)}
+.scr .kick::before{background:var(--blood)}
+.scr h2{font-family:'Cinzel';font-weight:900;font-size:clamp(26px,4.2vw,48px);text-transform:uppercase;line-height:1.08}
+.scr .sub{margin-top:15px;color:#5A4C36;font-size:17px;line-height:1.7;max-width:560px}
+form{margin-top:34px;display:grid;gap:19px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.row.trio{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:780px){.row.trio{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.row,.row.trio{grid-template-columns:1fr}}
+.field label{display:block;font-family:'Cinzel';font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  color:#6B5C42;margin-bottom:8px;font-weight:700}
+.field input,.field select{width:100%;background:rgba(255,252,244,.6);border:1px solid rgba(80,66,44,.38);
+  padding:13px 15px;color:#241C12;font-family:'Spectral';font-size:17px;transition:.25s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blood);
+  box-shadow:0 0 0 3px rgba(138,17,22,.12);background:#FFFDF6}
+.field input::placeholder{color:rgba(107,92,66,.55)}
+.btn-seal{font-family:'Cinzel';font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;
+  padding:16px 44px;cursor:pointer;background:var(--blood);border:1px solid var(--blood);
+  color:var(--bone);justify-self:start;transition:.3s}
+.btn-seal:hover{background:var(--blood-lt);box-shadow:0 14px 34px -12px rgba(138,17,22,.8);transform:translateY(-2px)}
+.btn-seal:disabled{opacity:.65;cursor:wait;transform:none}
+.note{font-size:12px;color:#6B5C42;line-height:1.9}
+#companions{display:grid;gap:19px}
+.comp-note{font-family:'Cinzel';font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--blood);font-weight:700;padding-top:10px;border-top:1px solid rgba(80,66,44,.3)}
+.sealed{display:none;text-align:center;padding:14px}
+.sealed.show{display:block}
+.sealed .wax{width:72px;height:72px;margin:0 auto 16px;color:var(--blood)}
+.sealed h3{font-family:'Cinzel';font-weight:900;font-size:27px;text-transform:uppercase}
+.sealed p{margin-top:13px;color:#5A4C36;line-height:1.75;font-size:17px}
+.sealed .code{margin-top:19px;font-family:'Cinzel';font-size:12px;letter-spacing:.22em;color:var(--blood);
+  border:1px solid rgba(138,17,22,.4);display:inline-block;padding:11px 22px;font-weight:700}
+
+.laws{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:6vh 4vw 14vh;
+  max-width:1320px;margin:0 auto}
+@media(max-width:900px){.laws{grid-template-columns:1fr}}
+.law{border:1px solid var(--line);padding:30px;background:rgba(14,17,22,.8);will-change:transform}
+.law h4{font-family:'Cinzel';font-weight:700;font-size:15px;text-transform:uppercase;color:var(--gold);letter-spacing:.16em}
+.law ul{margin-top:18px;list-style:none;display:grid;gap:12px}
+.law li{font-size:16px;line-height:1.62;color:var(--mist);padding-left:22px;position:relative}
+.law li::before{content:"†";position:absolute;left:0;color:var(--blood-lt)}
+.law li b{color:var(--gold);font-weight:600}
+
+footer{border-top:1px solid var(--line);padding:12vh 4vw 6vh;text-align:center;overflow:hidden}
+footer .big{font-family:'Cinzel';font-weight:900;font-size:clamp(36px,9.5vw,150px);text-transform:uppercase;
+  line-height:.96;background:linear-gradient(180deg,var(--bone) 16%,rgba(138,17,22,.14));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:transform}
+footer .cols{margin-top:6vh;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;
+  font-size:16px;color:var(--mist);line-height:1.95;text-align:left}
+footer .cols b{color:var(--bone);font-family:'Cinzel';font-size:10px;letter-spacing:.26em;
+  text-transform:uppercase;display:block;margin-bottom:10px}
+footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);letter-spacing:.28em;text-transform:uppercase}
+/* ---------- map interface: reins, tally, hint ---------- */
+.mapui{pointer-events:none}
+#reins{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  transition:opacity .6s,transform .6s}
+#reins.gone{opacity:0;transform:translate(-50%,-50%) scale(.9)}
+#reins svg{width:78px;height:78px;overflow:visible}
+#reins circle{fill:none;stroke-width:1.6}
+#reins .track{stroke:rgba(200,165,75,.22)}
+#reins .fill{stroke:var(--gold);stroke-dasharray:163;stroke-dashoffset:163;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  filter:drop-shadow(0 0 6px rgba(200,165,75,.65))}
+#reins span{font-family:'Cinzel';font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--bone);text-shadow:0 2px 12px #000}
+#reins::after{content:"";position:absolute;top:39px;left:50%;width:7px;height:7px;
+  margin:-3.5px 0 0 -3.5px;background:var(--gold);
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+  animation:pulseDot 1.9s ease-in-out infinite}
+#reins.holding::after{animation:none;transform:scale(1.9)}
+#reins.taken .fill{stroke:var(--amber);animation:flare .7s ease-out}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.5);opacity:1}}
+@keyframes flare{0%{filter:drop-shadow(0 0 4px var(--gold))}
+  40%{filter:drop-shadow(0 0 24px var(--amber))}100%{filter:drop-shadow(0 0 4px var(--gold))}}
+
+#tallyWrap{position:absolute;top:84px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:9px;width:min(300px,68vw);
+  opacity:0;transition:opacity .6s}
+#tallyWrap.show{opacity:1}
+#tallyWrap .tbar{width:100%;height:2px;background:rgba(200,165,75,.18);overflow:hidden}
+#tallyWrap .tbar i{display:block;height:100%;background:linear-gradient(90deg,var(--blood-lt),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+#tally{font-family:'Cinzel';font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--mist)}
+#tallyWrap.done #tally{color:var(--gold)}
+
+.maphint{position:absolute;left:50%;bottom:5vh;transform:translateX(-50%);text-align:center;
+  font-family:'Cinzel';font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);
+  background:rgba(8,10,14,.66);padding:11px 22px;border:1px solid var(--line);
+  display:flex;flex-direction:column;gap:9px;align-items:center}
+.maphint b{color:var(--gold);font-weight:700}
+#unveil{pointer-events:auto;background:none;border:0;border-bottom:1px solid rgba(142,151,166,.4);
+  color:var(--ash);font-family:'Cinzel';font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;padding:2px 0;transition:color .25s,border-color .25s}
+#unveil:hover{color:var(--gold);border-color:var(--gold)}
+
+.helm{position:absolute;right:3vw;bottom:5vh;display:flex;flex-direction:column;gap:10px;
+  align-items:center;opacity:0;transition:opacity .6s}
+.helm.show{opacity:1}
+.helm .pad{display:grid;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,34px);
+  gap:3px;align-items:center;justify-items:center}
+.helm .pad>*:nth-child(1){grid-area:1/2}
+.helm .pad>*:nth-child(2){grid-area:2/1}
+.helm .pad>*:nth-child(3){grid-area:2/2}
+.helm .pad>*:nth-child(4){grid-area:2/3}
+.helm .pad>*:nth-child(5){grid-area:3/2}
+.helm button{pointer-events:auto;width:34px;height:34px;background:rgba(8,10,14,.72);
+  border:1px solid var(--line);color:var(--bone);font-size:11px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;line-height:1}
+.helm button:hover,.helm button:active{background:var(--gold);color:#0B0D11;border-color:var(--gold)}
+.helm .rose{color:var(--gold);font-size:15px;opacity:.55}
+.helm .turn{display:flex;align-items:center;gap:7px;font-family:'Cinzel';font-size:8px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+@media(max-width:620px){.helm{right:2vw;bottom:15vh}}
+
+/* a hold, newly found, announces itself */
+.pin.fresh .flag{animation:found 2.6s ease-out}
+.pin.fresh .dot{animation:foundDot 2.6s ease-out}
+@keyframes found{0%{transform:translateY(14px) scale(.6);opacity:0;
+    box-shadow:0 0 0 0 var(--pinCol)}
+  18%{transform:translateY(-2px) scale(1.12);opacity:1;box-shadow:0 0 34px 6px var(--pinCol)}
+  100%{transform:translateY(2px) scale(1);box-shadow:0 0 0 0 transparent}}
+@keyframes foundDot{0%,30%{transform:rotate(0) scale(1.8)}100%{transform:rotate(180deg) scale(1)}}
+
+/* ---------- the roll rejects a name ---------- */
+.reject{display:none;margin-top:22px;border:1px solid rgba(138,17,22,.45);
+  background:rgba(138,17,22,.07);padding:20px 22px;position:relative}
+.reject.show{display:block}
+.reject h4{font-family:'Cinzel';font-weight:700;font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--blood);display:flex;align-items:center;gap:10px}
+.reject h4::before{content:"†";font-size:16px}
+.reject ul{margin-top:12px;list-style:none;display:grid;gap:9px}
+.reject li{font-size:15.5px;line-height:1.6;color:#5A4C36;padding-left:18px;position:relative}
+.reject li::before{content:"·";position:absolute;left:4px;color:var(--blood);font-weight:700}
+.reject li b{color:#241C12}
+.reject .stamp{position:absolute;top:-16px;right:14px;width:74px;height:74px;color:var(--blood);
+  opacity:0;transform:rotate(-24deg) scale(2.2)}
+.reject.show .stamp{animation:stamp .55s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes stamp{to{opacity:.34;transform:rotate(-13deg) scale(1)}}
+
+/* live warning under a field */
+.warn{display:block;margin-top:7px;font-family:'Cinzel';font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blood);opacity:0;transition:opacity .3s}
+.warn.on{opacity:1}
+.field.bad input{border-color:var(--blood);background:rgba(138,17,22,.06)}
+
+/* ---------- search the roll ---------- */
+.lookup{margin-top:34px;border-top:1px solid rgba(80,66,44,.3);padding-top:22px}
+.lookup .lu{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.lookup .lu .field{flex:1 1 220px}
+.lookup button{font-family:'Cinzel';font-weight:700;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;padding:13px 22px;cursor:pointer;background:none;
+  border:1px solid rgba(80,66,44,.5);color:#241C12;transition:.25s}
+.lookup button:hover{background:#241C12;color:#E9DEC4;border-color:#241C12}
+.lookup .out{margin-top:14px;font-size:15.5px;line-height:1.65;color:#5A4C36;min-height:1.2em}
+.lookup .out b{color:var(--blood);font-family:'Cinzel';font-size:13px;letter-spacing:.1em}
+
+/* ---------- ravens carry the seal ---------- */
+.ravens{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden;display:none}
+.ravens.fly{display:block}
+.ravens i{position:absolute;width:26px;height:26px;color:#0B0D11;
+  animation:raven 2.6s cubic-bezier(.3,.1,.5,1) forwards}
+@keyframes raven{
+  0%{transform:translate(0,0) scale(.3) rotate(-8deg);opacity:0}
+  12%{opacity:1}
+  100%{transform:translate(var(--rx),var(--ry)) scale(1.25) rotate(12deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero .cue::after{animation:none}
+.pin.fresh .flag,.pin.fresh .dot,#reins::after{animation:none}
+.ravens{display:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="gl"></canvas>
+<div class="vig"></div>
+<div class="grain"></div>
+
+<div id="stage">
+  <div class="mapui" id="reins">
+    <svg viewBox="0 0 60 60" aria-hidden="true">
+      <circle class="track" cx="30" cy="30" r="26"/>
+      <circle class="fill" id="reinsRing" cx="30" cy="30" r="26"/>
+    </svg>
+    <span>Press &amp; hold</span>
+  </div>
+  <div class="mapui" id="tallyWrap">
+    <div class="tbar"><i id="tallyBar"></i></div>
+    <span id="tally">None of XVI holds found</span>
+  </div>
+  <div class="maphint mapui">
+    <span id="hintTxt">Press and hold the realm · <b>then drag</b></span>
+    <button id="unveil" type="button">Cannot drag? Unveil the realm</button>
+  </div>
+  <div class="mapui helm" id="helm">
+    <div class="pad">
+      <button data-go="n" aria-label="travel north">&#9650;</button>
+      <button data-go="w" aria-label="travel west">&#9664;</button>
+      <span class="rose">&#10022;</span>
+      <button data-go="e" aria-label="travel east">&#9654;</button>
+      <button data-go="s" aria-label="travel south">&#9660;</button>
+    </div>
+    <div class="turn">
+      <button data-turn="-1" aria-label="turn left">&#8630;</button>
+      <span>Turn</span>
+      <button data-turn="1" aria-label="turn right">&#8631;</button>
+    </div>
+  </div>
+</div>
+<div class="ravens" id="ravens"></div>
+
+<aside id="drawer">
+  <button class="x" id="drawerX">×</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<div class="content">
+
+<nav>
+  <div class="mark">Axentia</div>
+  <div class="links">
+    <a href="#table">The Painted Table</a>
+    <a href="#realm">The Map</a>
+    <a href="#roll">The Roll</a>
+    <a href="#oath">Swear</a>
+  </div>
+  <div class="links" style="gap:0"><a href="#oath">Set the Seal ▸</a></div>
+</nav>
+
+<header class="hero">
+  <svg class="crest" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4">
+    <path d="M50 6 L88 22 V50c0 24-16 38-38 44C28 88 12 74 12 50V22Z" stroke-linejoin="round"/>
+    <path d="M50 26v40M34 40h32"/>
+  </svg>
+  <div class="over">Christ University · School of Business &amp; Management · MBA</div>
+  <h1>
+    <span class="line"><span>The Realm</span></span>
+    <span class="line"><span class="div">Divided</span></span>
+  </h1>
+  <div class="rule"><i></i><b>Axentia MMXXVI</b><i></i></div>
+  <p class="lede">Sixteen great houses hold sixteen disciplines, and each keeps its own seat somewhere in these lands. The map below is dark and it will stay dark. Descend, take the reins in your hand, and drag the light across the realm — every tower you want to see, you must find.</p>
+  <div class="base">
+    <span class="cue">Descend</span>
+    <span>VI &amp; VII August MMXXVI · Bangalore Central Campus</span>
+  </div>
+</header>
+
+<section class="chapter" id="table">
+  <div class="txt">
+    <div class="mark">Chapter the First · The Painted Table</div>
+    <h2>A house is a sigil and a set of words</h2>
+    <p>The sigil is what the realm sees from a distance — the mark, the accent, the thing that makes a house unmistakable. The words are what remains once the banners come down. Axentia has always been both: <em>Accent</em> and <em>Essentia</em>. Two days will decide which of the two each house truly possesses.</p>
+  </div>
+  <div class="void"></div>
+</section>
+
+<section class="chapter right" id="rise">
+  <div class="txt">
+    <div class="mark">Chapter the Second · The Realm Rises</div>
+    <h2>Nothing is shown to the idle hand</h2>
+    <p>Below lies a painted table under a shroud of mist. Press and hold until the realm answers, then drag: a lantern moves with your hand, and only what it passes over wakes. Winterfell's grey walls, the Rock's gilded crown, the Eyrie's pale needles, the great beacon of Oldtown — sixteen holds, and not one of them will come to you. No house inherits its standing. It is found.</p>
+  </div>
+  <div class="void"></div>
+</section>
+
+<section class="chapter" id="dusk">
+  <div class="txt">
+    <div class="mark">Chapter the Third · Nightfall</div>
+    <h2>Sixteen fires against the dark</h2>
+    <p>Every hold you uncover raises its towers out of the map, hangs its banner in the wind, and lights its arrow slits one by one. Something older wakes with the dark, too — look up, and you will find wings crossing the realm. They mark the hand that moves over the map; reach toward one, and it may answer in fire. This is the hour the map stops being a picture and becomes a choice.</p>
+  </div>
+  <div class="void"></div>
+</section>
+
+<!-- interactive map section: the canvas takes over here -->
+<section id="realm" style="height:190vh;position:relative"></section>
+
+<section class="roll" id="roll">
+  <div class="head">
+    <div class="kick">If you would rather not ride out</div>
+    <h2>The Roll<br>of Banners</h2>
+    <p>Every house, plainly set down. Choose a line to read its charge — the same as claiming its tower on the map.</p>
+  </div>
+  <div class="rows" id="rows"></div>
+</section>
+
+<section id="oath" class="oath">
+  <div class="scr" id="scrollWrap">
+    <div id="formView">
+      <div class="kick">Set Your Hand to It</div>
+      <h2>The Oath Roll</h2>
+      <p class="sub">For a sworn company, the leader alone sets the seal — but every companion must be named upon the roll. <strong>One house per knight:</strong> the moment a name is sealed to a house, that name is refused by every other. This holds for companions as much as for leaders.</p>
+      <form id="oathForm">
+        <div class="row">
+          <div class="field"><label>Name of the Sworn</label><input required name="name" placeholder="Your full name"></div>
+          <div class="field"><label>Register Number</label><input required name="reg" data-guard="reg" placeholder="e.g. 25MBA1234"><span class="warn"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Raven — Email</label><input required type="email" name="email" data-guard="email" placeholder="you@christuniversity.in"><span class="warn"></span></div>
+          <div class="field"><label>Phone</label><input required name="phone" data-guard="phone" placeholder="10-digit mobile" inputmode="numeric" pattern="[0-9]{10}" title="10-digit mobile number"><span class="warn"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Section</label><input required name="section" placeholder="e.g. 1 MBA C"></div>
+          <div class="field"><label>Strength of Company</label><input name="teamsize" id="sizeField" placeholder="Set by your house" readonly></div>
+        </div>
+        <div class="field"><label>House You Ride For</label>
+          <select required name="event" id="houseSelect"><option value="">— Name your house —</option></select>
+        </div>
+        <div id="companions"></div>
+        <p class="note">By setting your hand to this roll you accept the laws of the realm. The roll closes III August MMXXVI, 23:59 IST.</p>
+        <button type="submit" class="btn-seal">Set the Seal</button>
+      </form>
+
+      <div class="reject" id="reject">
+        <svg class="stamp" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="5"/>
+          <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M30 30l40 40M70 30L30 70" stroke="currentColor" stroke-width="7" fill="none"/>
+        </svg>
+        <h4>The Roll Refuses This Company</h4>
+        <ul id="rejectList"></ul>
+        <p class="note" style="margin-top:14px">A knight may ride under one house only. Remove or replace the named companion, or have them withdraw from their first house through the coordinator.</p>
+      </div>
+
+      <div class="lookup">
+        <div class="kick" style="margin-bottom:14px">Search the Roll</div>
+        <div class="lu">
+          <div class="field"><label>Register No., Email or Phone</label>
+            <input id="luInput" placeholder="e.g. 25MBA1234"></div>
+          <button type="button" id="luBtn">Search</button>
+        </div>
+        <p class="out" id="luOut"></p>
+      </div>
+    </div>
+    <div class="sealed" id="sealedView">
+      <svg class="wax" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M50 4l11 9 14-3 4 14 12 8-8 12 3 14-14 4-9 11-13-6-13 6-9-11-14-4 3-14-8-12 12-8 4-14 14 3z" opacity=".22"/>
+        <circle cx="50" cy="50" r="27"/>
+        <path d="M50 34v32M38 46h24" stroke="#E9DEC4" stroke-width="4" fill="none"/>
+      </svg>
+      <h3>The Seal Is Set</h3>
+      <p id="sealedMsg"></p>
+      <div class="code" id="sealedCode"></div>
+    </div>
+  </div>
+</section>
+
+<section class="laws">
+  <div class="law">
+    <h4>Laws of the Realm</h4>
+    <ul>
+      <li>The institute's code of conduct binds every participant at all hours.</li>
+      <li>All members of a sworn company must attend every round.</li>
+      <li>Carry laptops with a stable internet connection.</li>
+      <li>Formal college dress code on both days of trial.</li>
+      <li>The judgement of the judges is final and beyond appeal.</li>
+    </ul>
+  </div>
+  <div class="law">
+    <h4>Rules of the Lists</h4>
+    <ul>
+      <li>Participation is mandatory for all first-year MBA students.</li>
+      <li>A knight may ride under one house only.</li>
+      <li>Only the leader of a company sets the seal on the roll.</li>
+      <li>No house may be forsworn once the roll has closed.</li>
+      <li>Companies may be formed across sections.</li>
+    </ul>
+  </div>
+  <div class="law">
+    <h4>The Reckoning</h4>
+    <ul>
+      <li><b>Days of Trial:</b> 06–07 August 2026</li>
+      <li><b>Seat of the Court:</b> Bangalore Central Campus</li>
+      <li><b>Roll closes:</b> 03 August, 23:59 IST</li>
+      <li><b>Faculty Coordinator:</b> Dr. Arun T C</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="big" id="footBig">Take the Field</div>
+  <div class="cols">
+    <div><b>Student Coordinator</b>Tarush Bhusri · 99714 60425</div>
+    <div><b>The Fest</b>Axentia MMXXVI · The Realm Divided<br>Sixteen Banners, One Throne<br>Intra-Collegiate Management Fest</div>
+    <div><b>Presented By</b>School of Business &amp; Management<br>MBA Programme<br>CHRIST (Deemed to be University)</div>
+  </div>
+  <div class="fine">The sigil is what they see · The words are what you are</div>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ignoreMobileResize:true});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile=matchMedia('(pointer:coarse)').matches||innerWidth<820;
+const SHEET_ENDPOINT='';   /* paste your Apps Script /exec URL here */
+
+/* =====================================================
+   HOUSE DATA — sigil, colours, castle spec, charge
+===================================================== */
+const S=(i)=>`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.2"
+  stroke-linecap="round" stroke-linejoin="round">${i}</svg>`;
+const SIG={
+ seahorse:S(`<path d="M62 24c-9-7-23-2-25 10-1 9 7 12 6 21-1 8-9 11-9 19 0 7 6 12 14 12"/>
+   <path d="M62 24c5-4 9-3 12 1M55 20l-4-7M62 32c-6 1-9 5-9 10M50 45c-5 1-8 4-8 9"/>
+   <circle cx="61" cy="30" r="2.4" fill="currentColor" stroke="none"/>`),
+ trout:S(`<path d="M18 50c10-14 26-20 40-20s22 8 26 20c-4 12-12 20-26 20S28 64 18 50Z"/>
+   <path d="M84 50l12-12v24Z"/><path d="M46 40c4 6 4 14 0 20"/>
+   <circle cx="34" cy="46" r="2.6" fill="currentColor" stroke="none"/>`),
+ falcon:S(`<path d="M50 20c-14 0-24 10-24 22 0 14 12 24 24 34 12-10 24-20 24-34 0-12-10-22-24-22Z"/>
+   <path d="M30 40 50 32l20 8"/><path d="M78 16a17 17 0 1 0 8 15 13 13 0 1 1-8-15Z" stroke-width="3.6"/>`),
+ dragon:S(`<path d="M50 84c-6-10-16-14-16-26 0-9 7-15 16-15s16 6 16 15c0 12-10 16-16 26Z"/>
+   <path d="M34 44 18 30l8-4-6-10 16 8M66 44l16-14-8-4 6-10-16 8"/>
+   <path d="M42 34c0-6 3-10 8-10s8 4 8 10"/>
+   <circle cx="44" cy="52" r="2.4" fill="currentColor" stroke="none"/>
+   <circle cx="56" cy="52" r="2.4" fill="currentColor" stroke="none"/>`),
+ arrows:S(`<path d="M20 80 74 26M62 22h14v14M28 78l-8 4 4-8"/><path d="M80 80 26 26M38 22H24v14M72 78l8 4-4-8"/>`),
+ stag:S(`<path d="M50 88c-9-8-14-17-14-27 0-9 6-15 14-15s14 6 14 15c0 10-5 19-14 27Z"/>
+   <path d="M36 44 24 30M24 30l-10-2M24 30 20 18M64 44l12-14M76 30l10-2M76 30l4-12"/>
+   <path d="M38 14h24l-6 8H44Z"/>`),
+ bear:S(`<circle cx="50" cy="54" r="24"/><circle cx="28" cy="30" r="9"/><circle cx="72" cy="30" r="9"/>
+   <path d="M40 52a4 4 0 1 1 0 .1M60 52a4 4 0 1 1 0 .1" fill="currentColor"/>
+   <path d="M50 62v6M42 72c4 4 12 4 16 0"/>`),
+ rose:S(`<circle cx="50" cy="46" r="24"/><circle cx="50" cy="46" r="14"/><circle cx="50" cy="46" r="5"/>
+   <path d="M50 70v20M50 82c-9 0-14-5-16-12 8-1 13 3 16 8M50 82c9 0 14-5 16-12-8-1-13 3-16 8"/>`),
+ kraken:S(`<circle cx="50" cy="38" r="17"/>
+   <path d="M36 50c-6 8-16 10-22 6M64 50c6 8 16 10 22 6M42 54c-4 12-12 18-20 20M58 54c4 12 12 18 20 20M50 56v28"/>
+   <circle cx="43" cy="36" r="2.6" fill="currentColor" stroke="none"/>
+   <circle cx="57" cy="36" r="2.6" fill="currentColor" stroke="none"/>`),
+ lion:S(`<circle cx="50" cy="50" r="30" stroke-dasharray="7 5"/><circle cx="50" cy="50" r="19"/>
+   <path d="M42 46a3 3 0 1 1 0 .1M58 46a3 3 0 1 1 0 .1" fill="currentColor"/>
+   <path d="M50 54v5M43 62c4 4 10 4 14 0"/>`),
+ sunspear:S(`<circle cx="50" cy="50" r="17"/>
+   <path d="M50 20V8M50 92V80M20 50H8M92 50H80M29 29 20 20M71 71l9 9M71 29l9-9M29 71l-9 9"/>
+   <path d="M14 86 78 22M78 22l-2 12M78 22l-12 2"/>`),
+ wolf:S(`<path d="M50 86c-13-9-22-20-22-33 0-11 9-19 22-19s22 8 22 19c0 13-9 24-22 33Z"/>
+   <path d="M28 40 22 18l16 10M72 40l6-22-16 10"/>
+   <path d="M42 52a3 3 0 1 1 0 .1M58 52a3 3 0 1 1 0 .1" fill="currentColor"/>
+   <path d="M50 60v6M43 70c4 4 10 4 14 0"/>`),
+ beacon:S(`<path d="M34 88V44h32v44ZM40 44V30h20v14Z"/><path d="M28 88h44M40 60h20M40 74h20"/>
+   <path d="M50 28c-5-5-3-11 0-16 3 5 8 6 8 11a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0 3 3 5 8 5Z"/>`),
+ sword:S(`<path d="M50 14 44 62h12L50 14Z"/><path d="M50 62v18"/><path d="M34 80h32"/>
+   <path d="M44 86h12"/><path d="M50 14l2-6-2 2-2-2 2 6Z" fill="currentColor" stroke="none"/>
+   <path d="M62 34l14-8-2 8 6 4-16 2"/>`),
+ merman:S(`<path d="M50 18a9 9 0 1 0 .1 0Z"/>
+   <path d="M50 30c-8 0-13 6-13 15 0 8 4 13 4 20 0 6-4 9-9 11 6 3 12 1 14-4"/>
+   <path d="M50 30c8 0 13 6 13 15 0 8-4 13-4 20 0 6 4 9 9 11-6 3-12 1-14-4"/>
+   <path d="M42 46h16M44 56h12"/>`),
+ foxflower:S(`<circle cx="50" cy="48" r="9"/>
+   <path d="M50 39c-4-9 0-19 0-19s4 10 0 19M59 43c9-4 18 0 18 0s-9 5-18 1M59 55c7 6 9 16 9 16s-9-3-13-10M41 55c-7 6-9 16-9 16s9-3 13-10M41 43c-9-4-18 0-18 0s9 5 18 1"/>`),
+ /* Blackwood — a bare weirwood with a watching face, ravens in the boughs */
+ weirwood:S(`<path d="M50 90V54"/><path d="M42 90h16"/>
+   <path d="M50 54c-15 0-24-9-24-21 0-13 11-21 24-21s24 8 24 21c0 12-9 21-24 21Z"/>
+   <path d="M43 34a2.4 2.4 0 1 1 0 .1M57 34a2.4 2.4 0 1 1 0 .1" fill="currentColor" stroke="none"/>
+   <path d="M45 44c2 3 8 3 10 0"/>
+   <path d="M30 20c3-3 6-3 8 0M62 20c2-3 5-3 8 0"/>`),
+ /* Reed — the black lizard-lion of the crannogmen, low over the water */
+ lizardlion:S(`<path d="M14 54c11-7 24-9 37-6 9 2 17 5 25 11-8 2-15 2-23 0"/>
+   <path d="M14 54c7 5 15 8 25 8 8 0 15-2 21-5"/>
+   <path d="M31 47l3-6 3 6M42 46l3-6 3 6M53 47l3-6 3 6"/>
+   <circle cx="25" cy="51" r="1.9" fill="currentColor" stroke="none"/>
+   <path d="M23 61l-3 7M35 63v7M49 62l2 7M62 58l4 6"/>`)
+};
+
+/* castle archetypes — every seat is built differently.
+   Each house keeps its own seat, sigil and country; the event it
+   hosts is set by the Realm's roll of assignment. */
+const HOUSES=[
+{h:"House Stark",seat:"Winterfell",t:"The Cold Eye of the North",sig:"wolf",col:"#A8B4BE",
+ dom:"Business Analytics",team:3,pos:[-2,-25],trig:.13,
+ words:"The snow keeps every footprint. Learn to read it.",
+ desc:"No code, no programming — only patience and a cold eye that sees what the thaw gives up. Take raw, unlovely records and leave with the single pattern that changes the decision. Every claim must be earned twice: once from the data, and again before people who ask how you know. The North remembers everything, and so must you."},
+{h:"House Mormont",seat:"Bear Island",t:"The Green Throne",sig:"bear",col:"#6E8F4E",
+ dom:"Sustainability Event",team:3,pos:[-17,-21],trig:.17,
+ words:"The land outlasts every house that forgets it.",
+ desc:"A trial held where the forest has already begun taking the stone back. Build the case for growth that does not cost the realm its future — weigh profit against planet, ambition against consequence, and defend a plan that still stands when the ledger is read in fifty years. The green throne is inherited by those who leave more than they took."},
+{h:"House Greyjoy",seat:"Pyke",t:"The Iron Tide",sig:"kraken",col:"#5E7A8C",
+ dom:"Lean Operation",team:3,pos:[-24,-6],trig:.21,
+ words:"The sea forgives no wasted stroke.",
+ desc:"A high-tempo operations trial run at the pace of a longship crew. Find the bottleneck, cut the waste, and keep supply moving as the weather turns against you. No saga is sung of ballast and oar-count, and yet every raid that ever returned home was decided by them. Precision, speed, and the iron discipline to hold the stroke."},
+{h:"House Lannister",seat:"Casterly Rock",t:"The Vault of Casterly Rock",sig:"lion",col:"#E0B341",
+ dom:"Finance",team:3,pos:[-21,7],trig:.25,
+ words:"Every debt is remembered. Especially yours.",
+ desc:"A trial of nerve and numbers. Read turbulent markets, price what everyone else is guessing at, and negotiate positions where each decision compounds into the next round. Instinct gets you to the table. Valuation discipline lets you leave it solvent, and the vault stays shut to the careless."},
+{h:"House Blackwood",seat:"Raventree Hall",t:"The Raven's Long Game",sig:"weirwood",col:"#B0555C",
+ dom:"Strategy",team:3,pos:[-7,-7],trig:.28,
+ words:"The old tree remembers who bent, and who broke.",
+ desc:"A contest with no clean claim, played beneath a dead weirwood full of watching ravens. Take your position, then guide it through linked rounds — fortify, build reputation, forge alliances you may yet have to break, and outlast rivals doing the same to you. The Blackwoods have feuded so long they have forgotten the cause and kept only the craft: strategy is whatever still stands after contact with another house's ambition."},
+{h:"House Arryn",seat:"The Eyrie",t:"As High as Honor",sig:"falcon",col:"#9BB7D4",
+ dom:"B Plan",team:3,pos:[13,-14],trig:.31,
+ words:"Build high — but know the fall is honest.",
+ desc:"The flagship venture trial, argued at the realm's most vertiginous height. Bring a problem worth solving, a model that survives its own arithmetic, and the nerve to defend both before people who have heard every pitch. The Eyrie is reached only by those willing to climb in full view of the drop — ideas are cheap, and only a plan that scales, sustains, and does not devour its keeper is let past the Bloody Gate."},
+{h:"House Baratheon",seat:"Storm's End",t:"The Fury of Storm's End",sig:"stag",col:"#D4A017",
+ dom:"Best Management Team",team:4,pos:[11,4],trig:.34,
+ words:"One storm of many winds — or it is only weather.",
+ desc:"When the realm cannot decide, it summons the house that has weathered every gale as one. Your company is tested across every discipline at once — analysis, negotiation, leadership, judgement, all against a clock — where the fastest road to ruin is four able minds refusing to agree. Break apart and you are only weather; hold together and you are the storm."},
+{h:"House Targaryen",seat:"Dragonstone",t:"The Dragon Rides Alone",sig:"dragon",col:"#C0392B",
+ dom:"Best Manager",team:1,pos:[25,-3],trig:.37,
+ words:"A dragon answers to no council.",
+ desc:"The individual crucible, and only one may mount the beast. Face crisis calls, ethical traps, negotiations and reversals engineered to find the edge of your composure. You are measured by what you do the moment the plan burns and every eye in the hall turns to you. Many are born to the blood. Few can ride what it wakes."},
+{h:"House Velaryon",seat:"Driftmark",t:"The Nine Voyages",sig:"seahorse",col:"#7FA8C9",
+ dom:"International Business",team:3,pos:[24,11],trig:.40,
+ words:"The far shore trades with the bold, never the timid.",
+ desc:"A trial that crosses the narrow sea, run by the house whose fleets already know every foreign harbour. Read markets you were not raised in, weather the tariffs and currencies and customs no one warned you of, and strike the deal that holds on both shores. The Velaryons built their fortune on tides other houses feared — international business is not domestic strategy with a longer voyage, but the discipline of winning where the rules, and the risks, are not your own."},
+{h:"House Tyrell",seat:"Highgarden",t:"The Court of the Rose",sig:"rose",col:"#D98BA5",
+ dom:"Human Resource",team:3,pos:[-9,15],trig:.43,
+ words:"A garden is only ever as strong as its roots.",
+ desc:"A trial of the people who hold an institution together, held in the realm's most cultivated court. Work through grievance, culture, ethics, and the conversations nobody volunteers for. One round you design the structure; the next you keep it standing through open conflict. At Highgarden they know a rose is grown, never commanded — empathy is the discipline under examination, and the verdict is yours to earn."},
+{h:"House Hightower",seat:"Oldtown",t:"The Beacon's Reach",sig:"beacon",col:"#B4302F",
+ dom:"Digital Marketing",team:3,pos:[-19,19],trig:.46,
+ words:"The tallest tower is the one they see first.",
+ desc:"Marketing fought on screens and in feeds, from the realm's tallest tower. Build the funnel, read the analytics, place the beacon on the channel nobody else has lit, and defend every rupee of spend against the numbers. The Hightower does not shout to be seen — it is simply the light the whole coast steers by. Reach is engineered, not wished for, and won in attention."},
+{h:"House Tarly",seat:"Horn Hill",t:"The Hornhill Hunt",sig:"arrows",col:"#8FA35B",
+ dom:"Business Quiz",team:2,pos:[1,22],trig:.49,
+ words:"The quarry belongs to whoever knew where to look.",
+ desc:"The flagship quiz. Word reaches this house of markets, founders, collapses, and the quiet manoeuvres that redraw industries — and you are expected to have read all of it. Rounds span enterprise, finance, marketing and global currents, tested at speed with no room to hedge."},
+{h:"House Martell",seat:"Sunspear",t:"The Crown & Coin",sig:"sunspear",col:"#E07B39",
+ dom:"Economics",team:2,pos:[16,22],trig:.52,
+ words:"Bend for the realm. Never for the court.",
+ desc:"An expedition through the economics of a kingdom. Chase clues, argue policy before a hostile bench, and defend reform proposals to a panel that presses every assumption. Where the trade-off falls between growth, equity and the crown's next crisis is what you must own — with both the crown and the coin in the balance."},
+{h:"House Dayne",seat:"Starfall",t:"The Sword of the Morning",sig:"sword",col:"#B9C6E2",
+ dom:"Case Study",team:1,pos:[-13,2],trig:.55,
+ words:"One stroke, made in the right dawn, ends the war.",
+ desc:"A crisis is laid before you and the court waits on a single judgement. Read the case, weigh the counsel, and commit while committing still matters — through real problems, hostile questions, and a decision you must defend aloud. Starfall raises swordsmen who win with one clean stroke rather than a hundred wild ones: you are judged on whether the realm is still standing when you lower the blade."},
+{h:"House Manderly",seat:"White Harbour",t:"The Merman's Court",sig:"merman",col:"#4FA3B8",
+ dom:"Marketing",team:3,pos:[2,-14],trig:.58,
+ words:"Set the grandest table, and the realm comes to you.",
+ desc:"The flagship marketing trial, thrown with the appetite of White Harbour itself. In a realm deafened by noise, build the story people repeat without being asked. Decode a live brand problem, find the audience nobody else is courting, and raise a campaign sharp enough to be argued over at every table. The Manderlys know the secret of the great feast: be lavish, be talked about, be remembered — a sovereign pitch is won, never issued."},
+{h:"House Reed",seat:"Greywater Watch",t:"The Crannog's Counsel",sig:"lizardlion",col:"#6E8B62",
+ dom:"Consulting",team:3,pos:[-3,9],trig:.61,
+ words:"The bog swallows the loud. The wise walk light.",
+ desc:"The quiet seat of the crannogmen, where clear sight is worth more than loud confidence. Take a client's tangled problem, cut through it with structure and evidence, and forge a recommendation you would stake your name on. The Reeds have kept a moving castle hidden in a swamp for centuries — consulting is the discipline of finding the firm ground others miss, and proving exactly where it lies."}
+];
+
+/* =====================================================
+   THREE — THE REALM
+===================================================== */
+const canvas=document.getElementById('gl');
+/* mobile GPUs drop the WebGL context when the tab is backgrounded;
+   swallowing the event keeps the browser from abandoning it for good */
+canvas.addEventListener('webglcontextlost',e=>e.preventDefault(),false);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:!isMobile,alpha:false,powerPreference:'high-performance'});
+renderer.setPixelRatio(isMobile?1:Math.min(devicePixelRatio,1.5));
+renderer.setSize(innerWidth,innerHeight);
+renderer.setClearColor(0x0A0C11,1);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x0A0C11,.0075);
+const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.1,600);
+
+const amb=new THREE.AmbientLight(0x8FA0B8,.34);scene.add(amb);
+/* cool sky above, warm earth below: gives every wall a lit and a shaded side */
+const hemi=new THREE.HemisphereLight(0xAFC4DC,0x6B5335,.62);scene.add(hemi);
+const sunL=new THREE.DirectionalLight(0xC9D6E4,1.05);sunL.position.set(22,30,16);scene.add(sunL);
+const rimL=new THREE.DirectionalLight(0x8A1116,.5);rimL.position.set(-20,10,-16);scene.add(rimL);
+/* The castles are ONLY ever seen after dark, so the night has to be
+   a lit night: a cool moon key, plus warm firelight from whichever
+   holds are nearest the eye. Without these, every palette collapses. */
+const moonL=new THREE.DirectionalLight(0xB9CBE6,0);moonL.position.set(-18,26,-12);scene.add(moonL);
+const HEARTH=[];
+for(let i=0;i<3;i++){const l=new THREE.PointLight(0xFFB765,0,20,1.7);scene.add(l);HEARTH.push(l);}
+
+function glowTex(inner,mid){const s=256,c=document.createElement('canvas');c.width=c.height=s;
+  const x=c.getContext('2d');const g=x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+  g.addColorStop(0,inner);g.addColorStop(.28,mid);g.addColorStop(1,'rgba(0,0,0,0)');
+  x.fillStyle=g;x.fillRect(0,0,s,s);return new THREE.CanvasTexture(c);}
+const GLOW=glowTex('rgba(255,236,190,1)','rgba(226,164,74,.45)');
+const GLOW_R=glowTex('rgba(255,210,150,1)','rgba(200,40,20,.5)');
+
+const NOISE=`
+vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+float snoise(vec3 v){const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
+ vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+ vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+ vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;i=mod289(i);
+ vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
+ float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.0*floor(p*ns.z*ns.z);
+ vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;
+ vec4 h=1.0-abs(x)-abs(y);vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
+ vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));
+ vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+ vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+ vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+ p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+ vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
+ return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}
+float fbm(vec2 q){float f=0.0,a=0.5;vec3 p=vec3(q,0.0);
+ for(int i=0;i<4;i++){f+=a*snoise(p);p*=2.02;a*=0.55;}return f;}`;
+
+/* ---------- the painted table ---------- */
+const MAP=86;
+/* every seat stains the land around it with its own country:
+   snow at Winterfell, dune at Sunspear, ash and lava at Dragonstone */
+const BIOME={
+ 'Winterfell'  :{col:0xB9C6D2,glow:0,  rough:.30},
+ 'Bear Island' :{col:0x4A5442,glow:0,  rough:.85},
+ 'Pyke'        :{col:0x33414C,glow:0,  rough:.70},
+ 'Casterly Rock':{col:0xB08A4E,glow:0, rough:.55},
+ 'Raventree Hall':{col:0x5E7A52,glow:0,rough:.45},
+ 'The Eyrie'   :{col:0x9BAAB8,glow:0,  rough:.80},
+ "Storm's End" :{col:0x3A4048,glow:0,  rough:.75},
+ 'Dragonstone' :{col:0x2A2226,glow:1,  rough:.90},
+ 'Driftmark'   :{col:0x6E8A8E,glow:0,  rough:.40},
+ 'Highgarden'  :{col:0x6E9450,glow:0,  rough:.35},
+ 'Oldtown'     :{col:0x6B7A66,glow:0,  rough:.40},
+ 'Horn Hill'   :{col:0x55663F,glow:0,  rough:.60},
+ 'Sunspear'    :{col:0xC2A06A,glow:0,  rough:.25},
+ 'Starfall'    :{col:0x8FA0C4,glow:.55,rough:.30},
+ 'White Harbour':{col:0x4E7E8C,glow:0, rough:.42},
+ 'Greywater Watch':{col:0x5C7150,glow:0,rough:.55}
+};
+const mapUni={uTime:{value:0},uNight:{value:0},
+  uBio:{value:HOUSES.map(H=>new THREE.Vector4(H.pos[0],H.pos[1],0,(BIOME[H.seat]||{}).glow||0))},
+  uBioCol:{value:HOUSES.map(H=>new THREE.Color((BIOME[H.seat]||{}).col||0x555555))},
+  uBioRough:{value:HOUSES.map(H=>(BIOME[H.seat]||{}).rough||.5)}};
+const map=new THREE.Mesh(new THREE.PlaneGeometry(MAP,MAP),
+  new THREE.ShaderMaterial({uniforms:mapUni,
+    vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:NOISE+`
+      uniform float uNight;uniform float uTime;varying vec2 vUv;
+      uniform vec4 uBio[16];uniform vec3 uBioCol[16];uniform float uBioRough[16];
+      void main(){
+        vec2 p=(vUv-0.5)*2.0;
+        vec2 w=vec2(fbm(p*1.5+vec2(3.1)),fbm(p*1.5+vec2(8.7)));
+        float hh=fbm(p*1.35+w*0.5)+0.74-length(p)*0.95;
+        float land=smoothstep(-0.01,0.045,hh);
+        float coast=1.0-smoothstep(0.0,0.03,abs(hh));
+        float rv=abs(fbm(p*3.2+vec2(17.3)));
+        float river=(1.0-smoothstep(0.0,0.02,rv))*land;
+        float hatch=smoothstep(.6,.95,sin(vUv.y*560.0+fbm(p*4.0)*5.0));
+        float forest=smoothstep(.6,.8,fbm(p*8.5+vec2(41.0)))*land;
+        float hills=smoothstep(.68,.86,fbm(p*5.0+vec2(63.0)))*land;
+        /* carved war-table: dark oiled wood sea, slate-green land, brass inlay */
+        vec3 sea=mix(vec3(0.045,0.058,0.078),vec3(0.070,0.086,0.110),hatch*0.8);
+        vec3 soil=vec3(0.150,0.163,0.150);
+        soil=mix(soil,vec3(0.108,0.124,0.118),smoothstep(.4,.7,fbm(p*2.0))*0.7);
+        soil=mix(soil,vec3(0.078,0.104,0.086),forest*0.8);
+        soil=mix(soil,vec3(0.196,0.196,0.180),hills*0.55);
+        vec3 col=mix(sea,soil,land);
+        col=mix(col,vec3(0.482,0.392,0.196),coast*0.80);   /* brass coastline */
+        col=mix(col,vec3(0.180,0.290,0.360),river*0.75);
+        float grid=max(smoothstep(.988,1.0,abs(sin(vUv.x*20.0))),smoothstep(.988,1.0,abs(sin(vUv.y*20.0))));
+        col=mix(col,vec3(0.40,0.33,0.17),grid*0.13);
+        col*=1.0-pow(length(p)*0.70,3.2)*0.72;
+        vec3 night=col*vec3(0.42,0.50,0.66)*0.5;
+        night+=vec3(0.03,0.05,0.09)*hatch*(1.0-land);
+        col=mix(col,night,uNight);
+
+        /* ---- each seat's own country, bleeding out from its walls ---- */
+        vec2 pw=vec2((vUv.x-0.5)*86.0,-(vUv.y-0.5)*86.0);
+        vec3 bc=vec3(0.0);float bw=0.0;float bg=0.0;float br=0.0;
+        for(int i=0;i<16;i++){
+          float d=distance(pw,uBio[i].xy);
+          float w=smoothstep(13.0,2.5,d)*uBio[i].z;
+          bc+=uBioCol[i]*w;bw+=w;bg+=uBio[i].w*w;br+=uBioRough[i]*w;
+        }
+        if(bw>0.0005){
+          bc/=bw;br/=bw;
+          float k=clamp(bw,0.0,1.0);
+          /* the ground of that country: smooth snow and dune, broken rock and bog */
+          float gr=fbm(p*(3.0+br*14.0)+vec2(7.7));
+          vec3 bt=bc*(1.0-br*0.42+gr*br*0.95);
+          bt=mix(bt,bc*1.28,hills*0.55);
+          bt=mix(bt,bc*0.66,forest*0.55);
+          bt=mix(bt,bc*0.42,(1.0-land)*0.72);          /* its own coastal water */
+          bt*=mix(1.0,0.60,uNight);                     /* survives the dark */
+          bt+=vec3(0.02,0.04,0.07)*uNight;
+          col=mix(col,bt,k*0.90);
+          /* Dragonstone alone burns */
+          float cracks=smoothstep(0.62,0.98,fbm(p*9.0+vec2(3.3)));
+          col+=vec3(1.0,0.30,0.05)*bg*k*cracks*(0.55+0.45*sin(uTime*1.7+pw.x*0.3));
+        }
+        gl_FragColor=vec4(col,1.0);}`}));
+map.rotation.x=-Math.PI/2;scene.add(map);
+
+/* =====================================================
+   WEATHERED STONE
+   Flat colour is what made these look like toys. Every
+   wall now carries a vertical gradient (damp, shadowed
+   footings → sun-bleached parapets), two octaves of
+   block mottle so no two stones read alike, moss or
+   salt creeping up from the base, and snow settling on
+   surfaces that actually face the sky.
+===================================================== */
+const WEATHERED=[];
+function stone(lowHex,highHex,o){
+  o=o||{};
+  const m=new THREE.MeshStandardMaterial({color:highHex,
+    roughness:o.rough!==undefined?o.rough:.93,
+    metalness:o.metal!==undefined?o.metal:.03});
+  const U={
+    uLow    :{value:new THREE.Color(lowHex)},
+    uHigh   :{value:new THREE.Color(highHex)},
+    uMoss   :{value:new THREE.Color(o.mossCol!==undefined?o.mossCol:0x47543A)},
+    uMossAmt:{value:o.moss||0},
+    uMossH  :{value:o.mossH||.28},
+    uSnowAmt:{value:o.snow||0},
+    uGrain  :{value:o.grain!==undefined?o.grain:.14},
+    uH      :{value:o.h||4.0}
+  };
+  m.onBeforeCompile=sh=>{
+    Object.assign(sh.uniforms,U);
+    sh.vertexShader='varying vec3 vWP_;varying vec3 vWN_;\n'+
+      sh.vertexShader.replace('#include <begin_vertex>',
+`#include <begin_vertex>
+  vec4 wp_=modelMatrix*vec4(transformed,1.0);
+  vWP_=wp_.xyz;
+  vec3 wn_=mat3(modelMatrix)*objectNormal;
+  vWN_=wn_/max(length(wn_),1e-5);`);
+    sh.fragmentShader=
+'uniform vec3 uLow;uniform vec3 uHigh;uniform vec3 uMoss;\n'+
+'uniform float uMossAmt;uniform float uMossH;uniform float uSnowAmt;\n'+
+'uniform float uGrain;uniform float uH;\n'+
+'varying vec3 vWP_;varying vec3 vWN_;\n'+
+      sh.fragmentShader.replace('#include <color_fragment>',
+`#include <color_fragment>
+  float hg_=clamp(vWP_.y/uH,0.0,1.0);
+  vec3 c_=mix(uLow,uHigh,smoothstep(0.0,1.0,hg_));
+  float n1_=fract(sin(dot(floor(vWP_*11.0),vec3(12.9898,78.233,37.719)))*43758.5453);
+  float n2_=fract(sin(dot(floor(vWP_*2.7 ),vec3(39.3468,11.135,83.155)))*24634.6345);
+  c_*=1.0-uGrain*0.55+n1_*uGrain*0.62+n2_*uGrain*0.48;
+  float mo_=(1.0-smoothstep(0.0,uMossH,hg_))*uMossAmt*(0.42+0.58*n2_);
+  c_=mix(c_,uMoss,clamp(mo_,0.0,1.0));
+  float up_=clamp(vWN_.y,0.0,1.0);
+  c_=mix(c_,vec3(0.93,0.955,0.98),smoothstep(0.48,0.94,up_)*uSnowAmt*(0.72+0.28*n1_));
+  diffuseColor.rgb=c_;`);
+  };
+  /* one shared program for every weathered material, but never
+     shared with a plain MeshStandardMaterial */
+  m.customProgramCacheKey=()=>'axentia_weathered_stone';
+  WEATHERED.push(m);
+  return m;
+}
+
+/* =====================================================
+   PALETTE — every seat gets its own stone and roof,
+   sampled from its own reference painting
+===================================================== */
+const M={
+ /* — WINTERFELL · cold northern granite, snow on every ledge — */
+ north   :stone(0x333942,0x77818D,{h:4.0,snow:.60,grain:.15}),
+ slate   :stone(0x1F2630,0x3A434F,{h:4.6,snow:.70,grain:.11,rough:.70,metal:.10}),
+
+ /* — STORM'S END · wet dark grey, salt-stained at the foot — */
+ stormStn:stone(0x272D35,0x69717B,{h:5.8,grain:.13,moss:.17,mossH:.20,mossCol:0x3E4A44}),
+ stormRck:stone(0x1B1F25,0x3C424A,{h:2.2,grain:.16,moss:.30,mossH:.45,mossCol:0x39443A}),
+
+ /* — OLDTOWN · blue-grey river stone; the Hightower is pale — */
+ oldStone:stone(0x3D4650,0x848E9A,{h:4.2,grain:.13}),
+ oldRoof :stone(0x28323D,0x46545F,{h:4.6,grain:.10,rough:.70,metal:.10}),
+ pale    :stone(0x9BA3AA,0xF2F0E8,{h:7.2,grain:.09}),
+
+ /* — CASTERLY ROCK · gilded sandstone above a tan massif — */
+ gold    :stone(0x7E5F32,0xEAC68B,{h:5.0,grain:.15}),
+ goldDk  :stone(0x684C27,0xC69C5E,{h:5.0,grain:.15}),
+ rockTan :stone(0x6B4C2E,0xD2A770,{h:4.6,grain:.19}),
+
+ /* — THE EYRIE · white marble, blue slate, snow — */
+ marble  :stone(0x93A0AE,0xF6F9FC,{h:6.0,snow:.34,grain:.10}),
+ slateBl :stone(0x3B5369,0x7E9BB2,{h:6.0,snow:.30,grain:.12,rough:.66,metal:.12}),
+ eyrieRck:stone(0x373D45,0x8894A2,{h:3.6,snow:.42,grain:.17}),
+
+ /* — DRAGONSTONE · black basalt with a faint volcanic warmth — */
+ basalt  :stone(0x131418,0x3E424B,{h:4.2,grain:.19,rough:.78,metal:.14}),
+ basaltDk:stone(0x0D0E11,0x2A2D34,{h:4.2,grain:.19,rough:.78,metal:.14}),
+ dsRock  :stone(0x0F1115,0x35393F,{h:2.6,grain:.21}),
+
+ /* — RIVERRUN · warm river sandstone, blue-grey roofs — */
+ riverStn:stone(0x7A5A52,0xD2B3A6,{h:3.6,grain:.14,moss:.14,mossH:.14,mossCol:0x4E5A44}),
+ rrRoof  :stone(0x333E4C,0x5E7182,{h:4.0,grain:.11,rough:.68,metal:.12}),
+
+ /* — PYKE · sea-black stone, heavy with salt and weed — */
+ northDk :stone(0x242A31,0x616A74,{h:3.6,grain:.16,moss:.36,mossH:.30,mossCol:0x47543F}),
+ pykeRock:stone(0x1A1E24,0x4C545B,{h:2.8,grain:.20,moss:.32,mossH:.42,mossCol:0x3F4A3A}),
+
+ /* — SUNSPEAR · desert gold, deepening in the shade — */
+ sand    :stone(0x8E6A3A,0xEACA96,{h:4.2,grain:.14}),
+ sandDk  :stone(0x745329,0xC9A26C,{h:4.2,grain:.15}),
+
+ /* — HIGHGARDEN · cream marble under climbing vines — */
+ hgStone :stone(0xA9AC9E,0xFAF8EE,{h:4.4,grain:.10,moss:.32,mossH:.42,mossCol:0x4E7A3E}),
+ hgRoof  :stone(0x2C584F,0x69A396,{h:4.4,grain:.12,rough:.64,metal:.12}),
+
+ /* — DRIFTMARK · rose-red keep stone above the water — */
+ redKeep :stone(0x7A4E44,0xD9A599,{h:4.0,grain:.14}),
+ dmRoof  :stone(0x384858,0x6D8698,{h:4.0,grain:.11,rough:.68,metal:.12}),
+
+ /* — BEAR ISLAND · stone half-returned to the moss — */
+ moss    :stone(0x2C322A,0x717B64,{h:3.2,grain:.18,moss:.52,mossH:.48,mossCol:0x546B3E}),
+ mossLt  :stone(0x37472F,0x7F9160,{h:3.2,grain:.18,moss:.40,mossH:.60,mossCol:0x5C7642}),
+
+ /* — HORN HILL · cool grey ruin, lichen at the footings — */
+ ruin    :stone(0x2D323A,0x717783,{h:4.6,grain:.16,moss:.30,mossH:.26,mossCol:0x4C5642}),
+ hhRoof  :stone(0x2A303A,0x4C5563,{h:4.6,grain:.11,rough:.70,metal:.10}),
+
+ /* — shared rock and trim — */
+ rock    :stone(0x3B4047,0x8B929B,{h:3.4,grain:.17}),
+ rockDk  :stone(0x1C2026,0x474D55,{h:3.0,grain:.18}),
+ goldLf  :new THREE.MeshStandardMaterial({color:0xD8B44E,roughness:.34,metalness:.76}),
+ stoneLt :stone(0xA6ADB4,0xF1F2ED,{h:1.4,grain:.09}),
+
+ /* — nature and small props: flat is fine at this size — */
+ snow    :new THREE.MeshStandardMaterial({color:0xE6ECF2,roughness:.86,metalness:0}),
+ water   :new THREE.MeshStandardMaterial({color:0x16222E,roughness:.20,metalness:.55}),
+ river   :new THREE.MeshStandardMaterial({color:0x2A4557,roughness:.18,metalness:.50}),
+ pine    :new THREE.MeshStandardMaterial({color:0x24361F,roughness:.98,metalness:0}),
+ leaf    :new THREE.MeshStandardMaterial({color:0x3E5A34,roughness:.97,metalness:0}),
+ grass   :new THREE.MeshStandardMaterial({color:0x4C6138,roughness:.98,metalness:0}),
+ weirT   :new THREE.MeshStandardMaterial({color:0xDAD6C8,roughness:.90,metalness:0}),
+ weirL   :new THREE.MeshStandardMaterial({color:0x9E2A28,roughness:.86,metalness:0}),
+ wood    :new THREE.MeshStandardMaterial({color:0x5A4433,roughness:.95,metalness:.02}),
+ woodDk  :new THREE.MeshStandardMaterial({color:0x3E2F22,roughness:.96,metalness:.02}),
+ tile    :new THREE.MeshStandardMaterial({color:0xB25A38,roughness:.86,metalness:.02}),
+ thatch  :new THREE.MeshStandardMaterial({color:0x6B5B36,roughness:.98,metalness:0}),
+ canvas  :new THREE.MeshStandardMaterial({color:0xCBC7B6,roughness:.95,metalness:0,side:THREE.DoubleSide}),
+ lava    :new THREE.MeshBasicMaterial({color:0xE2561B})
+};
+
+/* =====================================================
+   BUILDING BLOCKS
+===================================================== */
+const holds=[];
+const banners=[];
+const windowLights=[];
+const DETAIL=[];            /* fine masonry, dropped when far off or on slow devices */
+const at=(o,x,y,z)=>{o.position.set(x,y,z);return o;};   /* never reassign .position */
+
+/* --- rippling banner cloth ------------------------------------ */
+const BANNER_VS=`
+uniform float uTime; uniform float uSeed;
+varying vec2 vUv; varying float vSh;
+void main(){
+  vUv=uv; vec3 p=position;
+  float grip=smoothstep(0.0,0.30,uv.x);
+  float w=sin(uv.x*7.0-uTime*3.2+uSeed)*0.060
+         +sin(uv.x*13.0+uv.y*4.0-uTime*4.9+uSeed)*0.024;
+  p.z+=w*grip; p.y+=sin(uv.x*5.0-uTime*3.0+uSeed)*0.020*grip;
+  vSh=0.60+w*4.4;
+  gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);
+}`;
+const BANNER_FS=`
+uniform vec3 uCol; uniform float uOpacity;
+varying vec2 vUv; varying float vSh;
+void main(){
+  vec3 c=uCol*vSh;
+  float band=smoothstep(0.40,0.45,vUv.y)-smoothstep(0.55,0.60,vUv.y);
+  c=mix(c,c*1.8+0.05,band*0.45);
+  if(vUv.x>0.955-abs(vUv.y-0.5)*0.14) discard;   /* swallow-tail */
+  gl_FragColor=vec4(c,uOpacity);
+}`;
+function banner(sc,col,poleH,poleMat,w,h){
+  const G=new THREE.Group();
+  w=w||.42*sc; h=h||.54*sc;
+  const pole=new THREE.Mesh(new THREE.CylinderGeometry(.016*sc,.020*sc,poleH,5),poleMat||M.slate);
+  pole.position.y=poleH/2;G.add(pole);
+  const cloth=new THREE.Mesh(new THREE.PlaneGeometry(w,h,12,6),
+    new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uSeed:{value:Math.random()*9},
+      uCol:{value:new THREE.Color(col)},uOpacity:{value:1}},
+      vertexShader:BANNER_VS,fragmentShader:BANNER_FS,side:THREE.DoubleSide,transparent:true}));
+  cloth.geometry.translate(w/2,-h/2,0);
+  cloth.position.y=poleH-.03*sc;
+  G.add(cloth);banners.push(cloth);
+  return G;
+}
+/* a long hanging wall-banner, as on every reference castle */
+function drape(sc,col,w,h){
+  const c=new THREE.Mesh(new THREE.PlaneGeometry(w||.20*sc,h||.52*sc,6,8),
+    new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uSeed:{value:Math.random()*9},
+      uCol:{value:new THREE.Color(col)},uOpacity:{value:1}},
+      vertexShader:BANNER_VS,fragmentShader:BANNER_FS,side:THREE.DoubleSide,transparent:true}));
+  banners.push(c);DETAIL.push(c);
+  return c;
+}
+
+/* --- merlons along a straight run ----------------------------- */
+function merlonsLine(len,thick,mat,sc,y){
+  const n=Math.max(2,Math.round(len/(.20*sc)));
+  const mw=len/n*.55, mh=.15*sc;
+  const inst=new THREE.InstancedMesh(new THREE.BoxGeometry(mw,mh,thick*1.05),mat,n);
+  const m=new THREE.Matrix4();
+  for(let i=0;i<n;i++)inst.setMatrixAt(i,m.makeTranslation(-len/2+(i+.5)*(len/n),y+mh/2,0));
+  inst.instanceMatrix.needsUpdate=true;DETAIL.push(inst);
+  return inst;
+}
+/* --- merlons around a ring ------------------------------------ */
+function merlonsRing(r,mat,sc,sides){
+  const n=sides?sides*3:Math.max(9,Math.round(r*24));
+  const mw=(2*Math.PI*r)/n*.54, mh=.15*sc, md=.085*sc;
+  const inst=new THREE.InstancedMesh(new THREE.BoxGeometry(mw,mh,md),mat,n);
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),one=new THREE.Vector3(1,1,1),p=new THREE.Vector3();
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2;
+    p.set(Math.cos(a)*r,mh/2,Math.sin(a)*r);
+    q.setFromEuler(new THREE.Euler(0,-a,0));m.compose(p,q,one);inst.setMatrixAt(i,m);}
+  inst.instanceMatrix.needsUpdate=true;DETAIL.push(inst);
+  return inst;
+}
+/* --- lit windows / arrow slits -------------------------------- */
+function windows(r,h,sc,rows,per,col,sq){
+  const n=rows*per;
+  const mat=new THREE.MeshBasicMaterial({color:col||0xFFBE6E,transparent:true,opacity:0,
+    side:THREE.DoubleSide,depthWrite:false});
+  const inst=new THREE.InstancedMesh(new THREE.PlaneGeometry(.042*sc,.13*sc),mat,n);
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),one=new THREE.Vector3(1,1,1),p=new THREE.Vector3();
+  let k=0;
+  for(let ry=0;ry<rows;ry++)for(let i=0;i<per;i++){
+    const a=sq?(i/per*Math.PI*2+Math.PI/4):(i/per*Math.PI*2+ry*.45);
+    p.set(Math.cos(a)*r*1.02,h*(.30+ry*(.55/rows)),Math.sin(a)*r*1.02);
+    q.setFromEuler(new THREE.Euler(0,Math.PI/2-a,0));m.compose(p,q,one);inst.setMatrixAt(k++,m);
+  }
+  inst.instanceMatrix.needsUpdate=true;
+  windowLights.push(mat);DETAIL.push(inst);
+  return inst;
+}
+/* --- ROUND DRUM TOWER (Winterfell, Raventree Hall, Storm's End) - */
+function drum(o){
+  const {r,h,sc}=o, mat=o.mat, T=new THREE.Group(), seg=o.seg||14;
+  const plinth=new THREE.Mesh(new THREE.CylinderGeometry(r*1.03,r*1.26,h*.10,seg),mat);
+  plinth.position.y=h*.05;T.add(plinth);
+  const shaft=new THREE.Mesh(new THREE.CylinderGeometry(r*.97,r*1.03,h*.90,seg),mat);
+  shaft.position.y=h*.10+h*.45;T.add(shaft);
+  if(!o.plain){
+    const band=new THREE.Mesh(new THREE.CylinderGeometry(r*1.05,r*1.05,h*.020,seg),mat);
+    band.position.y=h*.60;T.add(band);DETAIL.push(band);
+  }
+  /* corbel gallery + wall-walk */
+  const corb=new THREE.Mesh(new THREE.CylinderGeometry(r*1.20,r*.98,h*.055,seg),mat);
+  corb.position.y=h*.965;T.add(corb);
+  const walk=new THREE.Mesh(new THREE.CylinderGeometry(r*1.22,r*1.22,h*.026,seg),mat);
+  walk.position.y=h*1.00;T.add(walk);
+  if(o.crenel!==false){const c=merlonsRing(r*1.14,mat,sc);c.position.y=h*1.01;T.add(c);}
+  if(o.win!==false)T.add(windows(r,h,sc,o.rows||2,4,o.winCol));
+  let top=h*1.01;
+  if(o.roof==='spire'){                       /* Eyrie / Raventree turret */
+    const pitch=o.pitch||1.5;
+    const c=new THREE.Mesh(new THREE.ConeGeometry(r*1.22,r*pitch*2,seg),o.roofMat||M.slate);
+    c.position.y=top+r*pitch;T.add(c);
+    top+=r*pitch*2;
+    if(o.finial!==false){const f=new THREE.Mesh(new THREE.SphereGeometry(r*.13,7,5),M.goldLf);
+      f.position.y=top;T.add(f);DETAIL.push(f);}
+  }else if(o.roof==='cone'){
+    const c=new THREE.Mesh(new THREE.ConeGeometry(r*1.26,r*1.5,seg),o.roofMat||M.slate);
+    c.position.y=top+r*.75;T.add(c);top+=r*1.5;
+  }else if(o.roof==='dome'){
+    const d=new THREE.Mesh(new THREE.SphereGeometry(r*1.12,16,10,0,Math.PI*2,0,Math.PI/2),o.roofMat||M.goldLf);
+    d.position.y=top;T.add(d);top+=r*1.12;
+  }
+  if(o.snow){                                  /* Winterfell caps */
+    const s=new THREE.Mesh(new THREE.CylinderGeometry(r*1.16,r*1.16,h*.018,seg),M.snow);
+    s.position.y=h*1.015;T.add(s);DETAIL.push(s);
+  }
+  if(o.banner)T.add(at(banner(sc,o.banner,h*.34,mat),0,top,0));
+  T.userData.top=top;
+  return T;
+}
+/* --- SQUARE KEEP with corner turrets (Winterfell, Raventree) --- */
+function keep(o){
+  const {w,d,h,sc}=o, mat=o.mat, K=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+  body.position.y=h/2;K.add(body);
+  /* pilaster buttresses, seen on every reference keep */
+  for(const s of[-1,1])for(let i=-1;i<=1;i++){
+    const b=new THREE.Mesh(new THREE.BoxGeometry(w*.09,h*.86,d*.07),mat);
+    b.position.set(i*w*.34,h*.43,s*d*.52);K.add(b);DETAIL.push(b);
+  }
+  const walk=new THREE.Mesh(new THREE.BoxGeometry(w*1.13,h*.03,d*1.13),mat);
+  walk.position.y=h;K.add(walk);
+  for(const[ax,len]of[[0,w],[1,d]])for(const s of[-1,1]){
+    const m=merlonsLine(ax?d*1.13:w*1.13,.06*sc,mat,sc,h);
+    if(ax){m.rotation.y=Math.PI/2;m.position.x=s*w*.565;}else{m.position.z=s*d*.565;}
+    K.add(m);
+  }
+  K.add(windows(Math.max(w,d)*.5,h,sc,o.rows||3,4,o.winCol,true));
+  let top=h;
+  if(o.turrets){
+    const tr=o.turretR||.13*sc, th=o.turretH||h*.42;
+    for(const sx of[-1,1])for(const sz of[-1,1]){
+      const t=drum({r:tr,h:h+th,sc,mat,roof:o.turretRoof||'spire',pitch:1.4,
+        roofMat:o.roofMat||M.slate,rows:2,seg:10,plain:true,snow:o.snow,winCol:o.winCol});
+      t.position.set(sx*w*.5,0,sz*d*.5);K.add(t);
+      top=Math.max(top,h+th+tr*2.8);
+    }
+  }
+  if(o.roof==='pitch'){
+    const rf=new THREE.Mesh(new THREE.ConeGeometry(Math.max(w,d)*.78,h*.42,4),o.roofMat||M.slate);
+    rf.rotation.y=Math.PI/4;rf.position.y=h+h*.21;K.add(rf);top=Math.max(top,h+h*.42);
+  }
+  if(o.banner)K.add(at(banner(sc,o.banner,h*.36,mat),0,top,0));
+  K.userData.top=top;
+  return K;
+}
+/* --- GREAT HALL: long building, pitched roof, chimneys --------- */
+function hall(o){
+  const {w,d,h,sc}=o, H=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),o.mat);
+  body.position.y=h/2;H.add(body);
+  const rf=new THREE.Mesh(new THREE.CylinderGeometry(d*.62,d*.62,w,3,1),o.roofMat||M.slate);
+  rf.rotation.z=Math.PI/2;rf.rotation.y=Math.PI/2;rf.position.y=h+d*.26;H.add(rf);
+  const lit=new THREE.MeshBasicMaterial({color:0xFFB861,transparent:true,opacity:0,side:THREE.DoubleSide});
+  for(const s of[-1,1])for(let i=-1;i<=1;i++){
+    const win=new THREE.Mesh(new THREE.PlaneGeometry(w*.11,h*.46),lit);
+    win.position.set(i*w*.30,h*.52,s*(d*.5+.005));
+    if(s<0)win.rotation.y=Math.PI;H.add(win);
+  }
+  windowLights.push(lit);
+  if(o.chimneys)for(let i=0;i<o.chimneys;i++){
+    const ch=new THREE.Mesh(new THREE.BoxGeometry(.10*sc,.42*sc,.10*sc),o.mat);
+    ch.position.set((i-(o.chimneys-1)/2)*w*.42,h+d*.34,0);H.add(ch);
+  }
+  H.userData.top=h+d*.52;
+  return H;
+}
+/* --- WALL CIRCUIT along a footprint ---------------------------- */
+function walls(pts,o){
+  const {h,sc}=o, mat=o.mat, th=o.thick||.14*sc, W=new THREE.Group();
+  const n=pts.length;
+  for(let i=0;i<n;i++){
+    const a=pts[i],b=pts[(i+1)%n];
+    if(!o.closed&&i===n-1)break;
+    const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),ang=-Math.atan2(dz,dx);
+    const S=new THREE.Group();
+    S.position.set((a[0]+b[0])/2,0,(a[1]+b[1])/2);S.rotation.y=ang;
+    const seg=new THREE.Mesh(new THREE.BoxGeometry(len,h,th),mat);
+    seg.position.y=h/2;S.add(seg);
+    const walk=new THREE.Mesh(new THREE.BoxGeometry(len,h*.05,th*1.5),mat);
+    walk.position.y=h;S.add(walk);
+    S.add(merlonsLine(len,th,mat,sc,h*1.02));
+    /* buttresses */
+    const nb=Math.max(1,Math.round(len/(.62*sc)));
+    for(let k=0;k<nb;k++){
+      const bt=new THREE.Mesh(new THREE.BoxGeometry(.09*sc,h*.80,th*1.6),mat);
+      bt.position.set(-len/2+(k+.5)*(len/nb),h*.40,th*.55);S.add(bt);DETAIL.push(bt);
+    }
+    if(o.drapeCol&&len>.9*sc){
+      const dr=drape(sc,o.drapeCol,.17*sc,h*.62);
+      dr.position.set(0,h*.72,th*.62);S.add(dr);
+    }
+    W.add(S);
+  }
+  /* a tower on every corner */
+  if(o.towers!==false)pts.forEach((p,i)=>{
+    if(!o.closed&&(i===0||i===n-1)&&o.endTowers===false)return;
+    const t=drum({r:o.towerR||.15*sc,h:o.towerH||h*1.55,sc,mat,rows:2,seg:o.square?4:10,
+      roof:o.towerRoof,roofMat:o.roofMat,pitch:1.4,plain:true,snow:o.snow,winCol:o.winCol});
+    if(o.square)t.rotation.y=Math.PI/4;
+    t.position.set(p[0],0,p[1]);W.add(t);
+  });
+  return W;
+}
+/* --- GATEHOUSE ------------------------------------------------- */
+function gatehouse(sc,mat,h,col){
+  const G=new THREE.Group(),w=.62*sc;
+  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h*1.25,.30*sc),mat);
+  body.position.y=h*.625;G.add(body);
+  const arch=new THREE.Mesh(new THREE.TorusGeometry(.155*sc,.048*sc,6,12,Math.PI),mat);
+  arch.position.set(0,h*.46,.16*sc);G.add(arch);
+  const dark=new THREE.Mesh(new THREE.PlaneGeometry(.29*sc,.46*sc),
+    new THREE.MeshBasicMaterial({color:0x08090C}));
+  dark.position.set(0,h*.24,.156*sc);G.add(dark);
+  const bar=new THREE.MeshStandardMaterial({color:0x2A2622,roughness:.6,metalness:.5});
+  const bars=new THREE.InstancedMesh(new THREE.BoxGeometry(.020*sc,.42*sc,.020*sc),bar,5);
+  const m=new THREE.Matrix4();
+  for(let i=0;i<5;i++)bars.setMatrixAt(i,m.makeTranslation((i-2)*.06*sc,h*.24,.17*sc));
+  bars.instanceMatrix.needsUpdate=true;G.add(bars);DETAIL.push(bars);
+  G.add(merlonsLine(w,.30*sc,mat,sc,h*1.25));
+  for(const s of[-1,1]){
+    const t=drum({r:.115*sc,h:h*1.6,sc,mat,rows:1,seg:8,plain:true,win:false});
+    t.position.x=s*w*.5;G.add(t);
+  }
+  if(col){const d=drape(sc,col,.15*sc,h*.6);d.position.set(0,h*1.12,.17*sc);G.add(d);}
+  return G;
+}
+/* --- assorted scenery ------------------------------------------ */
+function pine(sc,s){
+  const G=new THREE.Group();s=s||1;
+  const tr=new THREE.Mesh(new THREE.CylinderGeometry(.030*sc,.045*sc,.26*sc*s,5),M.woodDk);
+  tr.position.y=.13*sc*s;G.add(tr);
+  for(let k=0;k<3;k++){
+    const t=new THREE.Mesh(new THREE.ConeGeometry((.22-k*.05)*sc*s,.40*sc*s,6),M.pine);
+    t.position.y=(.30+k*.19)*sc*s;G.add(t);
+  }
+  return G;
+}
+function broadleaf(sc,s,mat){
+  const G=new THREE.Group();s=s||1;
+  const tr=new THREE.Mesh(new THREE.CylinderGeometry(.040*sc,.062*sc,.34*sc*s,5),M.woodDk);
+  tr.position.y=.17*sc*s;G.add(tr);
+  const c=new THREE.Mesh(new THREE.SphereGeometry(.30*sc*s,9,7),mat||M.leaf);
+  c.position.y=.52*sc*s;c.scale.y=.80;G.add(c);
+  return G;
+}
+function cypress(sc,s){
+  const c=new THREE.Mesh(new THREE.ConeGeometry(.09*sc*(s||1),.62*sc*(s||1),6),M.pine);
+  c.position.y=.31*sc*(s||1);return c;
+}
+function cottages(sc,n,rad,mat,roofMat,seedA){
+  const G=new THREE.Group();
+  for(let i=0;i<n;i++){
+    const a=(seedA||0)+i*2.399, rr=rad*(.72+((i*37)%13)/26);
+    const s=.7+((i*53)%9)/16;
+    const h=new THREE.Group();
+    const b=new THREE.Mesh(new THREE.BoxGeometry(.28*sc*s,.20*sc*s,.22*sc*s),mat||M.wood);
+    b.position.y=.10*sc*s;h.add(b);
+    const r=new THREE.Mesh(new THREE.CylinderGeometry(.15*sc*s,.15*sc*s,.28*sc*s,3,1),roofMat||M.thatch);
+    r.rotation.z=Math.PI/2;r.rotation.y=Math.PI/2;r.position.y=.26*sc*s;h.add(r);
+    h.position.set(Math.cos(a)*rr,0,Math.sin(a)*rr);h.rotation.y=a;
+    G.add(h);
+  }
+  DETAIL.push(G);
+  return G;
+}
+function ship(sc,s,sailCol,dark){
+  const G=new THREE.Group();s=s||1;
+  const hull=new THREE.Mesh(new THREE.CylinderGeometry(.085*sc*s,.115*sc*s,.86*sc*s,6),dark?M.woodDk:M.wood);
+  hull.rotation.z=Math.PI/2;hull.scale.y=.55;hull.position.y=.05*sc*s;G.add(hull);
+  const mast=new THREE.Mesh(new THREE.CylinderGeometry(.012*sc*s,.015*sc*s,.58*sc*s,5),M.woodDk);
+  mast.position.y=.34*sc*s;G.add(mast);
+  const sail=new THREE.Mesh(new THREE.PlaneGeometry(.34*sc*s,.40*sc*s),
+    sailCol?new THREE.MeshStandardMaterial({color:sailCol,roughness:.94,side:THREE.DoubleSide}):M.canvas);
+  sail.position.y=.40*sc*s;G.add(sail);
+  return G;
+}
+function fountain(sc,s){
+  const G=new THREE.Group();s=s||1;
+  const bowl=new THREE.Mesh(new THREE.CylinderGeometry(.20*sc*s,.22*sc*s,.07*sc*s,14),M.stoneLt);
+  bowl.position.y=.035*sc*s;G.add(bowl);
+  const jet=new THREE.Mesh(new THREE.ConeGeometry(.045*sc*s,.30*sc*s,8),
+    new THREE.MeshBasicMaterial({color:0xBFE0F0,transparent:true,opacity:.5}));
+  jet.position.y=.20*sc*s;G.add(jet);
+  DETAIL.push(G);
+  return G;
+}
+function flowerbed(sc,r,hue){
+  const G=new THREE.Group();
+  const bed=new THREE.Mesh(new THREE.CylinderGeometry(r,r,.03*sc,12),M.grass);
+  bed.position.y=.015*sc;G.add(bed);
+  const N=10,pos=new Float32Array(N*3),cols=new Float32Array(N*3);
+  const c=new THREE.Color();
+  for(let i=0;i<N;i++){
+    const a=Math.random()*6.28,rr=Math.random()*r*.85;
+    pos[i*3]=Math.cos(a)*rr;pos[i*3+1]=.05*sc;pos[i*3+2]=Math.sin(a)*rr;
+    c.setHSL(hue+Math.random()*.22,.62,.60);
+    cols[i*3]=c.r;cols[i*3+1]=c.g;cols[i*3+2]=c.b;
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.setAttribute('color',new THREE.BufferAttribute(cols,3));
+  const p=new THREE.Points(g,new THREE.PointsMaterial({size:.10*sc,vertexColors:true}));
+  G.add(p);DETAIL.push(G);
+  return G;
+}
+function smokePlume(sc,y,x,z){
+  const N=14,pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){pos[i*3]=x;pos[i*3+1]=y+i*.13*sc;pos[i*3+2]=z;}
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const p=new THREE.Points(g,new THREE.PointsMaterial({color:0x9AA3AD,size:.20*sc,
+    transparent:true,opacity:.26,depthWrite:false}));
+  p.userData={base:pos.slice(),sc,N};
+  DETAIL.push(p);
+  return p;
+}
+/* a plunging waterfall (the Eyrie) */
+function waterfall(sc,w,h){
+  const m=new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0}},transparent:true,depthWrite:false,side:THREE.DoubleSide,
+    vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`uniform float uTime;varying vec2 vUv;
+      float h(vec2 p){return fract(sin(dot(p,vec2(12.9,78.2)))*43758.5);}
+      void main(){
+        vec2 p=vUv;p.y+=uTime*0.55;
+        float s=h(floor(vec2(p.x*14.0,p.y*7.0)));
+        float streak=smoothstep(0.35,1.0,s);
+        float fade=smoothstep(0.0,0.18,vUv.y)*smoothstep(1.0,0.72,vUv.y);
+        float a=(0.30+streak*0.55)*fade;
+        gl_FragColor=vec4(mix(vec3(0.72,0.82,0.90),vec3(1.0),streak),a);
+      }`});
+  const f=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);
+  banners.push({material:{uniforms:m.uniforms}});   /* reuse the uTime pump */
+  return f;
+}
+
+/* =====================================================
+   THE SIXTEEN SEATS
+===================================================== */
+const SEATS={};
+
+/* ---------- WINTERFELL · rectangular double curtain, drum towers,
+   snow caps, smoking hall, weirwood in the godswood ---------- */
+SEATS['Winterfell']=(g,H,sc,raise,U)=>{
+  const S=M.north, col=H.col;
+  /* outer wall */
+  const o=[[-2.5,-1.9],[2.5,-1.9],[2.5,1.9],[-2.5,1.9]].map(p=>[p[0]*sc,p[1]*sc]);
+  raise(walls(o,{h:.62*sc,sc,mat:S,closed:true,towerR:.17*sc,towerH:1.02*sc,
+    snow:true,drapeCol:col,winCol:0xFFC98A}),0,0);
+  const gh=gatehouse(sc,S,.62*sc,col);gh.position.set(0,0,1.9*sc);raise(gh,0,.05);
+  /* inner wall */
+  const inn=[[-1.7,-1.25],[1.7,-1.25],[1.7,1.25],[-1.7,1.25]].map(p=>[p[0]*sc,p[1]*sc]);
+  raise(walls(inn,{h:.86*sc,sc,mat:S,closed:true,towerR:.15*sc,towerH:1.30*sc,snow:true}),0,.10);
+  /* the Great Keep */
+  const K=keep({w:.86*sc,d:.80*sc,h:1.75*sc,sc,mat:S,turrets:true,turretR:.15*sc,
+    turretH:.85*sc,roofMat:M.slate,snow:true,banner:col,rows:3});
+  K.position.set(.55*sc,0,-.45*sc);raise(K,0,.18);
+  /* First Keep + Broken Tower: fat flat-topped drums */
+  [[-.95,-.15,.40,1.55],[-.30,.35,.34,1.30]].forEach((d,i)=>{
+    const t=drum({r:d[2]*sc,h:d[3]*sc,sc,mat:S,rows:3,snow:true,seg:16});
+    t.position.set(d[0]*sc,0,d[1]*sc);raise(t,0,.22+i*.05);
+  });
+  /* Great Hall, chimneys smoking */
+  const Hh=hall({w:1.5*sc,d:.72*sc,h:.62*sc,sc,mat:S,roofMat:M.slate,chimneys:2});
+  Hh.position.set(-.15*sc,0,-.62*sc);raise(Hh,0,.26);
+  const sm1=smokePlume(sc,1.1*sc,-.47*sc,-.62*sc), sm2=smokePlume(sc,1.1*sc,.16*sc,-.62*sc);
+  g.add(sm1,sm2);U.smoke=[sm1,sm2];
+  /* the godswood */
+  const W=new THREE.Group();
+  const tr=new THREE.Mesh(new THREE.CylinderGeometry(.09*sc,.16*sc,1.25*sc,7),M.weirT);
+  tr.position.y=.62*sc;W.add(tr);
+  for(let i=0;i<4;i++){
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(.025*sc,.045*sc,.60*sc,5),M.weirT);
+    const a=i*1.57;b.position.set(Math.cos(a)*.22*sc,1.10*sc,Math.sin(a)*.22*sc);
+    b.rotation.z=Math.cos(a)*.85;b.rotation.x=Math.sin(a)*.85;W.add(b);
+  }
+  const cn=new THREE.Mesh(new THREE.SphereGeometry(.52*sc,12,9),M.weirL);
+  cn.position.y=1.52*sc;cn.scale.y=.62;W.add(cn);
+  const face=new THREE.Mesh(new THREE.PlaneGeometry(.13*sc,.19*sc),
+    new THREE.MeshBasicMaterial({color:0x7E1B18,side:THREE.DoubleSide}));
+  face.position.set(0,.80*sc,.155*sc);W.add(face);
+  W.position.set(1.18*sc,0,.62*sc);raise(W,0,.34);
+  /* snow ground + winter town outside the gate */
+  const yard=new THREE.Mesh(new THREE.CircleGeometry(3.3*sc,26),M.snow);
+  yard.rotation.x=-Math.PI/2;yard.position.y=.012;g.add(yard);
+  raise(cottages(sc,7,3.5*sc,M.woodDk,M.snow,1.2),0,.42);
+  for(let i=0;i<6;i++){const p=pine(sc,.9+Math.random()*.4);
+    const a=2.0+i*.42;p.position.set(Math.cos(a)*3.7*sc,0,Math.sin(a)*3.7*sc);raise(p,0,.45);}
+  return 3.9*sc;
+};
+
+/* ---------- CASTERLY ROCK · a fortified massif above a harbour ---- */
+SEATS['Casterly Rock']=(g,H,sc,raise,U)=>{
+  const S=M.gold, D=M.goldDk, col=H.col;
+  /* the Rock: stacked irregular tiers */
+  const R=new THREE.Group();
+  const tiers=[[2.30,1.95,.95],[1.85,1.55,.85],[1.42,1.15,.78],[1.00,.78,.66]];
+  let y=0;
+  tiers.forEach((t,i)=>{
+    const m=new THREE.Mesh(new THREE.CylinderGeometry(t[1]*sc,t[0]*sc,t[2]*sc,7),M.rockTan);
+    m.position.y=y+t[2]*sc/2;m.rotation.y=i*.7;R.add(m);y+=t[2]*sc*.92;
+  });
+  raise(R,0,0);
+  const RH=y;
+  /* fortress crown */
+  const K=keep({w:.72*sc,d:.62*sc,h:1.45*sc,sc,mat:S,turrets:true,turretR:.13*sc,
+    turretH:.62*sc,roofMat:D,banner:col,rows:3});
+  K.position.set(0,RH,0);raise(K,0,.30);
+  for(let i=0;i<3;i++){
+    const a=i*2.09+.5;
+    const t=drum({r:.155*sc,h:(1.05+i*.16)*sc,sc,mat:S,rows:2,seg:4,roof:'cone',roofMat:D,
+      banner:i===0?col:null});
+    t.rotation.y=Math.PI/4;
+    t.position.set(Math.cos(a)*.62*sc,RH-.06*sc,Math.sin(a)*.62*sc);raise(t,0,.34+i*.03);
+  }
+  /* terraced ramparts down the face */
+  [[1.55,.72,.52],[2.05,.52,.30]].forEach((L,i)=>{
+    const n=7,pts=[];
+    for(let k=0;k<n;k++){const a=k/n*Math.PI*2+i*.4;
+      pts.push([Math.cos(a)*L[0]*sc,Math.sin(a)*L[0]*sc]);}
+    const w=walls(pts,{h:L[2]*sc,sc,mat:S,closed:true,towerR:.105*sc,towerH:L[2]*1.9*sc,
+      square:true,drapeCol:col});
+    w.position.y=RH*L[1];raise(w,0,.16+i*.06);
+  });
+  /* windows cut straight into the cliff face */
+  const cliffWin=windows(1.6*sc,RH,sc,3,7,0xFFC271);
+  g.add(cliffWin);
+  /* harbour: sea, mole, town, red-sailed ships */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.4*sc,30),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  const mole=walls([[-1.0,2.9],[1.7,2.6],[2.6,1.5]].map(p=>[p[0]*sc,p[1]*sc]),
+    {h:.34*sc,sc,mat:S,closed:false,towerR:.11*sc,towerH:.62*sc,square:true,drapeCol:col});
+  raise(mole,0,.46);
+  raise(cottages(sc,9,3.1*sc,M.sand,M.tile,-.7),0,.5);
+  const fleet=[];
+  for(let i=0;i<3;i++){
+    const s=ship(sc,.9,0x8E2226);
+    s.position.set((-1.9+i*1.5)*sc,.06,(3.1-i*.35)*sc);s.rotation.y=.4+i*.8;
+    g.add(s);fleet.push(s);
+  }
+  U.fleet=fleet;
+  return RH+2.5*sc;
+};
+
+/* ---------- THE EYRIE · pale needles on a peak, sky bridges ------- */
+SEATS['The Eyrie']=(g,H,sc,raise,U)=>{
+  const S=M.marble, R=M.slateBl, col=H.col;
+  /* the mountain */
+  const P=new THREE.Group();
+  const peak=new THREE.Mesh(new THREE.ConeGeometry(1.85*sc,3.30*sc,6),M.eyrieRck);
+  peak.position.y=1.65*sc;P.add(peak);
+  for(let i=0;i<4;i++){
+    const a=i*1.57+.4;
+    const s=new THREE.Mesh(new THREE.ConeGeometry(.62*sc,1.45*sc,5),M.eyrieRck);
+    s.position.set(Math.cos(a)*1.25*sc,.72*sc,Math.sin(a)*1.25*sc);P.add(s);
+  }
+  const cap=new THREE.Mesh(new THREE.ConeGeometry(.70*sc,.55*sc,6),M.snow);
+  cap.position.y=3.05*sc;P.add(cap);
+  raise(P,0,0);
+  const PH=3.05*sc;
+  /* seven towers — tall, slender, needle-spired */
+  const spec=[[0,0,.20,2.05],[.52,.16,.13,1.35],[-.46,.30,.12,1.20],
+              [.20,-.52,.135,1.50],[-.34,-.42,.115,1.05],[.62,-.30,.10,.92],[-.62,-.06,.105,1.00]];
+  const tops=[];
+  spec.forEach((t,i)=>{
+    const T=drum({r:t[2]*sc,h:t[3]*sc,sc,mat:S,roof:'spire',pitch:2.6,roofMat:R,
+      rows:3,seg:10,banner:i===0?col:(i<3?col:null),winCol:0xCFE6F5});
+    T.position.set(t[0]*sc,PH,t[1]*sc);
+    raise(T,0,.14+i*.045);
+    tops.push([t[0]*sc,PH+t[3]*sc*.86,t[1]*sc]);
+  });
+  /* the sky bridges between them */
+  const B=new THREE.Group();
+  [[0,1],[0,2],[0,3],[1,5],[2,6]].forEach(([a,b])=>{
+    const A=tops[a],C=tops[b];
+    const dx=C[0]-A[0],dz=C[2]-A[2],len=Math.hypot(dx,dz);
+    const arc=new THREE.Mesh(new THREE.TorusGeometry(len/2,.022*sc,5,14,Math.PI),S);
+    arc.position.set((A[0]+C[0])/2,(A[1]+C[1])/2-len*.14,(A[2]+C[2])/2);
+    arc.rotation.y=-Math.atan2(dz,dx);
+    B.add(arc);
+  });
+  raise(B,0,.42);
+  /* the switchback stair, with its waypoint towers */
+  const W=new THREE.Group();
+  const way=[[1.35,1.05,.62],[2.10,1.70,.30],[2.75,2.35,.10]];
+  way.forEach((p,i)=>{
+    const t=drum({r:.10*sc,h:.72*sc,sc,mat:S,rows:1,seg:8,plain:true,
+      banner:i===0?col:null,winCol:0xCFE6F5});
+    t.position.set(p[0]*sc,PH*p[2],p[1]*sc);W.add(t);
+    if(i<way.length-1){
+      const q=way[i+1];
+      const dx=(q[0]-p[0])*sc,dz=(q[1]-p[1])*sc,len=Math.hypot(dx,dz);
+      const st=new THREE.Mesh(new THREE.BoxGeometry(len,.045*sc,.16*sc),S);
+      st.position.set((p[0]+q[0])/2*sc,PH*(p[2]+q[2])/2,(p[1]+q[1])/2*sc);
+      st.rotation.y=-Math.atan2(dz,dx);st.rotation.z=Math.atan2((q[2]-p[2])*PH,len);
+      W.add(st);
+    }
+  });
+  raise(W,0,.30);
+  /* the falls beside the peak */
+  const F=waterfall(sc,.95*sc,3.4*sc);
+  F.position.set(-2.3*sc,1.7*sc,-.6*sc);F.rotation.y=.5;
+  raise(F,0,.5);
+  return PH+2.9*sc;
+};
+
+/* ---------- STORM'S END · one colossal drum against the sea ------- */
+SEATS["Storm's End"]=(g,H,sc,raise,U)=>{
+  const S=M.stormStn, col=H.col;
+  /* the crag */
+  const C=new THREE.Group();
+  for(let i=0;i<3;i++){
+    const r=new THREE.Mesh(new THREE.CylinderGeometry((1.7-i*.16)*sc,(2.0-i*.10)*sc,.30*sc,7),M.stormRck);
+    r.rotation.y=i*.8;r.position.y=.15*sc+i*.24*sc;C.add(r);
+  }
+  raise(C,0,0);
+  const lift=.78*sc;
+  /* the great drum: vast, smooth, buttressed */
+  const T=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.CylinderGeometry(.88*sc,.98*sc,3.9*sc,24),S);
+  body.position.y=1.95*sc;T.add(body);
+  for(let i=0;i<12;i++){                       /* the wave-breaking buttresses */
+    const a=i/12*Math.PI*2;
+    const b=new THREE.Mesh(new THREE.BoxGeometry(.14*sc,1.5*sc,.20*sc),S);
+    b.position.set(Math.cos(a)*.96*sc,.75*sc,Math.sin(a)*.96*sc);
+    b.rotation.y=-a;T.add(b);
+  }
+  const band=new THREE.Mesh(new THREE.CylinderGeometry(1.00*sc,1.00*sc,.09*sc,24),S);
+  band.position.y=2.35*sc;T.add(band);
+  const corb=new THREE.Mesh(new THREE.CylinderGeometry(1.10*sc,.90*sc,.20*sc,24),S);
+  corb.position.y=3.98*sc;T.add(corb);
+  const walk=new THREE.Mesh(new THREE.CylinderGeometry(1.12*sc,1.12*sc,.06*sc,24),S);
+  walk.position.y=4.10*sc;T.add(walk);
+  const cr=merlonsRing(1.04*sc,S,sc);cr.position.y=4.13*sc;T.add(cr);
+  T.add(windows(.90*sc,3.9*sc,sc,4,5,0xFFC271));
+  for(let i=0;i<4;i++){
+    const a=i*1.57+.4;
+    const b=banner(sc,col,.85*sc,S);
+    b.position.set(Math.cos(a)*.80*sc,4.16*sc,Math.sin(a)*.80*sc);T.add(b);
+  }
+  T.position.y=lift;raise(T,0,.12);
+  /* the curtain: high, unbroken, ringed with lesser drums */
+  const n=7,pts=[];
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2;pts.push([Math.cos(a)*1.72*sc,Math.sin(a)*1.72*sc]);}
+  const w=walls(pts,{h:1.28*sc,sc,mat:S,closed:true,towerR:.19*sc,towerH:1.90*sc,drapeCol:col});
+  w.position.y=lift;raise(w,0,.06);
+  /* the sea */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.2*sc,28),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  /* lightning: the storm never lets up */
+  const bolt=new THREE.PointLight(0xCBD9FF,0,60,1.4);
+  bolt.position.set(2.6*sc,5.5*sc,-2.0*sc);g.add(bolt);
+  U.anim.push((t,N,rev)=>{
+    const p=(t*.37+U.flick)%1;
+    const flash=p<.06?Math.pow(Math.sin(p/.06*Math.PI),3):0;
+    bolt.intensity=flash*22*rev;
+  });
+  return lift+4.9*sc;
+};
+
+/* ---------- DRAGONSTONE · black rock, horned towers, a volcano ---- */
+SEATS['Dragonstone']=(g,H,sc,raise,U)=>{
+  const S=M.basalt, D=M.basaltDk, col=H.col;
+  /* the island crag */
+  const C=new THREE.Group();
+  for(let i=0;i<4;i++){
+    const a=i*1.57;
+    const r=new THREE.Mesh(new THREE.ConeGeometry((.55-i*.05)*sc,(1.1+i*.2)*sc,5),M.dsRock);
+    r.position.set(Math.cos(a)*.85*sc,(.55+i*.1)*sc,Math.sin(a)*.85*sc);C.add(r);
+  }
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(1.35*sc,1.85*sc,1.0*sc,7),M.dsRock);
+  base.position.y=.5*sc;C.add(base);
+  raise(C,0,0);
+  const lift=1.0*sc;
+  /* horned tower helper */
+  const horned=(r,h,nh)=>{
+    const T=drum({r,h,sc,mat:S,rows:3,seg:4,plain:true,winCol:0xE0641E});
+    T.rotation.y=Math.PI/4;
+    for(let i=0;i<(nh||4);i++){
+      const a=i/(nh||4)*Math.PI*2+Math.PI/4;
+      const hn=new THREE.Mesh(new THREE.ConeGeometry(r*.20,h*.36,4),D);
+      hn.position.set(Math.cos(a)*r*.95,h*1.18,Math.sin(a)*r*.95);
+      hn.rotation.z=-Math.cos(a)*.30;hn.rotation.x=Math.sin(a)*.30;
+      T.add(hn);
+    }
+    T.userData.top=h*1.36;
+    return T;
+  };
+  /* the great keep */
+  const K=horned(.34*sc,2.85*sc);
+  K.position.set(-.10*sc,lift,-.20*sc);raise(K,0,.16);
+  const bn=banner(sc,col,.7*sc,S);bn.position.set(-.10*sc,lift+3.9*sc,-.20*sc);raise(bn,0,.34);
+  [[.72,.30,.22,1.85],[-.70,.42,.19,1.55]].forEach((t,i)=>{
+    const T=horned(t[2]*sc,t[3]*sc,3);
+    T.position.set(t[0]*sc,lift,t[1]*sc);raise(T,0,.22+i*.04);
+  });
+  /* dragon statues along the wall */
+  const dragonStatue=(s)=>{
+    const G=new THREE.Group();
+    const body=new THREE.Mesh(new THREE.CylinderGeometry(.045*sc*s,.075*sc*s,.34*sc*s,5),D);
+    body.rotation.z=.42;body.position.y=.17*sc*s;G.add(body);
+    const neck=new THREE.Mesh(new THREE.CylinderGeometry(.025*sc*s,.045*sc*s,.24*sc*s,5),D);
+    neck.position.set(.09*sc*s,.36*sc*s,0);neck.rotation.z=-.5;G.add(neck);
+    const head=new THREE.Mesh(new THREE.ConeGeometry(.045*sc*s,.14*sc*s,5),D);
+    head.position.set(.17*sc*s,.44*sc*s,0);head.rotation.z=-1.5;G.add(head);
+    for(const sd of[-1,1]){
+      const wing=new THREE.Mesh(new THREE.ConeGeometry(.10*sc*s,.36*sc*s,3),D);
+      wing.position.set(-.03*sc*s,.36*sc*s,sd*.10*sc*s);
+      wing.rotation.set(sd*.7,0,-.35);wing.scale.z=.28;G.add(wing);
+    }
+    return G;
+  };
+  /* the curtain wall */
+  const n=6,pts=[];
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2+.3;pts.push([Math.cos(a)*1.15*sc,Math.sin(a)*1.15*sc]);}
+  const w=walls(pts,{h:.72*sc,sc,mat:S,closed:true,towerR:.11*sc,towerH:1.05*sc,
+    square:true,drapeCol:col});
+  w.position.y=lift;raise(w,0,.10);
+  const DS=new THREE.Group();
+  for(let i=0;i<3;i++){
+    const a=i*2.09+.9;
+    const d=dragonStatue(1.1);
+    d.position.set(Math.cos(a)*1.15*sc,lift+.80*sc,Math.sin(a)*1.15*sc);
+    d.rotation.y=-a+Math.PI/2;DS.add(d);
+  }
+  raise(DS,0,.40);
+  /* the causeway out to the shore */
+  const CW=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(3.2*sc,.10*sc,.34*sc),S);
+  deck.position.set(2.4*sc,.62*sc,1.5*sc);deck.rotation.y=-.42;CW.add(deck);
+  for(let i=0;i<5;i++){
+    const pr=new THREE.Mesh(new THREE.BoxGeometry(.13*sc,.62*sc,.18*sc),S);
+    pr.position.set((1.2+i*.62)*sc,.31*sc,(1.95-i*.28)*sc);pr.rotation.y=-.42;CW.add(pr);
+  }
+  raise(CW,0,.46);
+  /* the smoking mountain */
+  const V=new THREE.Group();
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(1.5*sc,2.3*sc,7),M.dsRock);
+  cone.position.y=1.15*sc;V.add(cone);
+  const crater=new THREE.Mesh(new THREE.CircleGeometry(.30*sc,10),M.lava);
+  crater.rotation.x=-Math.PI/2;crater.position.y=2.30*sc;V.add(crater);
+  V.position.set(-2.9*sc,0,-2.2*sc);raise(V,0,.52);
+  const vs=smokePlume(sc,2.4*sc,-2.9*sc,-2.2*sc);g.add(vs);U.smoke=[vs];
+  const glow=new THREE.PointLight(0xE2561B,0,26,1.8);
+  glow.position.set(-2.9*sc,2.4*sc,-2.2*sc);g.add(glow);
+  U.anim.push((t,N,rev)=>{glow.intensity=rev*(1.2+.5*Math.sin(t*1.7))*(.5+N);});
+  /* sea */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.4*sc,28),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  return lift+4.4*sc;
+};
+
+/* ---------- RAVENTREE HALL · Blackwood's seat; a river castle in
+   the fork of two waters, a dead weirwood in its yard ------- */
+SEATS['Raventree Hall']=(g,H,sc,raise,U)=>{
+  const S=M.riverStn, col=H.col;
+  /* the waters */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(3.6*sc,28),M.river);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  /* the triangular curtain */
+  const pts=[[0,-1.85],[1.72,1.15],[-1.72,1.15]].map(p=>[p[0]*sc,p[1]*sc]);
+  raise(walls(pts,{h:.78*sc,sc,mat:S,closed:true,towerR:.30*sc,towerH:1.42*sc,drapeCol:col}),0,0);
+  const gh=gatehouse(sc,S,.78*sc,col);gh.position.set(0,0,1.15*sc);raise(gh,0,.06);
+  /* the keep at the point, with conical turrets */
+  const K=keep({w:.72*sc,d:.66*sc,h:1.55*sc,sc,mat:S,turrets:true,turretR:.14*sc,
+    turretH:.70*sc,turretRoof:'spire',roofMat:M.rrRoof,banner:col,rows:3});
+  K.position.set(0,0,-.85*sc);raise(K,0,.16);
+  /* the great hall */
+  const Hh=hall({w:1.28*sc,d:.62*sc,h:.60*sc,sc,mat:S,roofMat:M.rrRoof,chimneys:1});
+  Hh.position.set(-.05*sc,0,-.05*sc);raise(Hh,0,.22);
+  /* the two fat river drums */
+  [[-.86,.52],[-.18,.60]].forEach((d,i)=>{
+    const t=drum({r:.30*sc,h:1.20*sc,sc,mat:S,rows:3,seg:16});
+    t.position.set(d[0]*sc,0,d[1]*sc);raise(t,0,.26+i*.04);
+  });
+  /* the godswood oak and the yard */
+  const oak=broadleaf(sc,1.5);oak.position.set(.85*sc,0,.35*sc);raise(oak,0,.34);
+  /* the wooden bridge and the village across the water */
+  const B=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(1.5*sc,.07*sc,.26*sc),M.wood);
+  deck.position.set(1.05*sc,.30*sc,1.85*sc);deck.rotation.y=-.5;B.add(deck);
+  for(let i=0;i<3;i++){
+    const p=new THREE.Mesh(new THREE.BoxGeometry(.07*sc,.30*sc,.07*sc),M.woodDk);
+    p.position.set((.55+i*.5)*sc,.15*sc,(2.10-i*.26)*sc);B.add(p);
+  }
+  raise(B,0,.42);
+  raise(cottages(sc,6,2.9*sc,M.wood,M.thatch,.6),0,.46);
+  for(let i=0;i<5;i++){const t=broadleaf(sc,.9+Math.random()*.4);
+    const a=3.1+i*.5;t.position.set(Math.cos(a)*3.1*sc,0,Math.sin(a)*3.1*sc);raise(t,0,.48);}
+  return 3.5*sc;
+};
+
+/* ---------- PYKE · towers on sea stacks, joined by rope ---------- */
+SEATS['Pyke']=(g,H,sc,raise,U)=>{
+  const S=M.northDk, col=H.col;
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.4*sc,30),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  /* the stacks, and the tower on each */
+  const stacks=[[-1.95,.55,.30,1.35],[-1.05,-.30,.34,1.70],[-.05,.55,.30,1.55]];
+  const tops=[];
+  stacks.forEach((s,i)=>{
+    const G=new THREE.Group();
+    const rock=new THREE.Mesh(new THREE.CylinderGeometry(s[2]*.82*sc,s[2]*1.25*sc,s[3]*sc,6),M.pykeRock);
+    rock.position.y=s[3]*sc/2;rock.rotation.y=i*.9;G.add(rock);
+    const T=drum({r:.155*sc,h:(1.05+i*.16)*sc,sc,mat:S,rows:2,seg:4,plain:true,
+      banner:col,winCol:0xFFC271});
+    T.rotation.y=Math.PI/4;T.position.y=s[3]*sc;G.add(T);
+    G.position.set(s[0]*sc,0,s[1]*sc);raise(G,0,.06+i*.05);
+    tops.push([s[0]*sc,s[3]*sc+.72*sc,s[1]*sc]);
+  });
+  /* the main keep on the landward rock */
+  const MR=new THREE.Group();
+  const rock=new THREE.Mesh(new THREE.CylinderGeometry(.95*sc,1.35*sc,1.35*sc,7),M.pykeRock);
+  rock.position.y=.68*sc;MR.add(rock);
+  raise(MR,0,0);
+  const lift=1.35*sc;
+  const K=keep({w:.60*sc,d:.54*sc,h:1.55*sc,sc,mat:S,turrets:true,turretR:.11*sc,
+    turretH:.52*sc,turretRoof:null,banner:col,rows:3});
+  K.position.set(.95*sc,lift,-.15*sc);raise(K,0,.18);
+  const Hh=hall({w:.85*sc,d:.50*sc,h:.50*sc,sc,mat:S,roofMat:M.hhRoof,chimneys:1});
+  Hh.position.set(1.05*sc,lift,.52*sc);raise(Hh,0,.24);
+  const pts=[[.35,-.55],[1.55,-.70],[1.80,.55],[.50,.75]].map(p=>[p[0]*sc,p[1]*sc]);
+  const w=walls(pts,{h:.62*sc,sc,mat:S,closed:true,towerR:.13*sc,towerH:1.15*sc,
+    square:true,drapeCol:col});
+  w.position.y=lift;raise(w,0,.12);
+  tops.push([.60*sc,lift+1.05*sc,.20*sc]);
+  /* the rope bridges */
+  const RB=new THREE.Group();
+  for(let i=0;i<tops.length-1;i++){
+    const A=tops[i],B=tops[i+1];
+    const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],len=Math.hypot(dx,dz);
+    const SEG=7;
+    for(let k=0;k<SEG;k++){
+      const f=(k+.5)/SEG, sag=Math.sin(f*Math.PI)*.20*sc;
+      const p=new THREE.Mesh(new THREE.BoxGeometry(len/SEG*1.04,.022*sc,.13*sc),M.woodDk);
+      p.position.set(A[0]+dx*f,A[1]+dy*f-sag,A[2]+dz*f);
+      p.rotation.y=-Math.atan2(dz,dx);
+      RB.add(p);
+    }
+  }
+  raise(RB,0,.40);DETAIL.push(RB);
+  /* longships */
+  const fleet=[];
+  for(let i=0;i<3;i++){
+    const s=ship(sc,.85,0x2E3742,true);
+    s.position.set((-2.6+i*1.1)*sc,.06,(2.2+i*.5)*sc);s.rotation.y=.6+i*.7;
+    g.add(s);fleet.push(s);
+  }
+  U.fleet=fleet;
+  return lift+3.0*sc;
+};
+
+/* ---------- SUNSPEAR · sandstone, the Spear Tower, a gold dome ---- */
+SEATS['Sunspear']=(g,H,sc,raise,U)=>{
+  const S=M.sand, D=M.sandDk, col=H.col;
+  /* the walled compound */
+  const n=7,pts=[];
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2+.2;pts.push([Math.cos(a)*1.62*sc,Math.sin(a)*1.62*sc]);}
+  raise(walls(pts,{h:.70*sc,sc,mat:S,closed:true,towerR:.14*sc,towerH:1.05*sc,
+    square:true,drapeCol:col}),0,0);
+  const gh=gatehouse(sc,S,.70*sc,col);gh.position.set(.35*sc,0,1.58*sc);raise(gh,0,.06);
+  /* the Spear Tower */
+  const T=drum({r:.36*sc,h:3.35*sc,sc,mat:S,rows:4,seg:18,banner:col,winCol:0xFFD08A});
+  T.position.set(-.10*sc,0,-.20*sc);raise(T,0,.14);
+  const dr=drape(sc,col,.24*sc,1.0*sc);dr.position.set(-.10*sc,2.35*sc,.24*sc);raise(dr,0,.34);
+  /* the Tower of the Sun: a gilded dome on a drum */
+  const SunT=drum({r:.30*sc,h:1.15*sc,sc,mat:S,rows:2,seg:16,roof:'dome',roofMat:M.goldLf,crenel:false});
+  SunT.position.set(.72*sc,0,.38*sc);raise(SunT,0,.20);
+  /* the slender minaret with its gallery */
+  const Min=new THREE.Group();
+  const sh=new THREE.Mesh(new THREE.CylinderGeometry(.10*sc,.13*sc,2.05*sc,10),S);
+  sh.position.y=1.02*sc;Min.add(sh);
+  const gal=new THREE.Mesh(new THREE.CylinderGeometry(.19*sc,.19*sc,.09*sc,10),D);
+  gal.position.y=1.62*sc;Min.add(gal);
+  const cage=new THREE.Mesh(new THREE.CylinderGeometry(.11*sc,.11*sc,.30*sc,8,1,true),S);
+  cage.material=S;cage.position.y=1.82*sc;Min.add(cage);
+  const dome=new THREE.Mesh(new THREE.SphereGeometry(.14*sc,12,9,0,Math.PI*2,0,Math.PI*.62),M.goldLf);
+  dome.position.y=2.00*sc;Min.add(dome);
+  const fin=new THREE.Mesh(new THREE.ConeGeometry(.035*sc,.20*sc,6),M.goldLf);
+  fin.position.y=2.18*sc;Min.add(fin);
+  Min.position.set(-.85*sc,0,.55*sc);raise(Min,0,.26);
+  /* the shadow city: flat-roofed cubes */
+  const City=new THREE.Group();
+  for(let i=0;i<14;i++){
+    const a=i*2.399, rr=(1.9+((i*29)%11)/9)*sc, s=.7+((i*17)%7)/12;
+    const b=new THREE.Mesh(new THREE.BoxGeometry(.30*sc*s,.26*sc*s,.30*sc*s),i%3?S:D);
+    b.position.set(Math.cos(a)*rr,.13*sc*s,Math.sin(a)*rr);b.rotation.y=a;
+    City.add(b);
+  }
+  raise(City,0,.34);DETAIL.push(City);
+  /* cypresses and the dunes */
+  for(let i=0;i<5;i++){
+    const c=cypress(sc,.9+Math.random()*.4);const a=i*1.25+.3;
+    c.position.set(Math.cos(a)*1.25*sc,0,Math.sin(a)*1.25*sc);raise(c,0,.40);
+  }
+  const dune=new THREE.Mesh(new THREE.CircleGeometry(3.6*sc,24),D);
+  dune.rotation.x=-Math.PI/2;dune.position.y=.012;g.add(dune);
+  const sea=new THREE.Mesh(new THREE.RingGeometry(3.6*sc,4.6*sc,26),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.014;g.add(sea);
+  return 4.1*sc;
+};
+
+/* ---------- HIGHGARDEN · white walls, terraced gardens, fountains -- */
+SEATS['Highgarden']=(g,H,sc,raise,U)=>{
+  const S=M.hgStone, R=M.hgRoof, col=H.col;
+  /* three concentric rings, each a garden terrace higher */
+  [[2.35,.52,.0],[1.62,.58,.16],[1.05,.62,.30]].forEach((L,i)=>{
+    const n=10,pts=[];
+    for(let k=0;k<n;k++){const a=k/n*Math.PI*2+i*.3;
+      pts.push([Math.cos(a)*L[0]*sc,Math.sin(a)*L[0]*sc]);}
+    const w=walls(pts,{h:L[1]*sc,sc,mat:S,closed:true,towerR:.13*sc,towerH:L[1]*2.0*sc,
+      towerRoof:'spire',roofMat:R,drapeCol:col});
+    w.position.y=L[2]*sc;raise(w,0,.04+i*.06);
+    const lawn=new THREE.Mesh(new THREE.CylinderGeometry(L[0]*sc,L[0]*sc,.05*sc,22),M.grass);
+    lawn.position.y=L[2]*sc+.025*sc;raise(lawn,0,.04+i*.06);
+  });
+  const gh=gatehouse(sc,S,.52*sc,col);gh.position.set(0,0,2.32*sc);raise(gh,0,.10);
+  const lift=.30*sc;
+  /* the castle: a gothic hall crowned with slender spires */
+  const K=keep({w:.78*sc,d:.62*sc,h:1.30*sc,sc,mat:S,turrets:true,turretR:.115*sc,
+    turretH:.95*sc,turretRoof:'spire',roofMat:R,rows:3});
+  K.position.set(0,lift,-.15*sc);raise(K,0,.22);
+  const spire=drum({r:.155*sc,h:2.30*sc,sc,mat:S,roof:'spire',pitch:2.8,roofMat:R,
+    rows:3,seg:8,banner:col});
+  spire.position.set(0,lift,-.15*sc);raise(spire,0,.26);
+  [[.52,.30],[-.52,.30],[.34,-.55],[-.34,-.55]].forEach((p,i)=>{
+    const t=drum({r:.10*sc,h:(1.20+(i%2)*.28)*sc,sc,mat:S,roof:'spire',pitch:2.6,
+      roofMat:R,rows:2,seg:8,plain:true});
+    t.position.set(p[0]*sc,lift,p[1]*sc);raise(t,0,.30+i*.02);
+  });
+  /* the gardens themselves */
+  const G2=new THREE.Group();
+  for(let i=0;i<7;i++){
+    const a=i*.897, rr=(1.20+(i%3)*.42)*sc;
+    G2.add(at(flowerbed(sc,.22*sc,(i*.13)%1),
+      Math.cos(a)*rr,lift*(rr<1.5*sc?1:.53),Math.sin(a)*rr));
+  }
+  raise(G2,0,.36);
+  [[0,.85,.30],[1.35,.55,.16],[-1.35,.55,.16]].forEach((f,i)=>{
+    const F=fountain(sc,1);F.position.set(f[0]*sc,f[2]*sc,f[1]*sc);raise(F,0,.40+i*.02);
+  });
+  for(let i=0;i<8;i++){
+    const c=cypress(sc,.85);const a=i*.785+.4;
+    c.position.set(Math.cos(a)*1.32*sc,.16*sc,Math.sin(a)*1.32*sc);raise(c,0,.44);
+  }
+  /* the orchards outside the walls */
+  for(let i=0;i<9;i++){
+    const t=broadleaf(sc,.75,M.leaf);const a=i*.698+.2;
+    t.position.set(Math.cos(a)*2.95*sc,0,Math.sin(a)*2.95*sc);raise(t,0,.48);
+  }
+  return lift+3.9*sc;
+};
+
+/* ---------- DRIFTMARK · the harbour seat, a fleet at its feet ----- */
+SEATS['Driftmark']=(g,H,sc,raise,U)=>{
+  const S=M.redKeep, col=H.col;
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.4*sc,30),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  /* the headland */
+  const HL=new THREE.Group();
+  const h1=new THREE.Mesh(new THREE.CylinderGeometry(1.35*sc,1.70*sc,.72*sc,8),M.rockTan);
+  h1.position.y=.36*sc;HL.add(h1);
+  raise(HL,0,0);
+  const lift=.72*sc;
+  /* the great keep: a cluster of drums, joined by a flying arch */
+  const towers=[[-.30,-.25,.26,2.25],[.30,-.15,.22,1.85],[-.05,.35,.20,1.60],[.55,.40,.17,1.30]];
+  const tops=[];
+  towers.forEach((t,i)=>{
+    const T=drum({r:t[2]*sc,h:t[3]*sc,sc,mat:S,rows:3,seg:14,banner:i<2?col:null,winCol:0xFFC98A});
+    T.position.set(t[0]*sc,lift,t[1]*sc);raise(T,0,.14+i*.04);
+    tops.push([t[0]*sc,lift+t[3]*sc*.86,t[1]*sc]);
+  });
+  const A=tops[0],B=tops[1];
+  const arc=new THREE.Mesh(new THREE.TorusGeometry(Math.hypot(B[0]-A[0],B[2]-A[2])/2,.030*sc,5,14,Math.PI),S);
+  arc.position.set((A[0]+B[0])/2,(A[1]+B[1])/2-.12*sc,(A[2]+B[2])/2);
+  arc.rotation.y=-Math.atan2(B[2]-A[2],B[0]-A[0]);
+  raise(arc,0,.34);
+  const K=keep({w:.62*sc,d:.52*sc,h:1.05*sc,sc,mat:S,rows:2});
+  K.position.set(.12*sc,lift,.10*sc);raise(K,0,.20);
+  /* the sept: a pale dome ringed with spires */
+  const Sp=new THREE.Group();
+  const drum2=new THREE.Mesh(new THREE.CylinderGeometry(.42*sc,.46*sc,.55*sc,14),M.stoneLt);
+  drum2.position.y=.275*sc;Sp.add(drum2);
+  const dome=new THREE.Mesh(new THREE.SphereGeometry(.42*sc,16,11,0,Math.PI*2,0,Math.PI/2),M.dmRoof);
+  dome.position.y=.55*sc;Sp.add(dome);
+  for(let i=0;i<6;i++){
+    const a=i/6*Math.PI*2;
+    const s=new THREE.Mesh(new THREE.ConeGeometry(.055*sc,.72*sc,7),M.stoneLt);
+    s.position.set(Math.cos(a)*.50*sc,.60*sc,Math.sin(a)*.50*sc);Sp.add(s);
+  }
+  Sp.position.set(-1.85*sc,0,-1.15*sc);raise(Sp,0,.40);
+  /* the city wall running down to the quay */
+  raise(walls([[-2.6,.35],[-1.35,1.35],[.35,1.75],[1.85,1.35]].map(p=>[p[0]*sc,p[1]*sc]),
+    {h:.46*sc,sc,mat:S,closed:false,towerR:.115*sc,towerH:.82*sc,drapeCol:col}),0,.30);
+  raise(cottages(sc,12,2.35*sc,M.sand,M.tile,2.1),0,.44);
+  /* the quay and the fleet */
+  const quay=new THREE.Mesh(new THREE.BoxGeometry(2.4*sc,.14*sc,.42*sc),M.sand);
+  quay.position.set(.55*sc,.07*sc,2.25*sc);quay.rotation.y=-.16;raise(quay,0,.46);
+  const fleet=[];
+  for(let i=0;i<4;i++){
+    const s=ship(sc,.85+((i*7)%5)/16);
+    s.position.set((-1.3+i*.95)*sc,.06,(2.85+((i%2)?.35:0))*sc);s.rotation.y=1.55;
+    g.add(s);fleet.push(s);
+  }
+  U.fleet=fleet;
+  return lift+3.2*sc;
+};
+
+/* ---------- OLDTOWN · twin river castles, and the great beacon ---- */
+SEATS['Oldtown']=(g,H,sc,raise,U)=>{
+  const S=M.oldStone, col=H.col;
+  /* the river running between them */
+  const riv=new THREE.Mesh(new THREE.PlaneGeometry(1.5*sc,7.5*sc),M.river);
+  riv.rotation.x=-Math.PI/2;riv.position.y=.02;g.add(riv);
+  /* two castle blocks, one on each bank */
+  [-1.72,1.72].forEach((x,i)=>{
+    const pts=[[x-.85,-1.05],[x+.85,-1.05],[x+.85,1.05],[x-.85,1.05]].map(p=>[p[0]*sc,p[1]*sc]);
+    raise(walls(pts,{h:.62*sc,sc,mat:S,closed:true,towerR:.145*sc,towerH:1.10*sc,
+      towerRoof:'spire',roofMat:M.oldRoof,drapeCol:col}),0,.04+i*.04);
+    const K=keep({w:.62*sc,d:.56*sc,h:1.65*sc,sc,mat:S,turrets:true,turretR:.115*sc,
+      turretH:.62*sc,turretRoof:'spire',roofMat:M.oldRoof,banner:col,rows:3});
+    K.position.set((x+(i?.15:-.15))*sc,0,-.30*sc);raise(K,0,.14+i*.04);
+    const Hh=hall({w:.95*sc,d:.50*sc,h:.50*sc,sc,mat:S,roofMat:M.oldRoof,chimneys:1});
+    Hh.position.set(x*sc,0,.45*sc);raise(Hh,0,.24);
+  });
+  /* the bridge, with its gate-towers midstream */
+  const B=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(3.5*sc,.13*sc,.42*sc),S);
+  deck.position.y=.52*sc;B.add(deck);
+  for(const px of[-.62,.62]){
+    const arch=new THREE.Mesh(new THREE.TorusGeometry(.34*sc,.075*sc,6,14,Math.PI),S);
+    arch.position.set(px*sc,.10*sc,0);B.add(arch);
+    const t=drum({r:.14*sc,h:1.05*sc,sc,mat:S,rows:2,seg:4,plain:true,banner:col});
+    t.rotation.y=Math.PI/4;t.position.set(px*sc,.58*sc,0);B.add(t);
+  }
+  const rail=merlonsLine(3.5*sc,.42*sc,S,sc,.58*sc);B.add(rail);
+  raise(B,0,.30);
+  /* THE HIGHTOWER — five diminishing stages and the fire on top */
+  const T=new THREE.Group();
+  let y=0;
+  for(let s=0;s<5;s++){
+    const r=(.44-s*.062)*sc, hh=(1.30-s*.10)*sc;
+    const st=drum({r,h:hh,sc,mat:M.pale,rows:2,seg:16,plain:true,winCol:0xFFE0AC});
+    st.position.y=y;T.add(st);y+=hh*1.01;
+  }
+  const crown=new THREE.Mesh(new THREE.CylinderGeometry(.17*sc,.22*sc,.34*sc,12),M.goldLf);
+  crown.position.y=y+.17*sc;T.add(crown);
+  const bn=banner(sc,col,.60*sc,M.goldLf);bn.position.y=y+.34*sc;T.add(bn);
+  T.position.set(1.72*sc,0,-.30*sc);raise(T,0,.18);
+  /* the beacon fire */
+  const beacon=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,color:0xFFE3B0}));
+  beacon.scale.setScalar(4.6*sc);beacon.position.set(1.72*sc,y+.30*sc,-.30*sc);g.add(beacon);
+  U.beacon=beacon;
+  const bl=new THREE.PointLight(0xFFCE8E,0,40,1.6);
+  bl.position.copy(beacon.position);g.add(bl);
+  U.anim.push((t,N,rev)=>{bl.intensity=rev*(1.6+.6*Math.sin(t*2.1))*(.4+N);});
+  /* meadow and cottages on both banks */
+  raise(cottages(sc,8,3.15*sc,M.wood,M.oldRoof,.4),0,.44);
+  return y+2.6*sc;
+};
+
+/* ---------- BEAR ISLAND · weathered towers out of the mist -------- */
+SEATS['Bear Island']=(g,H,sc,raise,U)=>{
+  const S=M.moss, col=H.col;
+  const bog=new THREE.Mesh(new THREE.CircleGeometry(3.6*sc,26),M.water);
+  bog.rotation.x=-Math.PI/2;bog.position.y=.02;g.add(bog);
+  /* four broken towers, tops jagged and green with age */
+  const spec=[[-1.25,-.55,.30,2.25],[-.35,.35,.26,1.75],[.70,-.60,.24,2.00],[1.45,.50,.28,1.55]];
+  spec.forEach((s,i)=>{
+    const T=new THREE.Group();
+    const body=new THREE.Mesh(new THREE.CylinderGeometry(s[2]*.92*sc,s[2]*1.20*sc,s[3]*sc,9),S);
+    body.position.y=s[3]*sc/2;T.add(body);
+    /* the ragged crown: uneven stubs where the wall gave way */
+    for(let k=0;k<7;k++){
+      const a=k/7*Math.PI*2;
+      const hgt=(.10+((k*i*13)%9)/26)*sc;
+      const st=new THREE.Mesh(new THREE.BoxGeometry(.13*sc,hgt,.10*sc),S);
+      st.position.set(Math.cos(a)*s[2]*.98*sc,s[3]*sc+hgt/2,Math.sin(a)*s[2]*.98*sc);
+      st.rotation.y=-a;T.add(st);
+    }
+    /* moss creeping up the stone */
+    const mo=new THREE.Mesh(new THREE.CylinderGeometry(s[2]*1.02*sc,s[2]*1.22*sc,s[3]*.42*sc,9),M.mossLt);
+    mo.position.y=s[3]*.21*sc;T.add(mo);DETAIL.push(mo);
+    T.add(windows(s[2]*sc,s[3]*sc,sc,2,3,0xE0B45C));
+    if(i===0)T.add(at(banner(sc,col,.55*sc,S),0,s[3]*sc,0));
+    T.position.set(s[0]*sc,0,s[1]*sc);raise(T,0,.05+i*.06);
+  });
+  /* stubs of the fallen curtain */
+  raise(walls([[-1.25,-.55],[-.35,.35],[.70,-.60],[1.45,.50]].map(p=>[p[0]*sc,p[1]*sc]),
+    {h:.34*sc,sc,mat:S,closed:false,towers:false}),0,.28);
+  /* the timber hall the bears still keep */
+  const Hh=hall({w:1.05*sc,d:.58*sc,h:.52*sc,sc,mat:M.wood,roofMat:M.thatch,chimneys:1});
+  Hh.position.set(.15*sc,0,-.10*sc);raise(Hh,0,.32);
+  const sm=smokePlume(sc,1.0*sc,.15*sc,-.10*sc);g.add(sm);U.smoke=[sm];
+  /* the causeway in */
+  const C=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(2.6*sc,.09*sc,.30*sc),S);
+  deck.position.set(2.35*sc,.26*sc,1.55*sc);deck.rotation.y=-.55;C.add(deck);
+  for(let i=0;i<4;i++){
+    const p=new THREE.Mesh(new THREE.BoxGeometry(.10*sc,.26*sc,.13*sc),S);
+    p.position.set((1.5+i*.55)*sc,.13*sc,(2.05-i*.34)*sc);C.add(p);
+  }
+  raise(C,0,.40);
+  for(let i=0;i<7;i++){const p=pine(sc,.8+Math.random()*.5);
+    const a=i*.9+.3;p.position.set(Math.cos(a)*2.85*sc,0,Math.sin(a)*2.85*sc);raise(p,0,.44);}
+  return 3.2*sc;
+};
+
+/* ---------- HORN HILL · a great hall-castle above the water ------- */
+SEATS['Horn Hill']=(g,H,sc,raise,U)=>{
+  const S=M.ruin, col=H.col;
+  const lake=new THREE.Mesh(new THREE.CircleGeometry(4.0*sc,28),M.river);
+  lake.rotation.x=-Math.PI/2;lake.position.y=.02;g.add(lake);
+  /* a broad rectangular curtain, heavily towered */
+  const o=[[-2.15,-1.55],[2.15,-1.55],[2.15,1.55],[-2.15,1.55]].map(p=>[p[0]*sc,p[1]*sc]);
+  raise(walls(o,{h:.72*sc,sc,mat:S,closed:true,towerR:.17*sc,towerH:1.20*sc,drapeCol:col}),0,0);
+  const gh=gatehouse(sc,S,.72*sc,col);gh.position.set(-.6*sc,0,1.55*sc);raise(gh,0,.05);
+  /* the inner ward */
+  const inn=[[-1.15,-.85],[1.15,-.85],[1.15,.85],[-1.15,.85]].map(p=>[p[0]*sc,p[1]*sc]);
+  raise(walls(inn,{h:.60*sc,sc,mat:S,closed:true,towerR:.13*sc,towerH:.95*sc}),0,.10);
+  /* the tall central towers, tops uneven with age */
+  const spec=[[0,-.20,.28,3.10],[-.72,.15,.20,2.35],[.72,.10,.22,2.55],[.30,.55,.17,1.95]];
+  spec.forEach((t,i)=>{
+    const T=drum({r:t[2]*sc,h:t[3]*sc,sc,mat:S,rows:4,seg:12,crenel:false,winCol:0xE8C07A,
+      banner:i===0?col:null});
+    for(let k=0;k<8;k++){
+      const a=k/8*Math.PI*2;
+      const hgt=(.12+((k*(i+2)*11)%10)/24)*sc;
+      const st=new THREE.Mesh(new THREE.BoxGeometry(.12*sc,hgt,.09*sc),S);
+      st.position.set(Math.cos(a)*t[2]*1.10*sc,t[3]*sc+hgt/2,Math.sin(a)*t[2]*1.10*sc);
+      st.rotation.y=-a;T.add(st);
+    }
+    T.position.set(t[0]*sc,0,t[1]*sc);raise(T,0,.14+i*.05);
+  });
+  /* the great hall between them, with its tall windows */
+  const Hh=hall({w:1.45*sc,d:.68*sc,h:.95*sc,sc,mat:S,roofMat:M.hhRoof,chimneys:2});
+  Hh.position.set(0,0,.42*sc);raise(Hh,0,.26);
+  const sm=smokePlume(sc,1.6*sc,-.30*sc,.42*sc);g.add(sm);U.smoke=[sm];
+  /* the hunting wood */
+  for(let i=0;i<8;i++){
+    const t=broadleaf(sc,.85+Math.random()*.4,M.leaf);const a=i*.785+.25;
+    t.position.set(Math.cos(a)*3.05*sc,0,Math.sin(a)*3.05*sc);raise(t,0,.44);
+  }
+  raise(cottages(sc,5,2.55*sc,M.wood,M.thatch,1.7),0,.46);
+  return 4.0*sc;
+};
+
+/* ---------- STARFALL · the Dayne seat where a falling star lit
+   the pale tower; a slender keep on a spit between river and sea,
+   a luminous shard crowning the Palestone Tower ---------- */
+SEATS['Starfall']=(g,H,sc,raise,U)=>{
+  const S=M.pale, R=M.slateBl, col=H.col;
+  /* the confluence: sea on one side, river on the other */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.2*sc,30),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  const spit=new THREE.Mesh(new THREE.CylinderGeometry(2.05*sc,2.35*sc,.26*sc,20),M.eyrieRck);
+  spit.position.y=.12*sc;raise(spit,0,0);
+  const lift=.24*sc;
+  /* the walled ward */
+  const n=8,pts=[];
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2+.15;pts.push([Math.cos(a)*1.55*sc,Math.sin(a)*1.55*sc]);}
+  const w=walls(pts,{h:.66*sc,sc,mat:S,closed:true,towerR:.13*sc,towerH:1.00*sc,
+    towerRoof:'spire',roofMat:R,drapeCol:col,winCol:0xCFE0F5});
+  w.position.y=lift;raise(w,0,.06);
+  const gh=gatehouse(sc,S,.66*sc,col);gh.position.set(.3*sc,lift,1.55*sc);raise(gh,0,.10);
+  /* the Palestone Tower — tall, slender, white, star at its crown */
+  const PT=drum({r:.30*sc,h:3.55*sc,sc,mat:M.pale,rows:4,seg:18,roof:'spire',pitch:2.4,
+    roofMat:R,banner:col,winCol:0xDCE8FA});
+  PT.position.set(-.15*sc,lift,-.15*sc);raise(PT,0,.16);
+  /* the fallen star: a faceted shard, glowing, above the spire */
+  const starH=lift+3.55*sc+.30*sc*2.4+.5*sc;
+  const shard=new THREE.Mesh(new THREE.OctahedronGeometry(.34*sc,0),
+    new THREE.MeshStandardMaterial({color:0xEAF2FF,emissive:0x8FB4FF,emissiveIntensity:1.4,
+      roughness:.25,metalness:.3,flatShading:true}));
+  shard.position.set(-.15*sc,starH,-.15*sc);shard.scale.y=1.5;raise(shard,0,.36);
+  const starGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,color:0xBFD6FF}));
+  starGlow.scale.setScalar(2.4*sc);starGlow.position.copy(shard.position);g.add(starGlow);
+  const starLight=new THREE.PointLight(0x9CC0FF,0,30,1.6);
+  starLight.position.copy(shard.position);g.add(starLight);
+  U.anim.push((t,N,rev)=>{
+    const pulse=1.1+.5*Math.sin(t*1.4);
+    shard.rotation.y=t*.6;shard.rotation.x=Math.sin(t*.5)*.3;
+    shard.material.emissiveIntensity=rev*(1.0+.5*Math.sin(t*1.4));
+    starGlow.material.opacity=rev*(.55+.25*Math.sin(t*1.4));
+    starLight.intensity=rev*pulse*1.8*(.5+.5*N);
+  });
+  /* a lesser drum + the great hall */
+  const T2=drum({r:.20*sc,h:1.85*sc,sc,mat:S,roof:'spire',pitch:2.0,roofMat:R,rows:3,seg:12});
+  T2.position.set(.62*sc,lift,.30*sc);raise(T2,0,.24);
+  const Hh=hall({w:1.05*sc,d:.54*sc,h:.55*sc,sc,mat:S,roofMat:R,chimneys:1});
+  Hh.position.set(-.15*sc,lift,.60*sc);raise(Hh,0,.28);
+  /* the causeway to the shore, and cypress on the spit */
+  const CW=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(2.4*sc,.09*sc,.30*sc),S);
+  deck.position.set(2.0*sc,lift+.10*sc,1.4*sc);deck.rotation.y=-.5;CW.add(deck);
+  raise(CW,0,.42);
+  for(let i=0;i<6;i++){const c=cypress(sc,.8+Math.random()*.3);
+    const a=i*1.05+.3;c.position.set(Math.cos(a)*1.85*sc,lift,Math.sin(a)*1.85*sc);raise(c,0,.44);}
+  return starH+1.0*sc;
+};
+
+/* ---------- WHITE HARBOUR · the realm's great southern port of the
+   North; a domed New Castle, a busy quay, a merman gate, a fleet
+   flying foreign colours ---------- */
+SEATS['White Harbour']=(g,H,sc,raise,U)=>{
+  const S=M.stoneLt, R=M.rrRoof, col=H.col;
+  /* the sea and the harbour mole */
+  const sea=new THREE.Mesh(new THREE.CircleGeometry(4.6*sc,30),M.water);
+  sea.rotation.x=-Math.PI/2;sea.position.y=.02;g.add(sea);
+  /* the headland the New Castle stands on */
+  const HL=new THREE.Mesh(new THREE.CylinderGeometry(1.55*sc,1.9*sc,.62*sc,10),M.rock);
+  HL.position.y=.31*sc;raise(HL,0,0);
+  const lift=.62*sc;
+  /* the New Castle: a white keep crowned with a green dome */
+  const K=keep({w:.80*sc,d:.70*sc,h:1.55*sc,sc,mat:S,turrets:true,turretR:.13*sc,
+    turretH:.72*sc,turretRoof:'dome',roofMat:M.hgRoof,rows:3,winCol:0xFFD9A0});
+  K.position.set(0,lift,-.15*sc);raise(K,0,.14);
+  const dome=new THREE.Mesh(new THREE.SphereGeometry(.34*sc,16,11,0,Math.PI*2,0,Math.PI/2),M.hgRoof);
+  dome.position.set(0,lift+1.55*sc,-.15*sc);raise(dome,0,.24);
+  const bn=banner(sc,col,.6*sc,S);bn.position.set(0,lift+1.9*sc,-.15*sc);raise(bn,0,.34);
+  /* two flanking drums with green spires */
+  [[-.62,.32],[.62,.30]].forEach((p,i)=>{
+    const t=drum({r:.17*sc,h:1.55*sc,sc,mat:S,roof:'spire',pitch:1.9,roofMat:M.hgRoof,
+      rows:2,seg:12,banner:i===0?col:null});
+    t.position.set(p[0]*sc,lift,p[1]*sc);raise(t,0,.20+i*.03);
+  });
+  /* the Merman's Court — a broad domed hall */
+  const Court=new THREE.Group();
+  const cd=new THREE.Mesh(new THREE.CylinderGeometry(.5*sc,.54*sc,.5*sc,16),S);
+  cd.position.y=.25*sc;Court.add(cd);
+  const cdome=new THREE.Mesh(new THREE.SphereGeometry(.5*sc,18,12,0,Math.PI*2,0,Math.PI/2),M.hgRoof);
+  cdome.position.y=.5*sc;Court.add(cdome);
+  const fin=new THREE.Mesh(new THREE.ConeGeometry(.05*sc,.24*sc,7),M.goldLf);
+  fin.position.y=1.02*sc;Court.add(fin);
+  Court.position.set(0,lift,.62*sc);raise(Court,0,.30);
+  /* the harbour wall, quays and the merchant town */
+  raise(walls([[-2.35,.6],[-1.4,1.7],[.3,2.15],[1.9,1.75],[2.6,.7]].map(p=>[p[0]*sc,p[1]*sc]),
+    {h:.48*sc,sc,mat:S,closed:false,towerR:.11*sc,towerH:.82*sc,drapeCol:col}),0,.32);
+  raise(cottages(sc,14,2.7*sc,M.stoneLt,M.tile,1.3),0,.44);
+  /* the mole with its beacon */
+  const mole=new THREE.Mesh(new THREE.BoxGeometry(.4*sc,.2*sc,2.6*sc),M.rock);
+  mole.position.set(2.4*sc,.1*sc,1.7*sc);mole.rotation.y=-.5;raise(mole,0,.4);
+  /* a fleet from many shores — mixed-colour sails */
+  const sails=[0xC24A3A,0x2E6E8E,0xC9A24A,0x4E8E5A];
+  const fleet=[];
+  for(let i=0;i<5;i++){
+    const s=ship(sc,.8+((i*7)%5)/16,sails[i%sails.length]);
+    s.position.set((-2.3+i*1.1)*sc,.06,(2.5+((i%2)?.5:0))*sc);s.rotation.y=1.3+i*.2;
+    g.add(s);fleet.push(s);
+  }
+  U.fleet=fleet;
+  /* a lighthouse fire at the mole's end */
+  const beacon=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,color:0xFFE3B0}));
+  beacon.scale.setScalar(2.4*sc);beacon.position.set(3.0*sc,.9*sc,-.4*sc);g.add(beacon);
+  U.beacon=beacon;
+  return lift+2.6*sc;
+};
+
+/* ---------- GREYWATER WATCH · the Reed seat; a compact, clever
+   castle set amid moat and marsh, walking the line between
+   firm ground and bog ---------- */
+SEATS['Greywater Watch']=(g,H,sc,raise,U)=>{
+  const S=M.hgStone, R=M.hgRoof, col=H.col;
+  /* the bright moat ringing the keep */
+  const moat=new THREE.Mesh(new THREE.RingGeometry(1.75*sc,2.35*sc,30),M.river);
+  moat.rotation.x=-Math.PI/2;moat.position.y=.02;g.add(moat);
+  const isle=new THREE.Mesh(new THREE.CylinderGeometry(1.85*sc,1.95*sc,.16*sc,20),M.grass);
+  isle.position.y=.08*sc;raise(isle,0,0);
+  /* the octagonal curtain, neat and well-kept */
+  const n=8,pts=[];
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2+Math.PI/8;pts.push([Math.cos(a)*1.5*sc,Math.sin(a)*1.5*sc]);}
+  raise(walls(pts,{h:.72*sc,sc,mat:S,closed:true,towerR:.14*sc,towerH:1.10*sc,
+    towerRoof:'cone',roofMat:R,drapeCol:col,winCol:0xFFD9A0}),0,.05);
+  /* the gilded gatehouse and its causeway across the moat */
+  const gh=gatehouse(sc,S,.72*sc,col);gh.position.set(0,0,1.5*sc);raise(gh,0,.10);
+  const cw=new THREE.Mesh(new THREE.BoxGeometry(.5*sc,.1*sc,.9*sc),M.stoneLt);
+  cw.position.set(0,.28*sc,1.95*sc);raise(cw,0,.12);
+  /* the central keep — square, with a tall clock-like central tower */
+  const K=keep({w:.72*sc,d:.66*sc,h:1.35*sc,sc,mat:S,turrets:true,turretR:.12*sc,
+    turretH:.8*sc,turretRoof:'cone',roofMat:R,banner:col,rows:3});
+  K.position.set(0,0,-.1*sc);raise(K,0,.16);
+  const spire=drum({r:.19*sc,h:2.5*sc,sc,mat:S,roof:'spire',pitch:2.4,roofMat:R,
+    rows:3,seg:12,banner:col});
+  spire.position.set(0,0,-.1*sc);raise(spire,0,.22);
+  /* a gilded weather-fox finial catching the light */
+  const fox=new THREE.Mesh(new THREE.ConeGeometry(.06*sc,.3*sc,4),M.goldLf);
+  fox.rotation.z=Math.PI/2;fox.position.set(0,2.5*sc+.19*sc*2.4+.2*sc,-.1*sc);raise(fox,0,.34);
+  /* the terraced flower-fields outside the moat */
+  for(let i=0;i<9;i++){
+    const a=i*.698+.2;
+    raise(at(flowerbed(sc,.28*sc,(i*.15)%1),Math.cos(a)*3.0*sc,0,Math.sin(a)*3.0*sc),0,.40);
+  }
+  for(let i=0;i<8;i++){const t=broadleaf(sc,.7,M.leaf);const a=i*.785+.5;
+    t.position.set(Math.cos(a)*2.7*sc,0,Math.sin(a)*2.7*sc);raise(t,0,.44);}
+  /* a small watermill on the moat — the Reeds are shrewd, not showy */
+  const mill=new THREE.Group();
+  const mb=new THREE.Mesh(new THREE.BoxGeometry(.3*sc,.34*sc,.28*sc),M.wood);
+  mb.position.y=.17*sc;mill.add(mb);
+  const wheel=new THREE.Mesh(new THREE.TorusGeometry(.18*sc,.03*sc,5,10),M.woodDk);
+  wheel.position.set(.18*sc,.14*sc,0);mill.add(wheel);
+  mill.position.set(1.85*sc,0,-.9*sc);raise(mill,0,.42);
+  U.anim.push((t,N,rev)=>{wheel.rotation.z=-t*1.4;});
+  return 2.5*sc+.19*sc*2.4+1.0*sc;
+};
+
+/* =====================================================
+   ASSEMBLY
+===================================================== */
+function buildSeat(H,idx){
+  const detailStart=DETAIL.length;
+  const sc=(H.build&&H.build.scale)||1, g=new THREE.Group();
+  g.position.set(H.pos[0],0,H.pos[1]);
+  const parts=[];
+  const U={H,idx,parts,sc,flick:Math.random()*10,rev:0,found:false,foundAt:-1,anim:[]};
+  const raise=(grp,baseY,delay)=>{g.add(grp);parts.push({grp,baseY:baseY||0,delay:delay||0});return grp;};
+
+  const fn=SEATS[H.seat];
+  const labelY=fn?fn(g,H,sc,raise,U):3.4*sc;
+
+  /* the hearth every hall lights at dark */
+  const fire=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,color:0xFFCE8E}));
+  fire.scale.setScalar(3.6*sc);fire.position.y=.9*sc;g.add(fire);
+  U.fire=fire;
+
+  /* dust, thrown up while the stone is still rising */
+  const dn=24,dp=new Float32Array(dn*3);
+  for(let i=0;i<dn;i++){
+    const a=Math.random()*Math.PI*2,rr=(1.1+Math.random()*2.3)*sc;
+    dp[i*3]=Math.cos(a)*rr;dp[i*3+1]=Math.random()*1.5*sc;dp[i*3+2]=Math.sin(a)*rr;
+  }
+  const dg=new THREE.BufferGeometry();
+  dg.setAttribute('position',new THREE.BufferAttribute(dp,3));
+  U.dust=new THREE.Points(dg,new THREE.PointsMaterial({color:0xB9A279,size:.15*sc,
+    transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}));
+  g.add(U.dust);
+
+  U.labelY=labelY;
+  U.detail=DETAIL.slice(detailStart);   /* dropped when the seat is far off */
+  U.detailOn=true;
+  g.visible=false;
+  g.userData=U;
+  scene.add(g);holds.push(g);
+}
+HOUSES.forEach(buildSeat);
+/* mobile: shed the fine masonry entirely — far fewer draw calls */
+if(isMobile){
+  DETAIL.forEach(o=>{if(o&&o.parent)o.parent.remove(o);});
+  DETAIL.length=0;
+  holds.forEach(h=>{h.userData.detail=[];h.userData.detailOn=false;});
+}
+
+/* ---------- clockwork gears at the table's edge ---------- */
+const brass=new THREE.MeshStandardMaterial({color:0x8A6B33,metalness:.9,roughness:.42});
+const brassD=new THREE.MeshStandardMaterial({color:0x5F4A24,metalness:.88,roughness:.5});
+const gears=[];
+function gear(R,teeth,thick,mat,x,z,y,sp){
+  const g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(R,R,thick,36),mat));
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(R*.2,R*.2,thick*1.6,14),brassD));
+  for(let i=0;i<4;i++){const s=new THREE.Mesh(new THREE.BoxGeometry(R*1.5,thick*.5,R*.1),brassD);
+    s.rotation.y=i/4*Math.PI;g.add(s);}
+  const inst=new THREE.InstancedMesh(new THREE.BoxGeometry(R*.16,thick,R*.12),mat,teeth);
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),v=new THREE.Vector3(1,1,1),p=new THREE.Vector3();
+  for(let i=0;i<teeth;i++){const a=i/teeth*Math.PI*2;
+    p.set(Math.cos(a)*(R*1.06),0,Math.sin(a)*(R*1.06));
+    q.setFromEuler(new THREE.Euler(0,-a,0));m.compose(p,q,v);inst.setMatrixAt(i,m);}
+  inst.instanceMatrix.needsUpdate=true;g.add(inst);
+  g.position.set(x,y,z);g.userData={sp};scene.add(g);gears.push(g);
+}
+gear(12,28,1.0,brass,-36,-31,-2.6,.09);
+gear(8,20,.9,brass,-21,-40,-2.6,-.135);
+gear(10,24,.95,brass,37,33,-2.8,-.08);
+gear(6.2,15,.8,brassD,25,41,-2.8,.13);
+
+/* ---------- the sun, then the moon ---------- */
+const sky=new THREE.Group();sky.position.set(0,40,-58);scene.add(sky);
+const orb=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,32),new THREE.MeshBasicMaterial({color:0xE8DCC0}));
+sky.add(orb);
+const orbGlowM=new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:.8,
+  blending:THREE.AdditiveBlending,depthWrite:false});
+const orbGlow=new THREE.Sprite(orbGlowM);orbGlow.scale.setScalar(24);sky.add(orbGlow);
+const bands=[];
+[[6.4,.8],[8.2,-.5],[10.2,.35]].forEach(([R,sp],i)=>{
+  const b=new THREE.Group();
+  b.add(new THREE.Mesh(new THREE.TorusGeometry(R,.15,8,72),i%2?brassD:brass));
+  const n=Math.round(R*3.2);
+  const inst=new THREE.InstancedMesh(new THREE.BoxGeometry(.09,.4,.09),brass,n);
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),v=new THREE.Vector3(1,1,1),p=new THREE.Vector3();
+  for(let k=0;k<n;k++){const a=k/n*Math.PI*2;p.set(Math.cos(a)*R,Math.sin(a)*R,0);
+    q.setFromEuler(new THREE.Euler(0,0,a));m.compose(p,q,v);inst.setMatrixAt(k,m);}
+  inst.instanceMatrix.needsUpdate=true;b.add(inst);
+  b.rotation.set(i*.6,0,0);b.userData={sp};sky.add(b);bands.push(b);
+});
+/* stars for the night */
+const starGeo=new THREE.BufferGeometry();
+const STAR_N=isMobile?320:700;
+const sp=new Float32Array(STAR_N*3);
+for(let i=0;i<STAR_N;i++){const r=140+Math.random()*90,th=Math.random()*Math.PI*2,ph=Math.random()*.55;
+  sp[i*3]=Math.cos(th)*Math.cos(ph)*r;sp[i*3+1]=Math.sin(ph)*r+20;sp[i*3+2]=Math.sin(th)*Math.cos(ph)*r;}
+starGeo.setAttribute('position',new THREE.BufferAttribute(sp,3));
+const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xCBD8E8,size:.85,
+  transparent:true,opacity:0,depthWrite:false}));
+scene.add(stars);
+
+/* ---------- DRAGONS ---------- */
+/* =====================================================
+   DRAGONS
+   Built from the reference art: a long neck, a real skull
+   with a hinged jaw and swept horns, a spined ridge down
+   the back and tail, and proper bat wings — humerus,
+   radius, four finger bones, and a membrane stretched
+   between them and the hip.
+===================================================== */
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const UP=V(0,1,0);
+function bone(a,b,r1,r2,mat,seg){
+  const dir=new THREE.Vector3().subVectors(b,a), len=dir.length();
+  const m=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,len,seg||5),mat);
+  m.position.copy(a).addScaledVector(dir,.5);
+  m.quaternion.setFromUnitVectors(UP,dir.clone().normalize());
+  return m;
+}
+/* a triangle sheet stretched over a list of points */
+function membrane(pts,tris,mat){
+  const pos=new Float32Array(tris.length*9);
+  tris.forEach((t,i)=>{
+    for(let k=0;k<3;k++){
+      const p=pts[t[k]];
+      pos[i*9+k*3]=p.x;pos[i*9+k*3+1]=p.y;pos[i*9+k*3+2]=p.z;
+    }
+  });
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.computeVertexNormals();
+  return new THREE.Mesh(g,mat);
+}
+/* a ridge of spines along a path */
+function ridge(from,to,n,h0,h1,mat,tilt){
+  const G=new THREE.Group();
+  for(let i=0;i<n;i++){
+    const f=i/(n-1||1), h=h0+(h1-h0)*f;
+    const s=new THREE.Mesh(new THREE.ConeGeometry(h*.34,h,4),mat);
+    s.position.lerpVectors(from,to,f);
+    s.position.y+=h*.42;
+    s.rotation.z=tilt||-.28;
+    G.add(s);
+  }
+  return G;
+}
+
+const dragons=[];
+function makeDragon(o){
+  const G=new THREE.Group();
+  const skin=new THREE.MeshStandardMaterial({color:o.body,roughness:.58,metalness:.20,flatShading:true});
+  const belly=new THREE.MeshStandardMaterial({color:o.belly,roughness:.72,metalness:.10,flatShading:true});
+  const memb=new THREE.MeshStandardMaterial({color:o.memb,roughness:.80,metalness:.06,
+    side:THREE.DoubleSide,transparent:true,opacity:.96,
+    emissive:new THREE.Color(o.membGlow||0x000000),emissiveIntensity:o.membGlowI||0});
+  const horn=new THREE.MeshStandardMaterial({color:o.horn,roughness:.46,metalness:.24,flatShading:true});
+
+  /* ---- torso: deep chest tapering to the hips ---- */
+  const chest=new THREE.Mesh(new THREE.CylinderGeometry(.34,.50,1.05,8),skin);
+  chest.rotation.z=Math.PI/2;chest.position.x=.42;G.add(chest);
+  const hip=new THREE.Mesh(new THREE.CylinderGeometry(.50,.30,1.00,8),skin);
+  hip.rotation.z=Math.PI/2;hip.position.x=-.52;G.add(hip);
+  const keel=new THREE.Mesh(new THREE.SphereGeometry(.34,10,7),belly);
+  keel.scale.set(1.5,.78,.86);keel.position.set(.30,-.20,0);G.add(keel);
+
+  /* ---- neck: five segments, rising toward the head ---- */
+  const neck=new THREE.Group();neck.position.set(.92,.14,0);G.add(neck);
+  let prev=neck;
+  for(let i=0;i<5;i++){
+    const seg=new THREE.Group();
+    seg.position.x=i?.34:.0;seg.rotation.z=i?.045:.20;
+    const r0=.26-i*.030, r1=.29-i*.030;
+    const m=new THREE.Mesh(new THREE.CylinderGeometry(r0,r1,.36,7),skin);
+    m.rotation.z=Math.PI/2;m.position.x=.17;seg.add(m);
+    seg.add(ridge(V(.02,r0*.86,0),V(.32,r0*.86,0),2,.13-i*.012,.12-i*.012,horn));
+    prev.add(seg);prev=seg;
+  }
+
+  /* ---- skull ---- */
+  const head=new THREE.Group();head.position.x=.30;prev.add(head);
+  const skull=new THREE.Mesh(new THREE.BoxGeometry(.42,.26,.28),skin);
+  skull.position.x=.20;head.add(skull);
+  const snout=new THREE.Mesh(new THREE.CylinderGeometry(.10,.17,.40,6),skin);
+  snout.rotation.z=-Math.PI/2;snout.position.set(.58,-.02,0);head.add(snout);
+  const brow=new THREE.Mesh(new THREE.BoxGeometry(.30,.07,.32),horn);
+  brow.position.set(.22,.13,0);head.add(brow);
+  /* the hinged lower jaw */
+  const jaw=new THREE.Group();jaw.position.set(.16,-.10,0);head.add(jaw);
+  const jawM=new THREE.Mesh(new THREE.CylinderGeometry(.075,.14,.46,5),skin);
+  jawM.rotation.z=-Math.PI/2;jawM.position.x=.25;jaw.add(jawM);
+  for(let i=0;i<5;i++){                              /* teeth */
+    const t=new THREE.Mesh(new THREE.ConeGeometry(.022,.075,3),horn);
+    t.position.set(.16+i*.10,.055,.055*(i%2?1:-1));t.rotation.x=Math.PI;jaw.add(t);
+    const u=t.clone();u.position.y=.13;u.rotation.x=0;u.position.x-=.04;head.add(u);
+  }
+  /* swept horns and cheek spikes */
+  [[.10,.20,.10,-1.05,.34],[.10,.20,-.10,-1.05,.34],
+   [.04,.13,.15,-.62,.22],[.04,.13,-.15,-.62,.22]].forEach(h=>{
+    const c=new THREE.Mesh(new THREE.ConeGeometry(h[4]*.19,h[4],4),horn);
+    c.position.set(h[0],h[1],h[2]);c.rotation.z=h[3];c.rotation.x=h[2]>0?.30:-.30;
+    head.add(c);
+  });
+  head.add(ridge(V(.02,.16,0),V(.30,.18,0),3,.11,.08,horn,-.9));
+  /* eyes */
+  const eyes=[];
+  for(const s of[1,-1]){
+    const e=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:.9,
+      blending:THREE.AdditiveBlending,depthWrite:false,color:o.eye}));
+    e.scale.setScalar(.30);e.position.set(.34,.06,.13*s);head.add(e);eyes.push(e);
+  }
+
+  /* ---- breath ---- */
+  const breathCol=o.kind==='ice'?0x9FE4FF:0xFFA23C;
+  const breath=new THREE.Mesh(new THREE.ConeGeometry(o.kind==='ice'?.30:.40,3.1,10,1,true),
+    new THREE.MeshBasicMaterial({color:breathCol,transparent:true,opacity:0,
+      blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide}));
+  breath.rotation.z=-Math.PI/2;breath.position.set(1.95,-.02,0);head.add(breath);
+  /* a second, tighter core makes fire read as fire and ice as ice */
+  const core=new THREE.Mesh(new THREE.ConeGeometry(o.kind==='ice'?.13:.18,2.3,8,1,true),
+    new THREE.MeshBasicMaterial({color:o.kind==='ice'?0xE8FBFF:0xFFF0C0,transparent:true,opacity:0,
+      blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide}));
+  core.rotation.z=-Math.PI/2;core.position.set(1.60,-.02,0);head.add(core);
+  const spark=new THREE.Sprite(new THREE.SpriteMaterial({
+    map:o.kind==='ice'?GLOW:GLOW_R,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,color:o.kind==='ice'?0x8FD8FF:0xFFFFFF}));
+  spark.scale.setScalar(2.0);spark.position.set(.80,-.02,0);head.add(spark);
+  /* motes carried on the breath */
+  const MN=22,mp=new Float32Array(MN*3);
+  for(let i=0;i<MN;i++){mp[i*3]=.9+Math.random()*2.6;mp[i*3+1]=(Math.random()-.5)*.4;mp[i*3+2]=(Math.random()-.5)*.4;}
+  const mg=new THREE.BufferGeometry();
+  mg.setAttribute('position',new THREE.BufferAttribute(mp,3));
+  const motes=new THREE.Points(mg,new THREE.PointsMaterial({color:breathCol,size:.17,
+    transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}));
+  head.add(motes);
+
+  /* ---- back and tail ridge ---- */
+  G.add(ridge(V(.80,.30,0),V(-.90,.34,0),9,.16,.26,horn));
+
+  /* ---- tail: eight tapering segments, spined ---- */
+  const tail=new THREE.Group();tail.position.x=-1.00;G.add(tail);
+  prev=tail;const tailSegs=[];
+  for(let i=0;i<8;i++){
+    const seg=new THREE.Group();seg.position.x=i?-.30:0;
+    const r0=.24-i*.026, r1=.26-i*.026;
+    const m=new THREE.Mesh(new THREE.CylinderGeometry(r0,r1,.32,6),skin);
+    m.rotation.z=Math.PI/2;m.position.x=-.16;seg.add(m);
+    if(i<6)seg.add(ridge(V(-.02,r1*.82,0),V(-.28,r0*.82,0),2,.20-i*.022,.18-i*.022,horn,.30));
+    prev.add(seg);prev=seg;tailSegs.push(seg);
+  }
+  /* tail fin — a flame on the fire drake, a blade of ice on the other */
+  const fin=membrane(
+    [V(0,0,0),V(-.55,.34,0),V(-.62,-.02,0),V(-.50,-.32,0)],
+    [[0,1,2],[0,2,3]], memb);
+  fin.position.x=-.12;prev.add(fin);
+  let tailFlame=null;
+  if(o.tailFlame){
+    tailFlame=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW_R,transparent:true,opacity:.75,
+      blending:THREE.AdditiveBlending,depthWrite:false,color:0xFF8A2A}));
+    tailFlame.scale.setScalar(1.5);tailFlame.position.x=-.45;prev.add(tailFlame);
+  }
+
+  /* ---- hind legs, tucked ---- */
+  for(const s of[1,-1]){
+    const L=new THREE.Group();L.position.set(-.40,-.22,.30*s);G.add(L);
+    L.add(bone(V(0,0,0),V(-.30,-.34,.10*s),.13,.09,skin));
+    L.add(bone(V(-.30,-.34,.10*s),V(.06,-.60,.14*s),.09,.06,skin));
+    for(let c=-1;c<=1;c++){
+      const cl=new THREE.Mesh(new THREE.ConeGeometry(.030,.16,3),horn);
+      cl.position.set(.17,-.63,(.14+c*.07)*s);cl.rotation.z=-1.25;L.add(cl);
+    }
+  }
+
+  /* ---- wings: humerus, radius, four fingers, membrane ---- */
+  const wings=[];
+  for(const s of[1,-1]){
+    const W=new THREE.Group();W.position.set(.34,.30,.26*s);G.add(W);
+    const SH=V(0,0,0), EL=V(.22,.20,.85*s), WR=V(-.10,.16,1.80*s), HIP=V(-1.30,-.22,.10*s);
+    const F=[V(1.15,.10,2.55*s),V(.30,.02,3.05*s),V(-.62,-.06,2.85*s),V(-1.35,-.14,2.10*s)];
+    W.add(bone(SH,EL,.095,.075,skin));
+    W.add(bone(EL,WR,.075,.055,skin));
+    F.forEach((f,i)=>W.add(bone(WR,f,.048-i*.006,.020,skin)));
+    const pts=[SH,EL,WR,HIP,...F];                 /* 0 1 2 3, fingers 4..7 */
+    W.add(membrane(pts,[
+      [0,1,2],                                     /* shoulder web */
+      [2,4,5],[2,5,6],[2,6,7],                     /* between the fingers */
+      [2,7,3],[0,2,3]                              /* trailing edge down to the hip */
+    ],memb));
+    const thumb=new THREE.Mesh(new THREE.ConeGeometry(.035,.22,4),horn);
+    thumb.position.copy(WR);thumb.rotation.z=-.8;W.add(thumb);
+    wings.push({W,side:s});
+  }
+
+  G.scale.setScalar(o.scale);
+  G.userData={radius:o.radius,height:o.height,speed:o.speed,phase:o.phase,
+    kind:o.kind,wings,neck,tailSegs,jaw,head,breath,core,spark,motes,eyes,tailFlame,
+    fireT:2+Math.random()*8,firing:0,
+    /* interaction: smoothed head-look, attention, and excitement */
+    att:0,lookY:0,lookP:0,excite:0};
+  scene.add(G);dragons.push(G);
+}
+
+/* the three of the reference paintings */
+makeDragon({scale:1.60,radius:26,height:15,speed:.19,phase:0,kind:'fire',
+  body:0x1C181C,belly:0x2E2429,memb:0x7A2A18,membGlow:0x33100A,membGlowI:.55,
+  horn:0x0F0D10,eye:0xFF6A1E,tailFlame:false});          /* the black drake */
+makeDragon({scale:1.20,radius:35,height:21,speed:.150,phase:2.2,kind:'fire',
+  body:0x8E2E1A,belly:0xC08A3E,memb:0xC4451B,membGlow:0xFF6A14,membGlowI:1.15,
+  horn:0x6B3A18,eye:0xFFD24A,tailFlame:true});           /* the fire drake */
+if(!isMobile)makeDragon({scale:1.05,radius:20,height:12,speed:.235,phase:4.4,kind:'ice',
+  body:0x8FA6B8,belly:0xC3D4E0,memb:0x6E8CA6,membGlow:0x2A5C7A,membGlowI:.60,
+  horn:0xD6E6F0,eye:0x6FD8FF,tailFlame:false});          /* the ice drake */
+
+/* =====================================================
+   CAMERA — scroll base + drag control + focus
+===================================================== */
+const cam={yaw:.2,pitch:1.02,dist:52,fx:0,fy:0,fz:0};
+const pan={x:0,z:0};                 /* where on the map you are standing */
+const PANLIM=31;                     /* the edge of the painted table */
+const camE={...cam};
+let userYaw=0,userPitch=0;
+const T={p:0,night:0};const E={...T};
+let isDeep=false;
+
+gsap.timeline({scrollTrigger:{trigger:'.content',start:'top top',end:'bottom bottom',scrub:true,
+  onUpdate(self){
+    const p=self.progress;T.p=p;
+    T.night=THREE.MathUtils.smoothstep(p,.30,.46);
+    cam.yaw=.2+p*1.5;
+    cam.pitch=1.02-THREE.MathUtils.smoothstep(p,0,.55)*.52+THREE.MathUtils.smoothstep(p,.8,1)*.30;
+    cam.dist=52-THREE.MathUtils.smoothstep(p,0,.55)*24+THREE.MathUtils.smoothstep(p,.78,1)*26;
+    const wantDeep=p>.34;
+    if(wantDeep!==isDeep){isDeep=wantDeep;document.body.classList.toggle('deep',wantDeep);}
+  }}});
+
+/* =====================================================
+   THE SHROUD — the realm stays dark until a hand moves over it
+===================================================== */
+const HOLD_N=HOUSES.length;
+const RN_=['None','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI'];
+const shroudUni={
+  uTime:{value:0}, uAlpha:{value:0},
+  uLantern:{value:new THREE.Vector2(0,0)}, uLanternI:{value:0},
+  uHolds:{value:HOUSES.map(H=>new THREE.Vector3(H.pos[0],H.pos[1],0))}
+};
+const shroud=new THREE.Mesh(new THREE.PlaneGeometry(MAP*1.04,MAP*1.04,1,1),
+  new THREE.ShaderMaterial({
+    uniforms:shroudUni,transparent:true,depthWrite:false,
+    vertexShader:`varying vec2 vW;
+      void main(){vec4 wp=modelMatrix*vec4(position,1.0);vW=wp.xz;
+        gl_Position=projectionMatrix*viewMatrix*wp;}`,
+    fragmentShader:NOISE+`
+      uniform float uTime,uAlpha,uLanternI;
+      uniform vec2 uLantern;
+      uniform vec3 uHolds[${HOLD_N}];
+      varying vec2 vW;
+      void main(){
+        float clear=smoothstep(14.0,4.0,distance(vW,uLantern))*uLanternI;
+        for(int i=0;i<${HOLD_N};i++){
+          clear=max(clear,uHolds[i].z*smoothstep(14.0,4.5,distance(vW,uHolds[i].xy)));
+        }
+        float mist=fbm(vW*0.055+vec2(uTime*0.030,uTime*0.019))*0.5+0.5;
+        mist=mix(0.70,1.0,mist);
+        float a=(1.0-clear)*uAlpha*mist;
+        vec3 col=mix(vec3(0.030,0.038,0.056),vec3(0.072,0.084,0.108),mist);
+        gl_FragColor=vec4(col,clamp(a,0.0,1.0));
+      }`}));
+shroud.rotation.x=-Math.PI/2;shroud.position.y=.10;shroud.renderOrder=2;scene.add(shroud);
+
+/* the lantern carried over the painted table */
+const lantern=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,transparent:true,opacity:0,
+  blending:THREE.AdditiveBlending,depthWrite:false,color:0xFFD79A}));
+lantern.scale.setScalar(30);lantern.position.y=.7;scene.add(lantern);
+const lanternL=new THREE.PointLight(0xFFC98A,0,52,1.5);scene.add(lanternL);
+
+/* =====================================================
+   HOLD THE REINS, THEN DRAG THE REALM
+===================================================== */
+const stage=document.getElementById('stage');
+let focusTween=null;
+const gate=document.getElementById('reins');
+const ring=document.getElementById('reinsRing');
+const tally=document.getElementById('tally');
+const tallyBar=document.getElementById('tallyBar');
+const tallyWrap=document.getElementById('tallyWrap');
+
+let dragging=false,lastX=0,lastY=0,moved=0,ptype='mouse';
+const ptrs=new Map();
+let reins=false,holdStart=0,holdRAF=0,lampI=0,found=0,liveMap=false;
+const HOLD_MS=420;
+
+function setHint(t){document.getElementById('hintTxt').innerHTML=t;}
+function updateTally(){
+  tally.textContent=`${RN_[found]||found} of ${RN_[HOLD_N]||HOLD_N} holds found`;
+  tallyBar.style.transform=`scaleX(${found/HOLD_N})`;
+  if(found===HOLD_N){
+    tallyWrap.classList.add('done');
+    setHint('The realm stands unveiled · <b>travel to a tower and claim it</b>');
+  }
+}
+
+function beginHold(){
+  holdStart=performance.now();
+  gate.classList.add('holding');
+  const step=()=>{
+    const p=Math.min(1,(performance.now()-holdStart)/HOLD_MS);
+    ring.style.strokeDashoffset=String(163*(1-p));
+    if(p>=1){takeReins();return;}
+    holdRAF=requestAnimationFrame(step);
+  };
+  holdRAF=requestAnimationFrame(step);
+}
+function cancelHold(){
+  cancelAnimationFrame(holdRAF);
+  gate.classList.remove('holding');
+  ring.style.strokeDashoffset='163';
+}
+function takeReins(){
+  cancelAnimationFrame(holdRAF);
+  if(reins)return;
+  reins=true;
+  gate.classList.add('taken');
+  setHint('Drag to <b>travel the realm</b> · shift-drag to turn');
+  tallyWrap.classList.add('show');
+  helm.classList.add('show');
+  if(navigator.vibrate)navigator.vibrate(18);
+  setTimeout(()=>gate.classList.add('gone'),760);
+}
+
+stage.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.pin')||e.target.closest('.mapui'))return;
+  /* a tap on a dragon in the sky draws its breath, rather than the map */
+  if(reins&&dragonsAloft){
+    const hit=dragonAtScreen(e.clientX,e.clientY,88);
+    if(hit){rouseDragon(hit);return;}
+  }
+  ptrs.set(e.pointerId,1);
+  dragging=true;moved=0;ptype=e.pointerType;lastX=e.clientX;lastY=e.clientY;
+  stage.classList.add('dragging');
+  if(!reins)beginHold();
+  if(e.pointerType==='mouse')stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const dx=e.clientX-lastX, dy=e.clientY-lastY;
+  moved+=Math.abs(dx)+Math.abs(dy);
+  /* on touch, a mostly-vertical swipe belongs to the page, not the map */
+  if(ptype!=='mouse'&&Math.abs(dy)>Math.abs(dx)*1.4&&moved<40){
+    dragging=false;cancelHold();stage.classList.remove('dragging');return;
+  }
+  if(!reins&&moved>18)cancelHold();          /* a flick is not a hold */
+  if(ptype!=='mouse')e.preventDefault();
+  lastX=e.clientX;lastY=e.clientY;
+  if(!reins)return;
+  if(e.shiftKey||e.buttons===2||ptrs.size>1){
+    /* turn the table */
+    userYaw-=dx*.0045;
+    userPitch=THREE.MathUtils.clamp(userPitch+dy*.0028,-.35,.45);
+  }else{
+    /* travel across it — this is what actually carries you between seats */
+    travel(-dx,dy,camE.dist*.0019);
+  }
+});
+
+/* move the standing point along the ground, relative to where you are facing */
+function travel(sx,sy,k){
+  const y=camE.yaw+userYaw;
+  const rx= Math.cos(y), rz=-Math.sin(y);      /* screen right, on the map   */
+  const fx=-Math.sin(y), fz=-Math.cos(y);      /* into the screen, on the map */
+  pan.x=THREE.MathUtils.clamp(pan.x+(rx*sx+fx*sy)*k,-PANLIM,PANLIM);
+  pan.z=THREE.MathUtils.clamp(pan.z+(rz*sx+fz*sy)*k,-PANLIM,PANLIM);
+  cam.fx=pan.x;cam.fz=pan.z;
+  if(focusTween)focusTween.kill();
+}
+const endDrag=e=>{if(e&&e.pointerId!==undefined)ptrs.delete(e.pointerId);
+  dragging=false;cancelHold();stage.classList.remove('dragging');};
+stage.addEventListener('pointerup',endDrag);
+stage.addEventListener('pointercancel',endDrag);
+stage.addEventListener('pointerleave',endDrag);
+stage.addEventListener('contextmenu',e=>e.preventDefault());
+
+/* the realm should not be closed to anyone who cannot drag */
+addEventListener('keydown',e=>{
+  if(!liveMap)return;
+  const K=e.key;
+  if(K==='ArrowLeft'||K==='ArrowRight'||K==='ArrowUp'||K==='ArrowDown'){
+    if(!reins)takeReins();
+    const s=camE.dist*.055;
+    travel(K==='ArrowLeft'?-s:K==='ArrowRight'?s:0, K==='ArrowUp'?-s:K==='ArrowDown'?s:0, 1);
+    lampI=1;e.preventDefault();
+  }else if(K===','||K==='<'){if(!reins)takeReins();userYaw-=.12;e.preventDefault();}
+  else if(K==='.'||K==='>'){if(!reins)takeReins();userYaw+=.12;e.preventDefault();}
+});
+/* the helm: travel and turn without a mouse */
+const helm=document.getElementById('helm');
+let helmHold=null;
+function helmGo(fn){
+  fn();lampI=1;
+  clearInterval(helmHold);helmHold=setInterval(()=>{fn();lampI=1;},60);
+}
+const stopHelm=()=>clearInterval(helmHold);
+helm.querySelectorAll('[data-go]').forEach(b=>{
+  const d=b.dataset.go;
+  const step=()=>{
+    const s=camE.dist*.020;
+    travel(d==='w'?-s:d==='e'?s:0, d==='n'?-s:d==='s'?s:0, 1);
+  };
+  b.addEventListener('pointerdown',ev=>{ev.stopPropagation();if(!reins)takeReins();helmGo(step);});
+  b.addEventListener('pointerup',stopHelm);
+  b.addEventListener('pointerleave',stopHelm);
+  b.addEventListener('pointercancel',stopHelm);
+});
+helm.querySelectorAll('[data-turn]').forEach(b=>{
+  const s=+b.dataset.turn;
+  b.addEventListener('pointerdown',ev=>{ev.stopPropagation();if(!reins)takeReins();
+    helmGo(()=>{userYaw+=s*.035;});});
+  b.addEventListener('pointerup',stopHelm);
+  b.addEventListener('pointerleave',stopHelm);
+  b.addEventListener('pointercancel',stopHelm);
+});
+
+document.getElementById('unveil').addEventListener('click',()=>{
+  if(!reins)takeReins();
+  holds.forEach(h=>reveal(h));
+});
+
+/* --- the reveal ------------------------------------------------ */
+function reveal(h){
+  const u=h.userData;
+  if(u.found)return;
+  u.found=true;u.foundAt=simT;h.visible=true;found++;
+  updateTally();
+  gsap.to(u,{rev:1,duration:reduce?.01:2.2,ease:'power2.out'});
+  gsap.to(shroudUni.uHolds.value[u.idx],{z:1,duration:reduce?.01:2.6,ease:'power2.out'});
+  const p=pins[u.idx];
+  if(p){p.classList.add('fresh');setTimeout(()=>p.classList.remove('fresh'),2800);}
+  if(navigator.vibrate)navigator.vibrate(12);
+}
+
+/* whatever lies under the light wakes up */
+function sweepReveal(dt,yaw){
+  const lx=camE.fx, lz=camE.fz;      /* the light is wherever you are standing */
+  const target=(reins&&liveMap)?(dragging?1:.60):0;
+  lampI+=(target-lampI)*Math.min(1,dt*(target?5.5:2.6));
+  lantern.position.set(lx,.7,lz);
+  lanternL.position.set(lx,8,lz);
+  shroudUni.uLantern.value.set(lx,lz);
+  shroudUni.uLanternI.value=lampI;
+  lantern.material.opacity=lampI*.5;
+  lanternL.intensity=lampI*2.6;
+  if(lampI<.25)return;
+  for(const h of holds){
+    if(h.userData.found)continue;
+    const dx=h.position.x-lx, dz=h.position.z-lz;
+    if(dx*dx+dz*dz<132)reveal(h);
+  }
+}
+
+/* the map is only interactive while its section holds the screen */
+new IntersectionObserver(es=>es.forEach(en=>{
+  liveMap=en.isIntersecting;
+  stage.classList.toggle('live',liveMap);
+  gsap.to(shroudUni.uAlpha,{value:liveMap?.93:0,duration:1.1,ease:'power2.out'});
+  if(liveMap&&!reins)gate.classList.remove('gone');
+}),{threshold:0,rootMargin:'-30% 0px -30% 0px'}).observe(document.getElementById('realm'));
+
+/* =====================================================
+   PINS + DRAWER
+===================================================== */
+const pins=[];
+holds.forEach((h,i)=>{
+  const b=document.createElement('button');
+  b.className='pin';b.style.setProperty('--pinCol',h.userData.H.col);
+  b.innerHTML=`<div class="stalk"></div><div class="flag"><span class="dot"></span>
+    <span class="nm">${h.userData.H.h.replace('House ','')}</span>
+    <span class="sm">${h.userData.H.dom}</span></div>`;
+  b.addEventListener('click',ev=>{ev.stopPropagation();openHouse(i);});
+  stage.appendChild(b);pins.push(b);
+});
+const drawer=document.getElementById('drawer'),dBody=document.getElementById('drawerBody');
+document.getElementById('drawerX').onclick=()=>drawer.classList.remove('open');
+
+function openHouse(i){
+  const H=HOUSES[i];
+  reveal(holds[i]);          /* the Roll is a plain index — it finds the hold too */
+  drawer.style.setProperty('--dCol',H.col);
+  dBody.innerHTML=`
+    <div class="dsig">${SIG[H.sig]}</div>
+    <div class="dh">${H.h}</div>
+    <div class="dt">${H.seat} · ${H.t}</div>
+    <div><span class="dd">${H.dom}</span></div>
+    <div class="dw">${H.words}</div>
+    <p class="dp">${H.desc}</p>
+    <div class="dm">Company of ${H.team}${H.team>1?' · leader seals the roll':' · rides alone'}</div>
+    <button class="ride" data-i="${i}">Ride for ${H.h}</button>`;
+  dBody.querySelector('.ride').onclick=()=>{
+    const sel=document.getElementById('houseSelect');
+    sel.value=`${H.h} — ${H.t}`;
+    sel.dispatchEvent(new Event('change'));
+    drawer.classList.remove('open');
+    document.getElementById('oath').scrollIntoView({behavior:'smooth'});
+  };
+  drawer.classList.add('open');
+  pins.forEach((p,k)=>p.classList.toggle('sel',k===i));
+  /* the camera travels to that seat */
+  const t=holds[i].position;
+  if(focusTween)focusTween.kill();
+  focusTween=gsap.to(pan,{x:t.x,z:t.z,duration:1.5,ease:'power3.inOut',
+    onUpdate(){cam.fx=pan.x;cam.fz=pan.z;}});
+}
+
+/* =====================================================
+   RENDER
+===================================================== */
+const clock=new THREE.Clock();
+let simT=0,frames=0,slow=0,degraded=false;
+const proj=new THREE.Vector3();
+const camFwd=new THREE.Vector3();
+
+/* =====================================================
+   THE DRAGONS NOTICE YOU
+   The beasts were only ever decoration. Now the pointer
+   (or a finger on the glass) draws their eye: they turn
+   their heads to follow it, their eyes kindle, and a tap
+   on a dragon draws its breath. All of this is layered on
+   top of the flight — if any of it misreads, the beast
+   simply flies on as before.
+===================================================== */
+const ptr={x:innerWidth/2,y:innerHeight/2,seen:false};
+addEventListener('pointermove',e=>{ptr.x=e.clientX;ptr.y=e.clientY;ptr.seen=true;},{passive:true});
+let dragonsAloft=false;                      /* set true in the loop while they fly */
+const _headWP=new THREE.Vector3(), _ray=new THREE.Vector3(), _tgt=new THREE.Vector3(), _loc=new THREE.Vector3();
+/* where the pointer's ray meets a level plane at the given height */
+function pointerOnPlane(planeY){
+  const nx=(ptr.x/innerWidth)*2-1, ny=-(ptr.y/innerHeight)*2+1;
+  _ray.set(nx,ny,.5).unproject(camera).sub(camera.position);
+  if(Math.abs(_ray.y)<1e-4)return null;
+  const k=(planeY-camera.position.y)/_ray.y;
+  if(k<0)return null;
+  return _tgt.copy(camera.position).addScaledVector(_ray,k);
+}
+/* project a dragon's head to screen; returns null if behind the camera */
+function dragonScreen(d){
+  d.userData.head.getWorldPosition(_headWP);
+  _headWP.project(camera);
+  if(_headWP.z>1)return null;
+  return {x:(_headWP.x*.5+.5)*innerWidth, y:(-_headWP.y*.5+.5)*innerHeight};
+}
+/* the nearest flying dragon within `radius` px of a screen point */
+function dragonAtScreen(px,py,radius){
+  let best=null,bestD=radius*radius;
+  for(const d of dragons){
+    if(!d.visible)continue;
+    const s=dragonScreen(d);if(!s)continue;
+    const dd=(s.x-px)*(s.x-px)+(s.y-py)*(s.y-py);
+    if(dd<bestD){bestD=dd;best=d;}
+  }
+  return best;
+}
+/* rouse a dragon: it draws breath now, and remembers it was provoked */
+function rouseDragon(d){
+  const u=d.userData;
+  u.firing=Math.max(u.firing,1.55);
+  u.fireT=6+Math.random()*8;          /* hold off the next idle breath */
+  u.excite=1;
+  if(navigator.vibrate)navigator.vibrate(14);
+}
+
+function tick(){
+  const dt=Math.min(clock.getDelta(),.05);
+  simT+=dt;const t=simT;
+  const ez=reduce?1:1-Math.pow(.935,dt*60);
+  for(const k in T)E[k]+=(T[k]-E[k])*ez;
+  for(const k in cam)camE[k]+=(cam[k]-camE[k])*ez;
+  if(!degraded){if(dt>.024)slow++;else slow=Math.max(0,slow-1);
+    if(++frames>90&&slow>45){degraded=true;renderer.setPixelRatio(1);
+      DETAIL.forEach(o=>o.visible=false);}}
+
+  const N=E.night;
+
+  /* camera orbit */
+  const yaw=camE.yaw+userYaw, pitch=THREE.MathUtils.clamp(camE.pitch+userPitch,.16,1.32);
+  camera.position.set(
+    camE.fx+Math.cos(pitch)*Math.sin(yaw)*camE.dist,
+    camE.fy+Math.sin(pitch)*camE.dist,
+    camE.fz+Math.cos(pitch)*Math.cos(yaw)*camE.dist);
+  camera.lookAt(camE.fx,camE.fy+1.5,camE.fz);
+
+  /* day → night */
+  amb.intensity=.34-N*.14;
+  amb.color.setRGB(.56-N*.24,.63-N*.22,.72-N*.06);
+  hemi.intensity=.62-N*.24;
+  hemi.color.setRGB(.69-N*.34,.77-N*.34,.86-N*.16);
+  hemi.groundColor.setRGB(.42-N*.22,.33-N*.17,.21-N*.05);
+  moonL.intensity=N*.85;
+  sunL.intensity=1.05*(1-N*.92);
+  rimL.intensity=.50-N*.15;          /* an accent, not the key light */
+  renderer.toneMappingExposure=1+N*.35;
+  mapUni.uNight.value=N;mapUni.uTime.value=t;
+  for(let i=0;i<holds.length;i++)mapUni.uBio.value[i].z=holds[i].userData.rev;
+  scene.fog.density=.0075+N*.004;
+  renderer.setClearColor(new THREE.Color(0x0A0C11).lerp(new THREE.Color(0x05060A),N));
+  stars.material.opacity=N*.85;
+  sky.position.y=40-N*34;
+  sky.rotation.y=t*.03;
+  bands.forEach(b=>{b.rotation.z+=b.userData.sp*dt*.4;b.rotation.y+=b.userData.sp*dt*.18;});
+  orbGlowM.opacity=.8-N*.52;orbGlow.scale.setScalar(24-N*10);
+  orb.material.color.setRGB(.91-N*.30,.86-N*.20,.75+N*.14);
+  gears.forEach(g=>g.rotation.y+=g.userData.sp*dt);
+
+  /* ---- the lantern sweeps; whatever it touches is found ---- */
+  shroudUni.uTime.value=t;
+  sweepReveal(dt,yaw);
+
+  /* ---- the seats climb out of the map ---- */
+  holds.forEach(h=>{
+    const u=h.userData;
+    if(!u.found)return;
+    const raw=u.rev;
+    u.parts.forEach(pt=>{
+      const local=THREE.MathUtils.clamp((raw-pt.delay)/(1-pt.delay),0,1);
+      const e=local*local*(3-2*local);
+      pt.grp.scale.y=Math.max(.0015,e);
+      pt.grp.position.y=pt.baseY;
+    });
+    u.dust.material.opacity=Math.sin(THREE.MathUtils.clamp(raw,0,1)*Math.PI)*.5;
+    u.dust.rotation.y=t*.12;
+    u.dust.scale.setScalar(1+raw*.5);
+
+    const lit=raw*N;
+    u.fire.material.opacity=lit*(.5+.28*Math.sin(t*3.1+u.flick));
+    u.fire.scale.setScalar(3.6*u.sc*(.93+.07*Math.sin(t*4.2+u.flick)));
+    if(u.beacon){
+      u.beacon.material.opacity=raw*(.35+N*.55)*(.85+.15*Math.sin(t*2.2));
+      u.beacon.scale.setScalar(4.6*u.sc*(.95+.09*Math.sin(t*1.7)));
+    }
+    /* ships ride the swell */
+    if(u.fleet)u.fleet.forEach((s,k)=>{
+      s.position.y=.06+Math.sin(t*1.25+k*2.1)*.055*u.sc;
+      s.rotation.z=Math.sin(t*1.05+k)*.055;
+    });
+    /* chimneys and craters keep smoking */
+    if(u.smoke)u.smoke.forEach(p=>{
+      const d=p.userData, pos=p.geometry.attributes.position.array;
+      for(let i=0;i<d.N;i++){
+        const f=((t*.22+i/d.N)%1);
+        pos[i*3+1]=d.base[i*3+1]+f*1.5*d.sc;
+        pos[i*3]  =d.base[i*3]  +Math.sin(t*.7+i)*.14*d.sc*f;
+        pos[i*3+2]=d.base[i*3+2]+Math.cos(t*.6+i)*.14*d.sc*f;
+      }
+      p.geometry.attributes.position.needsUpdate=true;
+      p.material.opacity=raw*.24;
+    });
+    /* fine masonry only within reading distance of the camera */
+    const dx=h.position.x-camera.position.x, dz=h.position.z-camera.position.z;
+    const near=(dx*dx+dz*dz)<(degraded?0:900);
+    if(near!==u.detailOn){u.detailOn=near;u.detail.forEach(o=>o.visible=near);}
+
+    /* whatever else this particular seat does */
+    if(u.anim)for(const fn of u.anim)fn(t,N,raw);
+  });
+
+  /* ---- firelight goes to whichever holds the eye is nearest ---- */
+  if(N>.04){
+    const lit=holds.filter(h=>h.userData.found);
+    lit.sort((a,b)=>a.position.distanceToSquared(camera.position)
+                   -b.position.distanceToSquared(camera.position));
+    HEARTH.forEach((l,i)=>{
+      const h=lit[i];
+      if(!h){l.intensity=0;return;}
+      const u=h.userData;
+      l.position.set(h.position.x,1.25*u.sc,h.position.z);
+      l.distance=16*u.sc;
+      l.intensity=N*u.rev*(2.4+.45*Math.sin(t*3.1+u.flick));
+    });
+  }else for(const l of HEARTH)l.intensity=0;
+
+  /* ---- banners take the wind; windows take the fire ---- */
+  banners.forEach(b=>{b.material.uniforms.uTime.value=t;});
+  const winLit=.28+N*.72;
+  windowLights.forEach(m=>{m.opacity=winLit*(.62+.38*Math.sin(t*2.6+m.id*.7))*.9;});
+
+  /* ---- dragons ---- */
+  const aloft=THREE.MathUtils.smoothstep(E.p,.24,.42);
+  dragons.forEach((d,i)=>{
+    const u=d.userData;
+    u.phase+=u.speed*dt;
+    const a=u.phase;
+    const R=u.radius+Math.sin(a*.7)*3.5;
+    const x=Math.cos(a)*R, z=Math.sin(a*1.07)*R;
+    const y=u.height+Math.sin(a*1.9)*2.2;
+    d.position.set(x,y,z);
+    const nx=Math.cos(a+.05)*R, nz=Math.sin((a+.05)*1.07)*R;
+    d.rotation.y=Math.atan2(-(nz-z),(nx-x));
+    d.rotation.z=Math.sin(a*1.9)*.24-.30;            /* bank into the turn */
+
+    /* wingbeat: a hard downstroke, a slower recovery, as a real wing beats */
+    const raw=Math.sin(t*2.0+u.phase*2);
+    const beat=Math.sign(raw)*Math.pow(Math.abs(raw),.72);
+    u.wings.forEach(w=>{
+      w.W.rotation.x=-beat*(.62+u.excite*.22)*w.side;   /* beats harder when roused */
+      w.W.rotation.y=beat*.10*w.side;
+      w.W.rotation.z=beat*.14;
+    });
+
+    /* ---- the beast turns its head to whoever is watching it ---- */
+    let attWant=0,yawWant=0,pitWant=0;
+    if(d.visible&&ptr.seen){
+      const s=dragonScreen(d);
+      if(s){
+        const sd=Math.hypot(ptr.x-s.x,ptr.y-s.y);
+        attWant=THREE.MathUtils.clamp(1-sd/(Math.min(innerWidth,innerHeight)*.62),0,1);
+        const T=pointerOnPlane(y);
+        if(T){
+          d.worldToLocal(_loc.copy(T));
+          yawWant=THREE.MathUtils.clamp(Math.atan2(_loc.z,Math.max(2,Math.abs(_loc.x))),-.7,.7);
+          pitWant=THREE.MathUtils.clamp(Math.atan2(_loc.y,Math.hypot(_loc.x,_loc.z)),-.45,.55);
+        }
+      }
+    }
+    u.att +=(attWant-u.att)*.06;
+    u.lookY+=(yawWant-u.lookY)*.08;
+    u.lookP+=(pitWant-u.lookP)*.08;
+    if(u.excite>0)u.excite=Math.max(0,u.excite-dt*.6);
+    const idleZ=Math.sin(t*.8+i)*.10-.05, idleY=Math.sin(t*.53+i*2)*.16;
+    u.neck.rotation.y=idleY*(1-u.att)+u.lookY*u.att;
+    u.neck.rotation.z=idleZ+u.lookP*u.att;
+    u.tailSegs.forEach((s,k)=>{
+      s.rotation.y=Math.sin(t*1.5+k*.55+i)*.13;
+      s.rotation.z=Math.sin(t*1.1+k*.42+i)*.06;
+    });
+    if(u.tailFlame){
+      u.tailFlame.material.opacity=.55+.30*Math.sin(t*7.3+i);
+      u.tailFlame.scale.setScalar(1.4+.35*Math.sin(t*5.1+i));
+    }
+    /* eyes kindle when the beast has fixed on you */
+    const eyeLit=Math.min(1,.72+.28*Math.sin(t*3.4+i)+u.att*.5+u.excite*.5);
+    u.eyes.forEach(e=>{e.material.opacity=eyeLit;e.scale.setScalar(.30*(1+u.att*.45+u.excite*.55));});
+
+    /* the breath — fire from the drakes, an ice blast from the pale one */
+    u.fireT-=dt;
+    if(u.fireT<=0&&N>.15){u.firing=1.55;u.fireT=7+Math.random()*10;}
+    /* lingering right on a dragon will sometimes provoke it */
+    else if(u.att>.72&&u.fireT>1.2&&N>.12&&Math.random()<dt*.35){u.firing=Math.max(u.firing,1.4);u.fireT=6+Math.random()*8;}
+    if(u.firing>0){
+      u.firing-=dt;
+      const f=Math.sin(THREE.MathUtils.clamp(u.firing/1.55,0,1)*Math.PI);
+      const flick=u.kind==='ice'?1:(.80+.20*Math.sin(t*34));   /* fire gutters, ice is steady */
+      u.jaw.rotation.z=-f*.60;                                  /* the jaw opens to breathe */
+      u.breath.material.opacity=f*(u.kind==='ice'?.50:.62)*flick;
+      u.breath.scale.set(1+f*.45,1+f*1.55,1+f*.45);
+      u.core.material.opacity=f*(u.kind==='ice'?.75:.62)*flick;
+      u.core.scale.set(1,1+f*1.35,1);
+      u.spark.material.opacity=f*.95;
+      u.spark.scale.setScalar((u.kind==='ice'?1.5:2.0)*(.8+f*.5));
+      u.motes.material.opacity=f*.85;
+      const mp=u.motes.geometry.attributes.position.array;
+      for(let k=0;k<mp.length/3;k++){
+        mp[k*3]+=dt*(u.kind==='ice'?5.5:7.5);
+        if(mp[k*3]>3.6){mp[k*3]=.9;mp[k*3+1]=(Math.random()-.5)*.35;mp[k*3+2]=(Math.random()-.5)*.35;}
+        const spread=(mp[k*3]-.9)*(u.kind==='ice'?.10:.16);
+        mp[k*3+1]+=(Math.random()-.5)*spread*dt*8;
+        mp[k*3+2]+=(Math.random()-.5)*spread*dt*8;
+      }
+      u.motes.geometry.attributes.position.needsUpdate=true;
+    }else{
+      u.jaw.rotation.z=0;
+      u.breath.material.opacity=0;u.core.material.opacity=0;
+      u.spark.material.opacity=0;u.motes.material.opacity=0;
+    }
+    d.visible=aloft>.02;
+    d.scale.setScalar((i===0?1.60:i===1?1.20:1.05)*aloft);
+  });
+  dragonsAloft=aloft>.35;      /* the beasts are fully in the sky and can be roused */
+
+  /* ---- pins follow their towers ---- */
+  camera.getWorldDirection(camFwd);
+  holds.forEach((h,i)=>{
+    const pin=pins[i];
+    if(!h.userData.found||h.userData.rev<.45){pin.style.display='none';return;}
+    proj.set(h.position.x,h.userData.labelY,h.position.z);
+    const toPt=proj.clone().sub(camera.position);
+    if(toPt.dot(camFwd)<0){pin.style.display='none';return;}
+    proj.project(camera);
+    const sx=(proj.x*.5+.5)*innerWidth, sy=(-proj.y*.5+.5)*innerHeight;
+    if(sx<-160||sx>innerWidth+160||sy<-80||sy>innerHeight+80){pin.style.display='none';return;}
+    pin.style.display='block';
+    pin.style.left=sx+'px';pin.style.top=sy+'px';
+    pin.style.opacity=Math.min(1,(h.userData.rev-.45)/.25);
+  });
+
+  renderer.render(scene,camera);
+  requestAnimationFrame(tick);
+}
+tick();
+let lastW=innerWidth;
+addEventListener('resize',()=>{
+  /* mobile address-bar show/hide fires height-only resizes constantly —
+     rebuilding the canvas for those janks every animation. Width change only. */
+  if(isMobile&&innerWidth===lastW)return;
+  lastW=innerWidth;
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);});
+
+/* =====================================================
+   PAGE MOTION + ROLL + FORM
+===================================================== */
+if(!reduce){
+  gsap.to('.hero .crest',{opacity:1,y:0,duration:1.1,ease:'power3.out',delay:.1});
+  gsap.to('.hero .over',{opacity:1,y:0,duration:.9,ease:'power3.out',delay:.25});
+  gsap.to('.hero h1 .line span',{y:0,duration:1.15,ease:'power4.out',stagger:.13,delay:.35});
+  gsap.to('.rule',{opacity:1,duration:1,ease:'power3.out',delay:.85});
+  gsap.to('.hero .lede',{opacity:1,y:0,duration:1,ease:'power3.out',delay:1});
+  gsap.to('.hero .base',{opacity:1,duration:1,ease:'power2.out',delay:1.2});
+}else{
+  gsap.set('.hero .crest,.hero .over,.rule,.hero .lede,.hero .base',{opacity:1,y:0});
+  gsap.set('.hero h1 .line span',{y:0});
+}
+document.querySelectorAll('.chapter .txt').forEach(el=>{
+  gsap.from(el,{opacity:0,y:reduce?0:60,duration:1.05,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 78%'}});
+  if(!reduce)gsap.to(el,{y:-40,ease:'none',
+    scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}});
+});
+gsap.from('.roll .head',{opacity:0,y:reduce?0:56,duration:1,ease:'power3.out',
+  scrollTrigger:{trigger:'.roll',start:'top 76%'}});
+gsap.from('#scrollWrap',{opacity:0,y:reduce?0:80,rotationX:reduce?0:7,transformPerspective:900,
+  duration:1.15,ease:'power3.out',scrollTrigger:{trigger:'.oath',start:'top 74%'}});
+gsap.from('.law',{opacity:0,y:reduce?0:52,duration:.9,stagger:.13,ease:'power3.out',
+  scrollTrigger:{trigger:'.laws',start:'top 82%'}});
+gsap.from('#footBig',{opacity:0,scale:reduce?1:.86,duration:1.3,ease:'power3.out',
+  scrollTrigger:{trigger:'footer',start:'top 80%'}});
+
+/* =====================================================
+   THE ROLL — one knight, one house. Enforced.
+   A person is identified by register number, email or
+   phone. If ANY of the three is already sworn to a
+   house, the roll refuses the whole company.
+   NOTE: this is the client-side guard. Put the same
+   check in your Apps Script (see checkRoll below) so it
+   cannot be sidestepped by clearing browser storage.
+===================================================== */
+const Roll=(()=>{
+  const KEY='axentia.mmxxvi.roll.v1';
+  let mem=null;                       /* fallback when storage is unavailable */
+  function read(){
+    if(mem)return mem;
+    try{const raw=localStorage.getItem(KEY);mem=raw?JSON.parse(raw):{};}
+    catch(e){mem={};}
+    return mem;
+  }
+  function write(){
+    try{localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){/* memory only */}
+  }
+  const norm={
+    reg:v=>String(v||'').toUpperCase().replace(/[^A-Z0-9]/g,''),
+    email:v=>String(v||'').trim().toLowerCase(),
+    phone:v=>String(v||'').replace(/\D/g,'').slice(-10)
+  };
+  function keys(p){
+    const k=[];
+    if(norm.reg(p.reg).length>3)k.push('reg:'+norm.reg(p.reg));
+    if(norm.email(p.email).includes('@'))k.push('mail:'+norm.email(p.email));
+    if(norm.phone(p.phone).length===10)k.push('tel:'+norm.phone(p.phone));
+    return k;
+  }
+  return {
+    keys,norm,
+    /* returns the existing record, or null */
+    find(p){
+      const db=read();
+      for(const k of keys(p))if(db[k])return db[k];
+      return null;
+    },
+    claim(people,house,code){
+      const db=read();
+      people.forEach(p=>{
+        const rec={house,code,name:p.name||'',reg:norm.reg(p.reg),at:Date.now()};
+        keys(p).forEach(k=>{db[k]=rec;});
+      });
+      write();
+    },
+    all(){return read();},
+    /* organisers: Roll.reset() in the console clears this device */
+    reset(){mem={};try{localStorage.removeItem(KEY);}catch(e){}return 'The roll is wiped on this device.';}
+  };
+})();
+window.Roll=Roll;
+
+/* Server-side twin. Point SHEET_ENDPOINT at an Apps Script that
+   returns {taken:[{name,house}]} for any already-sworn identity,
+   and this will refuse the company before it is written. */
+async function checkRoll(payload){
+  if(!SHEET_ENDPOINT)return {taken:[]};
+  try{
+    const r=await fetch(SHEET_ENDPOINT+'?check=1&t='+Date.now(),{
+      method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'check',people:payload.people})});
+    if(!r.ok)return {taken:[]};
+    return await r.json();
+  }catch(e){return {taken:[]};}     /* never block on a network hiccup */
+}
+
+/* --- the roll index ------------------------------------------- */
+const rows=document.getElementById('rows'),sel=document.getElementById('houseSelect');
+const RN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI'];
+HOUSES.forEach((H,i)=>{
+  const r=document.createElement('div');
+  r.className='rrow';r.style.setProperty('--rc',H.col);
+  r.innerHTML=`<div class="rs">${SIG[H.sig]}</div>
+    <div><div class="rh">${H.h}</div><div class="rd">${H.dom}</div></div>
+    <div class="rt">${H.seat} · ${H.t}</div>
+    <div class="rd">Company of ${H.team}</div>
+    <div class="rn">${RN[i]}</div>`;
+  r.addEventListener('click',()=>openHouse(i));
+  rows.appendChild(r);
+  const o=document.createElement('option');
+  o.value=`${H.h} — ${H.t}`;
+  o.textContent=`${H.h} · ${H.t} — ${H.dom} (Company of ${H.team})`;
+  o.dataset.team=H.team;sel.appendChild(o);
+});
+gsap.from('.rrow',{opacity:0,x:reduce?0:-26,duration:.6,stagger:.045,ease:'power3.out',
+  scrollTrigger:{trigger:'#rows',start:'top 84%'}});
+
+/* --- companions ----------------------------------------------- */
+const comps=document.getElementById('companions');
+function renderCompanions(n){
+  comps.innerHTML='';
+  if(n>1){
+    const note=document.createElement('p');note.className='comp-note';
+    note.textContent=`Your sworn company — name your ${n-1} companion${n>2?'s':''} (you ride first, as leader)`;
+    comps.appendChild(note);
+    for(let i=2;i<=n;i++){
+      const row=document.createElement('div');row.className='row trio';
+      row.innerHTML=`
+        <div class="field"><label>Companion ${i} · Name</label><input required name="m${i}_name" placeholder="Full name"></div>
+        <div class="field"><label>Companion ${i} · Register No.</label><input required name="m${i}_reg" data-guard="reg" placeholder="e.g. 25MBA1234"><span class="warn"></span></div>
+        <div class="field"><label>Companion ${i} · Phone</label><input required name="m${i}_phone" data-guard="phone" placeholder="10-digit mobile" inputmode="numeric" pattern="[0-9]{10}" title="10-digit mobile number"><span class="warn"></span></div>`;
+      comps.appendChild(row);
+      if(!reduce)gsap.from(row,{opacity:0,y:14,duration:.45,ease:'power3.out',delay:(i-2)*.06});
+    }
+    wireGuards();
+  }
+}
+sel.addEventListener('change',()=>{
+  const o=sel.selectedOptions[0];const n=+((o&&o.dataset.team)||1);
+  document.getElementById('sizeField').value=n>1?`${n} sworn`:'Rides alone';
+  renderCompanions(n);
+});
+
+/* --- live guard: warn the moment a sworn name is typed --------- */
+function wireGuards(){
+  document.querySelectorAll('#oathForm input[data-guard]').forEach(inp=>{
+    if(inp.dataset.wired)return;
+    inp.dataset.wired='1';
+    inp.addEventListener('blur',()=>{
+      const field=inp.closest('.field'),warn=field.querySelector('.warn');
+      const probe={};probe[inp.dataset.guard]=inp.value;
+      const hit=Roll.find(probe);
+      if(hit){
+        field.classList.add('bad');
+        warn.textContent=`Already sworn to ${hit.house.split(' — ')[0]}`;
+        warn.classList.add('on');
+      }else{
+        field.classList.remove('bad');warn.classList.remove('on');
+      }
+    });
+    inp.addEventListener('input',()=>{
+      const field=inp.closest('.field');
+      field.classList.remove('bad');
+      const w=field.querySelector('.warn');if(w)w.classList.remove('on');
+    });
+  });
+}
+wireGuards();
+
+/* --- search the roll ------------------------------------------ */
+document.getElementById('luBtn').addEventListener('click',()=>{
+  const v=document.getElementById('luInput').value.trim();
+  const out=document.getElementById('luOut');
+  if(!v){out.textContent='Give a register number, email or phone.';return;}
+  const hit=Roll.find({reg:v,email:v,phone:v});
+  out.innerHTML=hit
+    ? `${hit.name||'That name'} rides for <b>${hit.house}</b> — seal ${hit.code}. No second house may be claimed.`
+    : 'No such name upon the roll. That knight is free to ride.';
+});
+
+/* --- ravens ---------------------------------------------------- */
+const RAVEN=`<svg viewBox="0 0 40 40" fill="currentColor"><path d="M6 22c4-8 12-12 20-12 3 0 6 1 8 3-3 0-5 1-6 3 4 1 6 3 7 6-3-2-6-2-9-1 2 2 3 4 3 7-3-4-7-6-12-6-5 0-9 2-11 6-1-3-1-5 0-6Z"/></svg>`;
+function sendRavens(){
+  const box=document.getElementById('ravens');
+  box.innerHTML='';box.classList.add('fly');
+  for(let i=0;i<7;i++){
+    const r=document.createElement('i');
+    r.innerHTML=RAVEN;
+    r.style.left=(45+Math.random()*10)+'vw';
+    r.style.top=(52+Math.random()*8)+'vh';
+    r.style.setProperty('--rx',(Math.random()*2-1)*70+'vw');
+    r.style.setProperty('--ry',-(35+Math.random()*45)+'vh');
+    r.style.animationDelay=(i*.09)+'s';
+    box.appendChild(r);
+  }
+  setTimeout(()=>box.classList.remove('fly'),3200);
+}
+
+/* --- setting the seal ------------------------------------------ */
+const rejectBox=document.getElementById('reject');
+function refuse(list){
+  document.getElementById('rejectList').innerHTML=
+    list.map(x=>`<li><b>${x.who}</b> ${x.why}</li>`).join('');
+  rejectBox.classList.remove('show');void rejectBox.offsetWidth;
+  rejectBox.classList.add('show');
+  if(!reduce)gsap.fromTo('#scrollWrap',{x:-9},{x:0,duration:.6,ease:'elastic.out(1,.35)'});
+  rejectBox.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+document.getElementById('oathForm').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const form=ev.target,d=new FormData(form);
+  const o=sel.selectedOptions[0];const n=+((o&&o.dataset.team)||1);
+  const house=d.get('event');
+
+  const leader={name:d.get('name'),reg:d.get('reg'),email:d.get('email'),
+                phone:d.get('phone'),section:d.get('section')};
+  const members=[];
+  for(let i=2;i<=n;i++)members.push({name:d.get(`m${i}_name`)||'',
+    reg:d.get(`m${i}_reg`)||'',phone:d.get(`m${i}_phone`)||''});
+  const people=[leader,...members];
+
+  /* 1 — nobody may appear twice inside one company */
+  const problems=[],seen=new Map();
+  people.forEach(p=>{
+    Roll.keys(p).forEach(k=>{
+      if(seen.has(k)&&seen.get(k)!==p.name){
+        problems.push({who:p.name||'A companion',
+          why:`is entered twice in this company (same ${k.split(':')[0]==='reg'?'register number':k.split(':')[0]==='tel'?'phone':'email'} as ${seen.get(k)}).`});
+      }
+      seen.set(k,p.name||'a companion');
+    });
+  });
+
+  /* 2 — nobody may already be sworn elsewhere */
+  people.forEach(p=>{
+    const hit=Roll.find(p);
+    if(hit){
+      problems.push({who:p.name||hit.name||'A companion',
+        why:hit.house===house
+          ? `is already on the roll for ${hit.house} — seal ${hit.code}. One entry per knight.`
+          : `already rides for ${hit.house} (seal ${hit.code}). A knight may ride under one house only.`});
+    }
+  });
+  if(problems.length){refuse(problems);return;}
+
+  const code='AX26-'+Math.floor(1000+Math.random()*9000);
+  const payload={code,mission:house,teamSize:n,leader,members,people};
+
+  const btn=form.querySelector('button[type="submit"]'),label=btn.textContent;
+  btn.disabled=true;btn.textContent='Sending the raven…';
+
+  /* 3 — the server has the last word */
+  const server=await checkRoll(payload);
+  if(server&&server.taken&&server.taken.length){
+    btn.disabled=false;btn.textContent=label;
+    refuse(server.taken.map(t=>({who:t.name,why:`already rides for ${t.house}.`})));
+    return;
+  }
+
+  if(SHEET_ENDPOINT){
+    try{await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});}
+    catch(err){btn.disabled=false;btn.textContent=label;
+      alert('The raven did not arrive — check your connection and set the seal again.');return;}
+  }
+
+  Roll.claim(people,house,code);
+  rejectBox.classList.remove('show');
+
+  const crew=members.map(m=>m.name).filter(Boolean);
+  const who=crew.length?`${leader.name}, sworn with ${crew.join(', ')},`:`${leader.name},`;
+  document.getElementById('sealedMsg').textContent=
+    `${who} you ride for ${house}. Every name here is now bound to this house alone — no second banner may be claimed.`;
+  document.getElementById('sealedCode').textContent='SEAL · '+code;
+  document.getElementById('formView').style.display='none';
+  const s=document.getElementById('sealedView');s.classList.add('show');
+  if(!reduce)sendRavens();
+  gsap.from(s,{opacity:0,scale:.92,duration:.8,ease:'back.out(1.6)'});
+  gsap.fromTo(s.querySelector('.wax'),{scale:2.4,rotate:-24,opacity:0},
+    {scale:1,rotate:0,opacity:1,duration:.7,ease:'back.out(2.2)',delay:.25});
+});
+</script>
+</body>
+</html>
