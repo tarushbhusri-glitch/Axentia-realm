@@ -218,8 +218,9 @@ footer{border-top:1px solid var(--line);padding:12vh 4vw 6vh;text-align:center;o
 footer .big{font-family:'Cinzel';font-weight:900;font-size:clamp(36px,9.5vw,150px);text-transform:uppercase;
   line-height:.96;background:linear-gradient(180deg,var(--bone) 16%,rgba(138,17,22,.14));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:transform}
-footer .cols{margin-top:6vh;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;
-  font-size:16px;color:var(--mist);line-height:1.95;text-align:left}
+footer .cols{margin-top:6vh;display:flex;justify-content:center;align-items:flex-start;
+  gap:64px;flex-wrap:wrap;font-size:15px;color:var(--mist);line-height:1.95;text-align:left}
+footer .cols>div{flex:0 1 250px;max-width:280px}
 footer .cols b{color:var(--bone);font-family:'Cinzel';font-size:10px;letter-spacing:.26em;
   text-transform:uppercase;display:block;margin-bottom:10px}
 footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);letter-spacing:.28em;text-transform:uppercase}
@@ -284,6 +285,8 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
 .helm .rose{color:var(--gold);font-size:15px;opacity:.55}
 .helm .turn{display:flex;align-items:center;gap:7px;font-family:'Cinzel';font-size:8px;
   letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+.helm .helphint{font-family:'Cinzel';font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mist);opacity:.55;text-align:center;max-width:110px;line-height:1.5}
 @media(max-width:620px){.helm{right:2vw;bottom:15vh}}
 
 /* a hold, newly found, announces itself */
@@ -377,6 +380,12 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
       <span>Turn</span>
       <button data-turn="1" aria-label="turn right">&#8631;</button>
     </div>
+    <div class="turn">
+      <button data-tilt="-1" aria-label="tilt up">&#8679;</button>
+      <span>Tilt</span>
+      <button data-tilt="1" aria-label="tilt down">&#8681;</button>
+    </div>
+    <div class="helphint">Drag to pan &middot; two fingers or Shift+drag to rotate</div>
   </div>
 </div>
 <div class="ravens" id="ravens"></div>
@@ -544,7 +553,7 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
       <li><b>Days of Trial:</b> 06–07 August 2026</li>
       <li><b>Seat of the Court:</b> Bangalore Central Campus</li>
       <li><b>Roll closes:</b> 03 August, 23:59 IST</li>
-      <li><b>Faculty Coordinator:</b> Dr. Arun T C</li>
+      <li><b>Faculty Coordinator:</b> Dr. Arun T C &amp; Dr. Joseph D Selvam</li>
     </ul>
   </div>
 </section>
@@ -552,9 +561,9 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
 <footer>
   <div class="big" id="footBig">Take the Field</div>
   <div class="cols">
-    <div><b>Student Coordinator</b>Tarush Bhusri · 99714 60425</div>
     <div><b>The Fest</b>Axentia MMXXVI · The Realm Divided<br>Sixteen Banners, One Throne<br>Intra-Collegiate Management Fest</div>
     <div><b>Presented By</b>School of Business &amp; Management<br>MBA Programme<br>CHRIST (Deemed to be University)</div>
+    <div><b>Website Support</b>For concerns with the registration website:<br>Tarush Bhusri · Section F4<br>Pavithra · Section F8</div>
   </div>
   <div class="fine">The sigil is what they see · The words are what you are</div>
 </footer>
@@ -695,7 +704,7 @@ const HOUSES=[
  words:"Bend for the realm. Never for the court.",
  desc:"An expedition through the economics of a kingdom. Chase clues, argue policy before a hostile bench, and defend reform proposals to a panel that presses every assumption. Where the trade-off falls between growth, equity and the crown's next crisis is what you must own — with both the crown and the coin in the balance."},
 {h:"House Dayne",seat:"Starfall",t:"The Sword of the Morning",sig:"sword",col:"#B9C6E2",
- dom:"Case Study",team:1,pos:[-13,2],trig:.55,
+ dom:"Case Study",team:2,pos:[-13,2],trig:.55,
  words:"One stroke, made in the right dawn, ends the war.",
  desc:"A crisis is laid before you and the court waits on a single judgement. Read the case, weigh the counsel, and commit while committing still matters — through real problems, hostile questions, and a decision you must defend aloud. Starfall raises swordsmen who win with one clean stroke rather than a hundred wild ones: you are judged on whether the realm is still standing when you lower the blade."},
 {h:"House Manderly",seat:"White Harbour",t:"The Merman's Court",sig:"merman",col:"#4FA3B8",
@@ -2745,6 +2754,14 @@ helm.querySelectorAll('[data-turn]').forEach(b=>{
   const s=+b.dataset.turn;
   b.addEventListener('pointerdown',ev=>{ev.stopPropagation();if(!reins)takeReins();
     helmGo(()=>{userYaw+=s*.035;});});
+  b.addEventListener('pointerup',stopHelm);
+  b.addEventListener('pointerleave',stopHelm);
+  b.addEventListener('pointercancel',stopHelm);
+});
+helm.querySelectorAll('[data-tilt]').forEach(b=>{
+  const s=+b.dataset.tilt;
+  b.addEventListener('pointerdown',ev=>{ev.stopPropagation();if(!reins)takeReins();
+    helmGo(()=>{userPitch=THREE.MathUtils.clamp(userPitch+s*.028,-.35,.45);});});
   b.addEventListener('pointerup',stopHelm);
   b.addEventListener('pointerleave',stopHelm);
   b.addEventListener('pointercancel',stopHelm);
