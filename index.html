@@ -343,6 +343,72 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
 @media(prefers-reduced-motion:reduce){.hero .cue::after{animation:none}
 .pin.fresh .flag,.pin.fresh .dot,#reins::after{animation:none}
 .ravens{display:none!important}}
+
+/* ══════════════════════════════════════════════════════════════════
+   THE BARRED HOUSES — capacity, ruin, and the closing of a roll
+   ════════════════════════════════════════════════════════════════ */
+
+/* a fallen hold's pin: the banner goes to ash */
+.pin.fallen .flag{background:rgba(10,6,7,.94);border-color:var(--blood);
+  filter:grayscale(.55)}
+.pin.fallen .dot{background:var(--blood);clip-path:polygon(50% 30%,68% 0,62% 42%,100% 50%,62% 58%,68% 100%,50% 70%,32% 100%,38% 58%,0 50%,38% 42%,32% 0)}
+.pin.fallen .nm{color:#C89A9A;text-decoration:line-through;text-decoration-color:var(--blood)}
+.pin.fallen .sm{color:var(--blood-lt)}
+.pin.fallen .stalk{background:linear-gradient(var(--blood),transparent)}
+.pin.fallen:hover .flag{background:var(--blood);transform:translateY(-1px) scale(1.03)}
+.pin.fallen:hover .nm,.pin.fallen:hover .sm{color:#0B0D11}
+
+/* capacity tally on the roll index */
+.cap{display:block;margin-top:5px;font-family:'Cinzel';font-size:9px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ash)}
+.cap.near{color:var(--amber)}
+.cap.barred{color:var(--blood-lt);font-weight:700}
+.rrow.full{opacity:.62}
+.rrow.full .rh{text-decoration:line-through;text-decoration-color:var(--blood);
+  text-decoration-thickness:1px}
+.rrow.full:hover{background:rgba(138,17,22,.07)}
+.rrow.full .rs{filter:grayscale(.7);opacity:.6}
+
+/* the drawer, when the gates are shut */
+#drawer .dcap{margin-top:14px;font-family:'Cinzel';font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mist)}
+#drawer .dcap b{color:var(--gold)}
+#drawer .dcap.barred b{color:var(--blood-lt)}
+#drawer .ride[disabled]{background:transparent;border-color:var(--blood);
+  color:var(--blood-lt);cursor:not-allowed}
+#drawer .ride[disabled]:hover{background:transparent;border-color:var(--blood)}
+
+/* ── the herald that announces a closed roll ── */
+#doomBox{position:fixed;inset:0;z-index:95;display:none;align-items:center;
+  justify-content:center;padding:6vw;background:rgba(4,5,8,.86);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+#doomBox.show{display:flex}
+#doomBox .panel{position:relative;max-width:560px;width:100%;text-align:center;
+  padding:clamp(30px,5vw,52px);color:var(--bone);
+  background:linear-gradient(178deg,rgba(20,12,13,.98),rgba(9,7,9,.98));
+  border:1px solid var(--blood);box-shadow:0 40px 120px -30px #000;
+  clip-path:polygon(0 14px,14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px))}
+#doomBox.show .panel{animation:doomIn .5s cubic-bezier(.2,.9,.3,1) both}
+@keyframes doomIn{from{opacity:0;transform:scale(.92) translateY(14px)}
+  to{opacity:1;transform:none}}
+#doomBox .sig{width:72px;height:72px;margin:0 auto 18px;color:var(--blood-lt);opacity:.9}
+#doomBox .over{font-family:'Cinzel';font-size:9.5px;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--ash);margin-bottom:14px}
+#doomBox h3{font-family:'Cinzel';font-weight:900;font-size:clamp(22px,4.6vw,38px);
+  text-transform:uppercase;line-height:1.08;color:var(--bone)}
+#doomBox .hs{margin-top:12px;font-style:italic;font-size:19px;color:var(--amber)}
+#doomBox .why{margin-top:20px;font-size:17px;line-height:1.72;color:var(--mist)}
+#doomBox .tallyline{margin-top:22px;display:inline-block;font-family:'Cinzel';
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--blood-lt);
+  border:1px solid rgba(138,17,22,.5);padding:9px 18px;font-weight:700}
+#doomBox .acts{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#doomBox button{font-family:'Cinzel';font-weight:700;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;padding:14px 26px;cursor:pointer;transition:.28s}
+#doomBox .go{background:var(--blood);border:1px solid var(--blood);color:var(--bone)}
+#doomBox .go:hover{background:var(--blood-lt);border-color:var(--blood-lt)}
+#doomBox .dismiss{background:none;border:1px solid var(--line);color:var(--mist)}
+#doomBox .dismiss:hover{color:var(--bone);border-color:var(--gold)}
+@media(prefers-reduced-motion:reduce){#doomBox.show .panel{animation:none}}
 </style>
 </head>
 <body>
@@ -389,6 +455,22 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
   </div>
 </div>
 <div class="ravens" id="ravens"></div>
+
+<!-- the herald that rides out when a roll is closed -->
+<div id="doomBox">
+  <div class="panel">
+    <div class="sig" id="doomSig"></div>
+    <div class="over">A raven from the maester</div>
+    <h3 id="doomTitle">The Gates Are Barred</h3>
+    <div class="hs" id="doomSeat"></div>
+    <p class="why" id="doomWhy"></p>
+    <div class="tallyline" id="doomTally"></div>
+    <div class="acts">
+      <button class="go" id="doomGo">Seek another banner</button>
+      <button class="dismiss" id="doomX">Close</button>
+    </div>
+  </div>
+</div>
 
 <aside id="drawer">
   <button class="x" id="drawerX">×</button>
@@ -587,6 +669,37 @@ const isMobile=matchMedia('(pointer:coarse)').matches||innerWidth<820;
    this name throws and kills the whole script (map, form, everything).
 ──────────────────────────────────────────────────────────────────────── */
 const SHEET_ENDPOINT='https://script.google.com/macros/s/AKfycbzlH33SlNMiPGNzXMfzf9icZ0RLi_FUCgHNtg3JgKZZVAQP6DNPYcPp6sM-2BKglxPN/exec';
+
+/* ══════════════════════════════════════════════════════════════════
+   HOW MANY COMPANIES EACH HOUSE MAY TAKE
+   Edit the numbers. They are the count of COMPANIES (teams), not
+   people — a company of 3 counts as one. When a house reaches its
+   number the seat is thrown down on the map and its roll is closed.
+   Set a house to 0 to bar it from the start; set it very high to
+   leave it effectively open.
+   ════════════════════════════════════════════════════════════════ */
+const DEFAULT_CAP=10;
+const CAPS={
+  'House Stark'     :10,   /*  1 · Business Analytics    */
+  'House Baratheon' :15,   /*  2 · Best Management Team  */
+  'House Lannister' :15,   /*  3 · Finance               */
+  'House Martell'   : 8,   /*  4 · Economics             */
+  'House Mormont'   : 9,   /*  5 · Sustainability Event  */
+  'House Tarly'     :20,   /*  6 · Business Quiz         */
+  'House Greyjoy'   :10,   /*  7 · Lean Operation        */
+  'House Hightower' :10,   /*  8 · Digital Marketing     */
+  'House Tyrell'    :10,   /*  9 · Human Resource        */
+  'House Blackwood' :10,   /* 10 · Strategy              */
+  'House Targaryen' :27,   /* 11 · Best Manager          */
+  'House Reed'      :10,   /* 12 · Consulting            */
+  'House Manderly'  :15,   /* 13 · Marketing             */
+  'House Velaryon'  :10,   /* 14 · International Business*/
+  'House Arryn'     :10,   /* 15 · B Plan                */
+  'House Dayne'     :10    /* 16 · Case Study            */
+};
+/* transient camera shake, fed by the blasts. Declared here so the
+   render loop can read it long before any house has fallen. */
+const SHAKE={v:0};
 
 /* =====================================================
    HOUSE DATA — sigil, colours, castle spec, charge
@@ -2838,6 +2951,7 @@ document.getElementById('drawerX').onclick=()=>drawer.classList.remove('open');
 
 function openHouse(i){
   const H=HOUSES[i];
+  const _cap=capOf(H),_used=capUsed(HKEY(H)),_full=_used>=_cap,_left=Math.max(0,_cap-_used);
   reveal(holds[i]);          /* the Roll is a plain index — it finds the hold too */
   drawer.style.setProperty('--dCol',H.col);
   dBody.innerHTML=`
@@ -2848,8 +2962,13 @@ function openHouse(i){
     <div class="dw">${H.words}</div>
     <p class="dp">${H.desc}</p>
     <div class="dm">Company of ${H.team}${H.team>1?' · leader seals the roll':' · rides alone'}</div>
-    <button class="ride" data-i="${i}">Ride for ${H.h}</button>`;
+    <div class="dcap${_full?' barred':''}">${_full
+      ? 'Gates barred · <b>this roll is closed</b>'
+      : `<b>${roman(_left)}</b> of ${roman(_cap)} places remain`}</div>
+    <button class="ride" data-i="${i}"${_full?' disabled':''}>${
+      _full?'The gates are barred':'Ride for '+H.h}</button>`;
   dBody.querySelector('.ride').onclick=()=>{
+    if(_full){showDoom(i);return;}
     const sel=document.getElementById('houseSelect');
     sel.value=`${H.h} — ${H.t}`;
     sel.dispatchEvent(new Event('change'));
@@ -2941,6 +3060,14 @@ function tick(){
     camE.fy+Math.sin(pitch)*camE.dist,
     camE.fz+Math.cos(pitch)*Math.cos(yaw)*camE.dist);
   camera.lookAt(camE.fx,camE.fy+1.5,camE.fz);
+  /* a seat thrown down shakes the table */
+  if(SHAKE.v>.0005){
+    SHAKE.v*=Math.exp(-dt*3.4);
+    const s=SHAKE.v;
+    camera.position.x+=(Math.random()-.5)*s;
+    camera.position.y+=(Math.random()-.5)*s;
+    camera.position.z+=(Math.random()-.5)*s;
+  }else SHAKE.v=0;
 
   /* day → night */
   amb.intensity=.34-N*.14;
@@ -3011,6 +3138,59 @@ function tick(){
     const dx=h.position.x-camera.position.x, dz=h.position.z-camera.position.z;
     const near=(dx*dx+dz*dz)<(degraded?0:900);
     if(near!==u.detailOn){u.detailOn=near;u.detail.forEach(o=>o.visible=near);}
+
+    /* ── a barred house is thrown down ── */
+    if(u.doom>0){
+      const D=u.doom;
+      /* the towers buckle, lean, and settle into rubble */
+      u.parts.forEach((pt,k)=>{
+        const bias=((k*7)%10)/10;
+        pt.grp.scale.y*=Math.max(.05,1-D*(.55+.40*bias));
+        pt.grp.rotation.z=D*(k%2?1:-1)*(.10+.16*bias);
+        pt.grp.rotation.x=D*(k%3?-1:1)*(.06+.10*bias);
+      });
+      u.fire.material.opacity*=(1-D*.85);          /* the hearth gutters out */
+      if(u.beacon)u.beacon.material.opacity*=(1-D); /* the beacon dies */
+      if(u.dust)u.dust.material.opacity=Math.max(u.dust.material.opacity,D*.30);
+
+      const B=u.blast;
+      if(B){
+        B.age+=dt;
+        const a=B.age;
+        /* the fireball */
+        const fb=THREE.MathUtils.clamp(a/.62,0,1);
+        B.ball.material.opacity=Math.max(0,(1-fb)*(1-fb))*.95;
+        B.ball.scale.setScalar(u.sc*(2.2+fb*11));
+        /* the shockwave across the ground */
+        const rw=THREE.MathUtils.clamp(a/1.15,0,1);
+        B.ring.scale.setScalar(.4+rw*13*u.sc);
+        B.ring.material.opacity=Math.max(0,1-rw)*.55;
+        /* the flash */
+        B.light.intensity=Math.max(0,1-a/.85)*26;
+        /* debris thrown clear, then falling */
+        if(B.debris){
+          const pos=B.debris.geometry.attributes.position.array, v=B.debris.vel;
+          for(let q=0;q<pos.length;q+=3){
+            v[q+1]-=9.4*dt;                         /* gravity */
+            pos[q]  +=v[q]  *dt;
+            pos[q+1]+=v[q+1]*dt;
+            pos[q+2]+=v[q+2]*dt;
+            if(pos[q+1]<.05){pos[q+1]=.05;v[q]*=.36;v[q+1]*=-.22;v[q+2]*=.36;}
+          }
+          B.debris.geometry.attributes.position.needsUpdate=true;
+          B.debris.material.opacity=Math.max(0,1-a/3.1)*.85;
+        }
+        /* embers keep smouldering in the wreck */
+        B.ember.material.opacity=(.16+.12*Math.sin(t*3.7+u.flick))*Math.min(1,a/1.4)*(.35+N*.65);
+        B.ember.scale.setScalar(u.sc*(2.5+.35*Math.sin(t*2.3+u.flick)));
+        if(a>3.4&&B.debris){                        /* tidy up the transient bits */
+          h.remove(B.debris,B.ball,B.ring,B.light);
+          B.debris.geometry.dispose();B.debris.material.dispose();
+          B.ball.material.dispose();B.ring.geometry.dispose();B.ring.material.dispose();
+          B.debris=null;
+        }
+      }
+    }
 
     /* whatever else this particular seat does */
     if(u.anim)for(const fn of u.anim)fn(t,N,raw);
@@ -3243,6 +3423,176 @@ const Roll=(()=>{
 })();
 window.Roll=Roll;
 
+/* ══════════════════════════════════════════════════════════════════
+   THE CLOSING OF A ROLL
+   A house is full when the number of distinct seals sworn to it
+   reaches its cap. Every member of a company carries the same seal
+   code, so counting DISTINCT codes per house counts COMPANIES.
+   This reads the existing roll store and writes nothing new to it.
+   ════════════════════════════════════════════════════════════════ */
+
+/* the exact string the select and the roll store use for a house */
+function HKEY(H){return `${H.h} — ${H.t}`;}
+function capOf(H){const c=CAPS[H.h];return (typeof c==='number')?c:DEFAULT_CAP;}
+function houseIndexByKey(key){
+  for(let i=0;i<HOUSES.length;i++)if(HKEY(HOUSES[i])===key)return i;
+  return -1;
+}
+/* small roman for the herald; falls back to digits past 39 */
+function roman(n){
+  if(n<0||n>39||n!==Math.floor(n))return String(n);
+  if(n===0)return 'None';
+  const M=[[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  let out='';for(const[v,s]of M){while(n>=v){out+=s;n-=v;}}
+  return out;
+}
+/* {houseKey: companiesSworn} — distinct seal codes per house */
+function capTally(){
+  const db=Roll.all(),seen=Object.create(null),out=Object.create(null);
+  for(const k in db){
+    const r=db[k];
+    if(!r||!r.house||!r.code)continue;
+    const id=r.house+'\u0000'+r.code;
+    if(seen[id])continue;
+    seen[id]=1;
+    out[r.house]=(out[r.house]||0)+1;
+  }
+  return out;
+}
+function capUsed(houseKey,tal){return (tal||capTally())[houseKey]||0;}
+function capIsFull(houseKey,tal){
+  const i=houseIndexByKey(houseKey);
+  if(i<0)return false;
+  return capUsed(houseKey,tal)>=capOf(HOUSES[i]);
+}
+
+/* what the maester's raven actually says, house by house */
+const FALL={
+ 'House Stark'    :'The gates of Winterfell are shut and the snow has already covered the road behind them.',
+ 'House Mormont'  :'Bear Island takes no further oaths. The hall is full, the hearth is crowded, and here we stand.',
+ 'House Greyjoy'  :'Every oar on Pyke is manned. What is dead may never die — but this roll is closed.',
+ 'House Lannister':'The vault is sealed. Casterly Rock has paid its last debt and will take on no more.',
+ 'House Blackwood':'The ravens have flown. The old tree keeps no further names beneath its branches.',
+ 'House Arryn'    :'The Bloody Gate is barred. None may climb to the Eyrie today, however high their honour.',
+ 'House Baratheon':'Storm\u2019s End has weathered its last company. Ours is the Fury — and the fury is spent.',
+ 'House Targaryen':'The dragon has chosen its riders. Fire and Blood, and no more of either.',
+ 'House Velaryon' :'Every ship at Driftmark has sailed. The tide kept no berth for another.',
+ 'House Tyrell'   :'Highgarden\u2019s roses are all cut. Growing Strong — and grown full.',
+ 'House Hightower':'The beacon burns only for those already within. Oldtown lights no further path.',
+ 'House Tarly'    :'The hunt has ridden out from Horn Hill. First in Battle, and the field is taken.',
+ 'House Martell'  :'Sunspear is closed to new spears. Unbowed, Unbent, Unbroken — and unavailable.',
+ 'House Dayne'    :'The Sword of the Morning is sheathed. Starfall\u2019s dawn has already broken.',
+ 'House Manderly' :'The Merman\u2019s Court is seated and the feast begun. No further place will be laid.',
+ 'House Reed'     :'Greywater Watch has moved on in the night. The crannogmen keep no room for more.'
+};
+
+/* ── throw the seat down ─────────────────────────────────────────── */
+function doomHold(i,animate){
+  const h=holds[i];if(!h)return;
+  const u=h.userData;
+  if(u.doomed)return;
+  u.doomed=true;
+  if(pins[i])pins[i].classList.add('fallen');
+
+  /* the smouldering wreck stays for good */
+  const ember=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW_R,transparent:true,
+    opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,color:0xFF7A32}));
+  ember.scale.setScalar(u.sc*2.5);ember.position.y=.55*u.sc;h.add(ember);
+
+  if(!animate||reduce){                       /* already-full on arrival: no blast */
+    u.doom=1;u.blast={age:9,ember,
+      ball:{material:{opacity:0},scale:{setScalar(){}}},
+      ring:{scale:{setScalar(){}},material:{opacity:0}},
+      light:{intensity:0},debris:null};
+    return;
+  }
+
+  /* the fireball */
+  const ball=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW_R,transparent:true,
+    opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,color:0xFFD07A}));
+  ball.position.y=1.0*u.sc;h.add(ball);
+  /* the shockwave */
+  const ring=new THREE.Mesh(new THREE.RingGeometry(.82,1,40),
+    new THREE.MeshBasicMaterial({color:0xFFB169,transparent:true,opacity:0,
+      side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+  ring.rotation.x=-Math.PI/2;ring.position.y=.14;h.add(ring);
+  /* the flash */
+  const light=new THREE.PointLight(0xFF9A40,0,40*u.sc,1.7);
+  light.position.y=1.1*u.sc;h.add(light);
+  /* the stones themselves, thrown clear */
+  const DN=isMobile?40:110;
+  const dp=new Float32Array(DN*3),vel=new Float32Array(DN*3);
+  for(let q=0;q<DN;q++){
+    const a=Math.random()*Math.PI*2,rr=Math.random()*.7*u.sc;
+    dp[q*3]=Math.cos(a)*rr;dp[q*3+1]=.3*u.sc+Math.random()*1.7*u.sc;dp[q*3+2]=Math.sin(a)*rr;
+    const sp=3.2+Math.random()*7.4;
+    vel[q*3]=Math.cos(a)*sp;vel[q*3+1]=2.6+Math.random()*8.2;vel[q*3+2]=Math.sin(a)*sp;
+  }
+  const dg=new THREE.BufferGeometry();
+  dg.setAttribute('position',new THREE.BufferAttribute(dp,3));
+  const debris=new THREE.Points(dg,new THREE.PointsMaterial({color:0xC2AE8C,
+    size:.20*u.sc,transparent:true,opacity:.85,depthWrite:false}));
+  debris.vel=vel;h.add(debris);
+
+  u.blast={age:0,ball,ring,light,debris,ember};
+  u.doom=0;
+  gsap.to(u,{doom:1,duration:1.35,ease:'power2.in'});
+  SHAKE.v=Math.max(SHAKE.v,2.6);
+  if(navigator.vibrate)navigator.vibrate([28,50,90]);
+}
+
+/* ── the herald ──────────────────────────────────────────────────── */
+const doomBox=document.getElementById('doomBox');
+function showDoom(i){
+  const H=HOUSES[i];if(!H)return;
+  const used=capUsed(HKEY(H)),cap=capOf(H);
+  document.getElementById('doomSig').innerHTML=SIG[H.sig]||'';
+  document.getElementById('doomTitle').textContent=
+    cap===0?'This Banner Rides Not':'The Gates Are Barred';
+  document.getElementById('doomSeat').textContent=`${H.h} · ${H.seat}`;
+  document.getElementById('doomWhy').textContent=
+    (FALL[H.h]||'This house will take no further oaths.')+
+    ` The roll for ${H.dom} is closed. Fifteen other banners still fly — choose one, and ride.`;
+  document.getElementById('doomTally').textContent=
+    `${roman(used)} of ${roman(cap)} companies sworn · roll closed`;
+  doomBox.classList.add('show');
+}
+document.getElementById('doomX').onclick=()=>doomBox.classList.remove('show');
+document.getElementById('doomGo').onclick=()=>{
+  doomBox.classList.remove('show');
+  document.getElementById('roll').scrollIntoView({behavior:'smooth'});
+};
+doomBox.addEventListener('click',e=>{if(e.target===doomBox)doomBox.classList.remove('show');});
+addEventListener('keydown',e=>{if(e.key==='Escape')doomBox.classList.remove('show');});
+
+/* ── keep every surface honest about who is still taking oaths ──── */
+function refreshCaps(animateNew){
+  const tal=capTally();
+  HOUSES.forEach((H,i)=>{
+    const key=HKEY(H),cap=capOf(H),used=capUsed(key,tal),full=used>=cap;
+    const left=Math.max(0,cap-used);
+
+    /* the roll index */
+    const badge=document.querySelector(`.cap[data-cap="${i}"]`);
+    if(badge){
+      badge.textContent=full?'Gates barred · roll closed'
+        :`${roman(used)} of ${roman(cap)} sworn · ${roman(left)} left`;
+      badge.className='cap'+(full?' barred':(left<=2?' near':''));
+      const row=badge.closest('.rrow');
+      if(row)row.classList.toggle('full',full);
+    }
+    /* the dropdown */
+    const opt=sel.options[i+1];
+    if(opt&&opt.value===key){
+      if(!opt.dataset.base)opt.dataset.base=opt.textContent;
+      opt.disabled=full;
+      opt.textContent=full?opt.dataset.base+' — GATES BARRED':opt.dataset.base;
+    }
+    /* the map */
+    if(full)doomHold(i,!!animateNew);
+  });
+}
+
 /* Server-side twin. Point SHEET_ENDPOINT at an Apps Script that
    returns {taken:[{name,house}]} for any already-sworn identity,
    and this will refuse the company before it is written. */
@@ -3266,7 +3616,7 @@ HOUSES.forEach((H,i)=>{
   r.innerHTML=`<div class="rs">${SIG[H.sig]}</div>
     <div><div class="rh">${H.h}</div><div class="rd">${H.dom}</div></div>
     <div class="rt">${H.seat} · ${H.t}</div>
-    <div class="rd">Company of ${H.team}</div>
+    <div class="rd">Company of ${H.team}<span class="cap" data-cap="${i}"></span></div>
     <div class="rn">${RN[i]}</div>`;
   r.addEventListener('click',()=>openHouse(i));
   rows.appendChild(r);
@@ -3407,6 +3757,14 @@ document.getElementById('oathForm').addEventListener('submit',async ev=>{
   });
   if(problems.length){refuse(problems);return;}
 
+  /* 2b — a barred house takes no further companies */
+  if(capIsFull(house)){
+    const hi=houseIndexByKey(house);
+    refreshCaps(true);
+    if(hi>=0)showDoom(hi);
+    return;
+  }
+
   const code='AX26-'+Math.floor(1000+Math.random()*9000);
   const payload={code,mission:house,teamSize:n,leader,members,people};
 
@@ -3429,6 +3787,7 @@ document.getElementById('oathForm').addEventListener('submit',async ev=>{
   }
 
   Roll.claim(people,house,code);
+  refreshCaps(true);          /* this company may have been the last one */
   rejectBox.classList.remove('show');
 
   const crew=members.map(m=>m.name).filter(Boolean);
@@ -3443,6 +3802,13 @@ document.getElementById('oathForm').addEventListener('submit',async ev=>{
   gsap.fromTo(s.querySelector('.wax'),{scale:2.4,rotate:-24,opacity:0},
     {scale:1,rotate:0,opacity:1,duration:.7,ease:'back.out(2.2)',delay:.25});
 });
+
+/* ── first reckoning: mark every roll that is already closed ──────
+   `false` means houses that were already full when the page loaded
+   are shown as ruins from the outset, with no blast. Only a house
+   that fills DURING this visit gets thrown down in front of you. */
+refreshCaps(false);
+/* organisers: Roll.reset() then reload to reopen every roll on this device */
 </script>
 </body>
 </html>
