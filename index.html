@@ -7,6 +7,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<!-- ╔════════════════════════════════════════════════════════════════════════╗
+     ║                    GOOGLE SHEETS INTEGRATION                          ║
+     ║  Configure your deployment URL below (get from Google Apps Script)   ║
+     ╚════════════════════════════════════════════════════════════════════════╝ -->
+
+<script>
+  /**
+   * GOOGLE SHEETS INTEGRATION CONFIGURATION
+   * 
+   * INSTRUCTIONS:
+   * 1. Create Google Sheet at https://sheets.google.com
+   * 2. Go to Extensions → Apps Script
+   * 3. Paste code from apps_script_registration.js
+   * 4. Save and run createSheetHeaders() function
+   * 5. Deploy as Web App (Deploy → + New deployment → Web app → Anyone)
+   * 6. Copy the deployment URL and paste below
+   * 
+   * The URL will look like:
+   * https://script.google.com/macros/d/YOUR_SCRIPT_ID/userweb
+   */
+  
+  const SHEET_ENDPOINT = 'PASTE_YOUR_DEPLOYMENT_URL_HERE';
+  
+  // EXAMPLE (replace with your actual URL):
+  // const SHEET_ENDPOINT = 'https://script.google.com/macros/d/1A2B3C4D5E6F7G8H9I0J/userweb';
+  
+  /**
+   * Debugging: Set to true to see console logs
+   */
+  const DEBUG_MODE = false;
+  
+  if (DEBUG_MODE && !SHEET_ENDPOINT.includes('script.google.com')) {
+    console.log('⚠️ Warning: SHEET_ENDPOINT not configured. Google Sheets integration will not work.');
+    console.log('📝 Steps to configure:');
+    console.log('1. Create Google Sheet');
+    console.log('2. Add Apps Script code');
+    console.log('3. Deploy as Web App');
+    console.log('4. Copy deployment URL to SHEET_ENDPOINT variable');
+  }
+</script>
+
+<!-- ═════════════════════════════════════════════════════════════════════════ -->
+
 <style>
 :root{
   --void:#06070A;
@@ -563,7 +607,7 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
   <div class="cols">
     <div><b>The Fest</b>Axentia MMXXVI · The Realm Divided<br>Sixteen Banners, One Throne<br>Intra-Collegiate Management Fest</div>
     <div><b>Presented By</b>School of Business &amp; Management<br>MBA Programme<br>CHRIST (Deemed to be University)</div>
-    <div><b>Website Support</b>For Concerns regarding the Registration Website:<br>Tarush Bhusri · Section F4<br>Pavithra · Section F8</div>
+    <div><b>Website Support</b>For concerns with the registration website:<br>Tarush Bhusri · Section F4<br>Pavithra · Section F8</div>
   </div>
   <div class="fine">The sigil is what they see · The words are what you are</div>
 </footer>
