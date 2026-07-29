@@ -7,50 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-
-<!-- ╔════════════════════════════════════════════════════════════════════════╗
-     ║                    GOOGLE SHEETS INTEGRATION                          ║
-     ║  Configure your deployment URL below (get from Google Apps Script)   ║
-     ╚════════════════════════════════════════════════════════════════════════╝ -->
-
-<script>
-  /**
-   * GOOGLE SHEETS INTEGRATION CONFIGURATION
-   * 
-   * INSTRUCTIONS:
-   * 1. Create Google Sheet at https://sheets.google.com
-   * 2. Go to Extensions → Apps Script
-   * 3. Paste code from apps_script_registration.js
-   * 4. Save and run createSheetHeaders() function
-   * 5. Deploy as Web App (Deploy → + New deployment → Web app → Anyone)
-   * 6. Copy the deployment URL and paste below
-   * 
-   * The URL will look like:
-   * https://script.google.com/macros/d/YOUR_SCRIPT_ID/userweb
-   */
-  
-  const SHEET_ENDPOINT = 'PASTE_YOUR_DEPLOYMENT_URL_HERE';
-  
-  // EXAMPLE (replace with your actual URL):
-  // const SHEET_ENDPOINT = 'https://script.google.com/macros/d/1A2B3C4D5E6F7G8H9I0J/userweb';
-  
-  /**
-   * Debugging: Set to true to see console logs
-   */
-  const DEBUG_MODE = false;
-  
-  if (DEBUG_MODE && !SHEET_ENDPOINT.includes('script.google.com')) {
-    console.log('⚠️ Warning: SHEET_ENDPOINT not configured. Google Sheets integration will not work.');
-    console.log('📝 Steps to configure:');
-    console.log('1. Create Google Sheet');
-    console.log('2. Add Apps Script code');
-    console.log('3. Deploy as Web App');
-    console.log('4. Copy deployment URL to SHEET_ENDPOINT variable');
-  }
-</script>
-
-<!-- ═════════════════════════════════════════════════════════════════════════ -->
-
 <style>
 :root{
   --void:#06070A;
@@ -622,7 +578,15 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ignoreMobileResize:true});
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isMobile=matchMedia('(pointer:coarse)').matches||innerWidth<820;
-const SHEET_ENDPOINT='';   /* paste your Apps Script /exec URL here */
+/* ── GOOGLE SHEETS LINKAGE ────────────────────────────────────────────
+   The ONE place the Apps Script URL belongs. It must be the /exec URL of
+   a Web App deployment ("Anyone" access). Re-deploying as a NEW
+   deployment issues a NEW URL — update it here if you ever redeploy.
+   Leave it as '' to disable the sheet entirely; the form still works.
+   Do NOT declare SHEET_ENDPOINT anywhere else — a second `const` with
+   this name throws and kills the whole script (map, form, everything).
+──────────────────────────────────────────────────────────────────────── */
+const SHEET_ENDPOINT='https://script.google.com/macros/s/AKfycbzlH33SlNMiPGNzXMfzf9icZ0RLi_FUCgHNtg3JgKZZVAQP6DNPYcPp6sM-2BKglxPN/exec';
 
 /* =====================================================
    HOUSE DATA — sigil, colours, castle spec, charge
