@@ -675,7 +675,7 @@ footer .fine{margin-top:6vh;font-family:'Cinzel';font-size:9px;color:var(--ash);
   <div class="cols">
     <div><b>The Fest</b>Axentia MMXXVI · The Realm Divided<br>Sixteen Banners, One Throne<br>Intra-Collegiate Management Fest</div>
     <div><b>Presented By</b>School of Business &amp; Management<br>MBA Programme<br>CHRIST (Deemed to be University)</div>
-    <div><b>Website Support</b>For concerns with the registration website:<br>Tarush Bhusri · Section F4<br>Pavithra · Section F8</div>
+    <div><b>Website Support</b>For concerns with the Registration:<br>Tarush Bhusri · Section F4<br>Pavithra · Section F8</div>
   </div>
   <div class="fine">The sigil is what they see · The words are what you are</div>
 </footer>
@@ -724,11 +724,15 @@ async function sheetPost(body){
     body:JSON.stringify(body)});
   return r.json();
 }
-/* ask the sheet whether any of these identities is already sworn */
+/* ask the sheet whether any of these identities is already sworn.
+   Returns {taken:[...]} from the sheet, or {error:true} if the sheet
+   could not be reached — callers must NOT treat an error as "no match". */
 async function serverCheck(people){
   if(!SHEET_ENDPOINT)return {taken:[]};
-  try{return await sheetPost({action:'check',people});}
-  catch(e){return {taken:[]};}
+  try{
+    const r=await sheetPost({action:'check',people});
+    return (r&&Array.isArray(r.taken))?r:{taken:[]};
+  }catch(e){return {error:true,taken:[]};}
 }
 /* the authoritative write: the sheet re-checks identity + capacity under
    a lock, appends the roster, and returns {ok|taken|full, used, code} */
@@ -3780,13 +3784,22 @@ function wireGuards(){
   document.querySelectorAll('#oathForm input[data-guard]').forEach(inp=>{
     if(inp.dataset.wired)return;
     inp.dataset.wired='1';
-    inp.addEventListener('blur',()=>{
+    inp.addEventListener('blur',async ()=>{
       const field=inp.closest('.field'),warn=field.querySelector('.warn');
-      const probe={};probe[inp.dataset.guard]=inp.value;
-      const hit=Roll.find(probe);
+      const val=(inp.value||'').trim();
+      if(!val){field.classList.remove('bad');warn.classList.remove('on');return;}
+      const probe={};probe[inp.dataset.guard]=val;
+      let hit=null;
+      if(SHEET_ENDPOINT){                       /* the sheet decides, not this browser */
+        const res=await serverCheck([probe]);
+        if(res.error){field.classList.remove('bad');warn.classList.remove('on');return;} /* stay silent; submit will verify */
+        hit=(res.taken&&res.taken.length)?res.taken[0]:null;
+      }else{
+        hit=Roll.find(probe);                    /* offline build only */
+      }
       if(hit){
         field.classList.add('bad');
-        warn.textContent=`Already sworn to ${hit.house.split(' — ')[0]}`;
+        warn.textContent=`Already sworn to ${String(hit.house).split(' — ')[0]}`;
         warn.classList.add('on');
       }else{
         field.classList.remove('bad');warn.classList.remove('on');
@@ -3808,12 +3821,15 @@ document.getElementById('luBtn').addEventListener('click',async ()=>{
   if(!v){out.textContent='Give a register number, email or phone.';return;}
   out.textContent='Searching the roll…';
   let hit=null;
-  if(SHEET_ENDPOINT){                    /* ask the sheet, the shared truth */
+  if(SHEET_ENDPOINT){                    /* the sheet is the ONLY truth when connected */
     const res=await serverCheck([{reg:v,email:v,phone:v}]);
-    if(res&&res.taken&&res.taken.length)hit=res.taken[0];
-    else hit=Roll.find({reg:v,email:v,phone:v});   /* fall back to local mirror */
+    if(res.error){
+      out.textContent='The roll could not be reached — check your connection and try again.';
+      return;
+    }
+    hit=(res.taken&&res.taken.length)?res.taken[0]:null;   /* no local fallback: a name deleted from the sheet is free */
   }else{
-    hit=Roll.find({reg:v,email:v,phone:v});
+    hit=Roll.find({reg:v,email:v,phone:v});   /* offline build only */
   }
   out.innerHTML=hit
     ? `${hit.name||'That name'} rides for <b>${String(hit.house).split(' — ')[0]}</b>${hit.code?` — seal ${hit.code}`:''}. No second house may be claimed.`
@@ -3873,18 +3889,25 @@ document.getElementById('oathForm').addEventListener('submit',async ev=>{
       seen.set(k,p.name||'a companion');
     });
   });
+  if(problems.length){refuse(problems);return;}   /* in-form duplicates: always enforced */
 
-  /* 2 — nobody may already be sworn elsewhere */
-  people.forEach(p=>{
-    const hit=Roll.find(p);
-    if(hit){
-      problems.push({who:p.name||hit.name||'A companion',
-        why:hit.house===house
-          ? `is already on the roll for ${hit.house} — seal ${hit.code}. One entry per knight.`
-          : `already rides for ${hit.house} (seal ${hit.code}). A knight may ride under one house only.`});
-    }
-  });
-  if(problems.length){refuse(problems);return;}
+  /* 2 — nobody may already be sworn elsewhere.
+     When the sheet is connected, the SERVER is the authority (checked in
+     step 3 below), so we do NOT consult this browser's cache here — that
+     cache can be stale if rows were deleted on the backend. This local
+     pass runs only for the offline build. */
+  if(!SHEET_ENDPOINT){
+    people.forEach(p=>{
+      const hit=Roll.find(p);
+      if(hit){
+        problems.push({who:p.name||hit.name||'A companion',
+          why:hit.house===house
+            ? `is already on the roll for ${hit.house} — seal ${hit.code}. One entry per knight.`
+            : `already rides for ${hit.house} (seal ${hit.code}). A knight may ride under one house only.`});
+      }
+    });
+    if(problems.length){refuse(problems);return;}
+  }
 
   /* 2b — a barred house takes no further companies (checked against the
      sheet's shared tally, not this browser) */
