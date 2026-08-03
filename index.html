@@ -3660,7 +3660,7 @@ function showDoom(i){
   document.getElementById('doomSig').classList.toggle('haslogo',!!H.logo);
   document.getElementById('doomTitle').textContent=
     cap===0?'This Banner Rides Not':'The Gates Are Barred';
-  document.getElementById('doomSeat').textContent=`${H.h} · ${H.seat}`;
+  document.getElementById('doomSeat').textContent=H.evName||`${H.h} · ${H.seat}`;
   document.getElementById('doomWhy').textContent=
     (FALL[H.h]||'This house will take no further oaths.')+
     ` The roll for ${H.dom} is closed. Fifteen other banners still fly — choose one, and ride.`;
