@@ -3561,6 +3561,10 @@ function capTally(){
   return out;
 }
 function capUsed(houseKey,tal){
+  /* House Targaryen (Best Manager) is already filled — its roll is closed no
+     matter what the sheet says, so the gates stay barred and the map bursts
+     for anyone who tries to ride. */
+  if(houseKey==='House Targaryen — The Dragon Rides Alone')return Infinity;
   /* the sheet, once loaded, is the truth for every browser */
   if(SHEET_USED)return SHEET_USED[houseKey]||0;
   /* before the sheet answers (or if it is offline) use the on-device roll */
